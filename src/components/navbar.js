@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import logo from "../images/rypl.png";
 import "./style/navbar.css";
 
@@ -10,9 +11,27 @@ const Navbar = props => {
           <img className="navbar-logo" src={logo} alt="logo" />
         </div>
         <div className="navbar-right">
-          <div className="nav-item">Sign Up</div>
-          <div className="nav-item">Log In</div>
-          <div className="nav-item">Sign Out</div>
+          <Link
+            to="/signup"
+            className="nav-item"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            Sign Up
+          </Link>
+          <Link
+            to="/login"
+            className="nav-item"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            Log In
+          </Link>
+          <Link
+            to="/logout"
+            className="nav-item"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            Log Out
+          </Link>
         </div>
       </div>
     </>

@@ -1,27 +1,51 @@
 import React from "react";
+import firebase from "./firebase";
 import "./App.css";
 import { Route, HashRouter, Switch } from "react-router-dom";
+
+//Context
+import AuthContext from "./contexts/auth";
 
 //Pages
 import Navbar from "./components/navbar";
 import Login from "./containers/login";
 import SignUp from "./containers/signup";
+import Logout from "./components/logout";
 
-function App() {
-  const arr = [1, 2, 3, 4];
-  for (let i = 0; i < arr.length; i++) {
-    console.log(i);
+class App extends React.Component {
+  state = {
+    user: null
+  };
+
+  componentDidMount() {
+    this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState({
+          user: {
+            uid: user.uid,
+            email: user.email
+          }
+        });
+      } else {
+        this.setState({ user: null });
+      }
+    });
   }
 
-  return (
-    <HashRouter>
-      <Route path="/" component={Navbar} />
-      <Switch>
-        <Route path="/login" exact component={Login} />
-        <Route path="/signup" exact component={SignUp} />
-      </Switch>
-    </HashRouter>
-  );
+  render() {
+    return (
+      <HashRouter>
+        <AuthContext.Provider value={this.state.user}>
+          <Route path="/" component={Navbar} />
+          <Switch>
+            <Route path="/login" exact component={Login} />
+            <Route path="/signup" exact component={SignUp} />
+            <Route path="/logout" exact component={Logout} />
+          </Switch>
+        </AuthContext.Provider>
+      </HashRouter>
+    );
+  }
 }
 
 export default App;

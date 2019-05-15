@@ -22,22 +22,24 @@ class SignUp extends React.Component {
     e.preventDefault();
 
     const { email, password, username, firstname, lastname } = this.state;
+
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(res => {
-        this.setState({ userUID: res.user.uid });
+        let userUID = res.user.uid;
+        this.setState({ userUID });
+      })
+      .then(() => {
+        axios.post("http://localhost:3200/user ", {
+          username: username,
+          email: email,
+          firebaseUid: this.state.userUID,
+          firstName: firstname,
+          lastName: lastname,
+          imgUrl: null
+        });
       });
-    // .then(()=>{
-    //   axios.post("http://localhost/ ", {
-    //     "username": username ,
-    //     "email": email,
-    //     "firebase_uid": userUID,
-    //     "firstname": firstname,
-    //     "lastname": lastname,
-    //     "img_url": null,
-    //   })
-    // })
   };
 
   // if doing profile imag, handleFileInput = (e) => {};
