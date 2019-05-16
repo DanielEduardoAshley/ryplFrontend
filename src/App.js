@@ -11,6 +11,7 @@ import Navbar from "./components/navbar";
 import Login from "./containers/login";
 import SignUp from "./containers/signup";
 import Logout from "./components/logout";
+import Home from "./containers/home";
 
 class App extends React.Component {
   state = {
@@ -18,6 +19,7 @@ class App extends React.Component {
   };
 
   componentDidMount() {
+    console.log(this.state, "state");
     this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.setState({
@@ -41,6 +43,7 @@ class App extends React.Component {
             <Route path="/login" exact component={Login} />
             <Route path="/signup" exact component={SignUp} />
             <Route path="/logout" exact component={Logout} />
+            <Route path="/" exact component={Home} />
           </Switch>
         </AuthContext.Provider>
       </HashRouter>
