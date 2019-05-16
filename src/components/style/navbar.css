@@ -1,0 +1,21 @@
+.navbar {
+  display: flex;
+  background-color: #2a2d34;
+  color: white;
+  padding: 15px;
+}
+
+.navbar-left {
+  width: 80%;
+}
+
+.navbar-logo {
+  width: 50px;
+}
+
+.navbar-right {
+  display: flex;
+  width: 20%;
+  justify-content: space-around;
+  align-items: center;
+}
