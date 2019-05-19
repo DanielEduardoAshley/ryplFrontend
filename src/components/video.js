@@ -126,32 +126,28 @@ import React from "react";
 class Video extends React.Component {
   state = {
     blob: [],
-    url: ''
+    url: ""
   };
-   updatedBlob=(blobs)=>{
+  updatedBlob = blobs => {
     this.setstate({
-      blob : blobs
-    })
-  }
-  
-   blobs = [];
-  componentDidMount() {
-    const blobUpdate=()=>{
-      this.setState({
-        blob: 'here'
-      })
-    }
-     
-   const updateBlob=(recordedBlobs)=>{
-    this.setState({
-      blob: (this.state.blob || []).concat(recordedBlobs)
-    })
-    }
-    
+      blob: blobs
+    });
+  };
 
-    
-  
-    
+  blobs = [];
+  componentDidMount() {
+    const blobUpdate = () => {
+      this.setState({
+        blob: "here"
+      });
+    };
+
+    const updateBlob = recordedBlobs => {
+      this.setState({
+        blob: (this.state.blob || []).concat(recordedBlobs)
+      });
+    };
+
     var mediaSource = new MediaSource();
     mediaSource.addEventListener("sourceopen", handleSourceOpen, false);
     var mediaRecorder;
@@ -279,15 +275,14 @@ class Video extends React.Component {
       mediaRecorder.stop();
       console.log("Recorded Blobs: ", recordedBlobs);
       // blobs = recordedBlobs;
-      updateBlob(recordedBlobs)
+      updateBlob(recordedBlobs);
       recordedVideo.controls = true;
     }
-    
+
     function play() {
       var superBuffer = new Blob(recordedBlobs, { type: "video/webm" });
       recordedVideo.src = window.URL.createObjectURL(superBuffer);
-      const url = window.URL.createObjectURL(superBuffer)
-      
+      const url = window.URL.createObjectURL(superBuffer);
     }
 
     function download() {
@@ -303,42 +298,41 @@ class Video extends React.Component {
         document.body.removeChild(a);
         window.URL.revokeObjectURL(url);
       }, 100);
-
-     
     }
   }
-  
-  handleFileStream = async e=> {
-    const superBuffer = new Blob(this.state.blob, { type: "video/webm" });
-      const url = window.URL.createObjectURL(superBuffer)
-        const root = firebase.storage().ref();
-        const newImage = root.child(`vids/${this.state.blob}`);
-    
-        try {
-          const snapshot = await newImage.put(superBuffer);
-          const urls = await snapshot.ref.getDownloadURL();
-          this.setState({
-            url: this.state.url.concat(urls)
-          });
-          console.log(url);
-        } catch (err) {
-          console.log(err);
-        }
-        console.log('hello')
-      };
 
+  handleFileStream = async e => {
+    const superBuffer = new Blob(this.state.blob, { type: "video/webm" });
+    const url = window.URL.createObjectURL(superBuffer);
+    const root = firebase.storage().ref();
+    const newImage = root.child(`vids/${this.state.blob}`);
+
+    try {
+      const snapshot = await newImage.put(superBuffer);
+      const urls = await snapshot.ref.getDownloadURL();
+      this.setState({
+        url: this.state.url.concat(urls)
+      });
+      console.log(url);
+    } catch (err) {
+      console.log(err);
+    }
+    console.log("hello");
+  };
 
   render() {
-      
-    console.log(this.state)
-    return <>{/* <VideoRecorder/> */}
-    <button onClick={e=>this.handleFileStream(e)}>button</button>
-    <Player
-        playsInline
-        poster="https://bostoncrusaders.org/wp-content/uploads/2014/12/kid-sad-face-new-york-1r6di21.jpg"
-        src={this.state.url}
-      />
-    </>;
+    console.log(this.state);
+    return (
+      <>
+        {/* <VideoRecorder/> */}
+        <button onClick={e => this.handleFileStream(e)}>button</button>
+        <Player
+          playsInline
+          poster="https://bostoncrusaders.org/wp-content/uploads/2014/12/kid-sad-face-new-york-1r6di21.jpg"
+          src={this.state.url}
+        />
+      </>
+    );
   }
 }
 
