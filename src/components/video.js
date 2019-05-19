@@ -295,6 +295,8 @@ class Video extends React.Component {
     function download() {
       var blob = new Blob(recordedBlobs, { type: "video/webm" });
       var url = window.URL.createObjectURL(blob);
+      console.log(url)
+
       var a = document.createElement("a");
       a.style.display = "none";
       a.href = url;
