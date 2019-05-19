@@ -126,7 +126,8 @@ import React from "react";
 class Video extends React.Component {
   state = {
     blob: [],
-    url: ""
+    url: "",
+    urls: []
   };
   updatedBlob = blobs => {
     this.setstate({
@@ -136,12 +137,6 @@ class Video extends React.Component {
 
   blobs = [];
   componentDidMount() {
-    const blobUpdate = () => {
-      this.setState({
-        blob: "here"
-      });
-    };
-
     const updateBlob = recordedBlobs => {
       this.setState({
         blob: (this.state.blob || []).concat(recordedBlobs)
@@ -175,7 +170,10 @@ class Video extends React.Component {
 
     var constraints = {
       audio: true,
-      video: true
+      video: true,
+      width: 200,
+      height: 300,
+      minFrameRate: 60
     };
 
     navigator.mediaDevices
@@ -223,7 +221,7 @@ class Video extends React.Component {
     function startRecording() {
       var options = {
         mimeType: "video/webm;codecs=vp9",
-        bitsPerSecond: 100000
+        bitsPerSecond: 10000000
       };
       recordedBlobs = [];
       try {
@@ -237,7 +235,7 @@ class Video extends React.Component {
         try {
           options = {
             mimeType: "video/webm;codecs=vp8",
-            bitsPerSecond: 100000
+            bitsPerSecond: 10000000
           };
           mediaRecorder = new MediaRecorder(window.stream, options);
         } catch (e1) {
@@ -305,7 +303,9 @@ class Video extends React.Component {
     const superBuffer = new Blob(this.state.blob, { type: "video/webm" });
     const url = window.URL.createObjectURL(superBuffer);
     const root = firebase.storage().ref();
-    const newImage = root.child(`vids/${this.state.blob}`);
+    const newImage = root.child(
+      `vids/${this.state.blob[this.state.blob.length - 1]}`
+    );
 
     try {
       const snapshot = await newImage.put(superBuffer);
@@ -320,17 +320,62 @@ class Video extends React.Component {
     console.log("hello");
   };
 
+  handleFileInput = async e => {
+    const firstFile = e.target.files[0];
+
+    const root = firebase.storage().ref();
+    const newImage = root.child(`vids/${firstFile.name}`);
+
+    try {
+      const snapshot = await newImage.put(firstFile);
+      const url = await snapshot.ref.getDownloadURL();
+      this.setState({
+        urls: (this.state.urls || []).concat(url)
+      });
+      console.log(url);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   render() {
     console.log(this.state);
     return (
       <>
+        <video id="gum" autoplay muted />
+        <video id="recorded" autoplay loop />
+
+        <div>
+          <button id="record">Start Recording</button>
+          <button id="play" disabled>
+            Play
+          </button>
+          <button id="download" disabled>
+            Download
+          </button>
+        </div>
         {/* <VideoRecorder/> */}
         <button onClick={e => this.handleFileStream(e)}>button</button>
+        <input
+          type="file"
+          name="myfile"
+          onChange={e => this.handleFileInput(e)}
+          onClick={this.getFirebasetoken}
+        />
         <Player
           playsInline
           poster="https://bostoncrusaders.org/wp-content/uploads/2014/12/kid-sad-face-new-york-1r6di21.jpg"
           src={this.state.url}
         />
+        {this.state.urls.map((e, i) => {
+          return (
+            <Player
+              playsInline
+              poster="https://bostoncrusaders.org/wp-content/uploads/2014/12/kid-sad-face-new-york-1r6di21.jpg"
+              src={`${e}`}
+            />
+          );
+        })}
       </>
     );
   }
