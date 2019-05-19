@@ -1,134 +1,20 @@
-// import React from "react";
 import firebase from "../firebase";
 import { Player } from "video-react";
-// import "video.js/dist/video-js.css";
-// import VideoRecorder from "react-video-recorder";
-// import 'video.js/dist/video-js.css';
 import React from "react";
-// import  VideoRecorder, { handleVideoSelected } from "react-video-recorder";
-// import RecordRTC,{ stream, MediaStreamRecorder } from "recordrtc"
-// import MediaCapturer from 'react-multimedia-capture';
-// import ReactMediaRecorder from 'react-multimedia-capture';
 
-// import { onStopRecording } from "react-video-recorder";
-// class App extends React.Component{
-
-//   render(){
-//     <VideoRecorder/>
-//   }
-// }
-
-// // class Video extends React.Component {
-// //   state = {
-// //     urls: []
-// //   };
-
-// //   handleFileInput = async e => {
-// //     const firstFile = e.target.files[0];
-
-// //     const root = firebase.storage().ref();
-// //     const newImage = root.child(`vids/${firstFile.name}`);
-
-// //     try {
-// //       const snapshot = await newImage.put(firstFile);
-// //       const url = await snapshot.ref.getDownloadURL();
-// //       this.setState({
-// //         urls: this.state.urls.concat(url)
-// //       });
-// //       console.log(url);
-// //     } catch (err) {
-// //       console.log(err);
-// //     }
-// //   };
-// //   // render() {
-// //   //   return (
-// //   //   <div data-vjs-player>
-// //   //       <video id="myVideo" ref={node => this.videoNode = node} className="video-js vjs-default-skin" playsinline></video>
-// //   //   </div>
-// //   //   );
-// //   render() {
-// //     return (
-// //       <>
-// //       <VideoRecorder />
-// //         {/* <input
-// //           type="file"
-// //           name="myfile"
-// //           onChange={e => this.handleFileInput(e)}
-// //           onClick={this.getFirebasetoken}
-// //         />
-// //         {this.state.urls.map((e, i) => {
-// //           return (
-// //             <Player
-// //               playsInline
-// //               poster="https://bostoncrusaders.org/wp-content/uploads/2014/12/kid-sad-face-new-york-1r6di21.jpg"
-// //               src={`${e}`}
-// //             />
-// //           );
-// //         })} */}
-// //       </>
-// //     );
-// //   }
-// // }
-// // // }
-// class Video extends React.Component {
-//   state = {
-//     urls: []
-//   };
-
-//   handleFileInput = async e => {
-//     const firstFile = e.target.files[0];
-
-//     const root = firebase.storage().ref();
-//     const newImage = root.child(`vids/${firstFile.name}`);
-
-//     try {
-//       const snapshot = await newImage.put(firstFile);
-//       const url = await snapshot.ref.getDownloadURL();
-//       this.setState({
-//         urls: this.state.urls.concat(url)
-//       });
-//       console.log(url);
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   };
-
-//   stop() {
-//     onStopRecording();
-//   }
-
-//   render() {
-//     return (
-//       <>
-//         <VideoRecorder />
-//         <input
-//           type="file"
-//           name="myfile"
-//           onChange={e => this.handleFileInput(e)}
-//           onClick={this.getFirebasetoken}
-//         />
-//         {this.state.urls.map((e, i) => {
-//           return (
-//             <Player
-//               playsInline
-//               poster="https://bostoncrusaders.org/wp-content/uploads/2014/12/kid-sad-face-new-york-1r6di21.jpg"
-//               src={`${e}`}
-//             />
-//           );
-//         })}
-//         <button onClick={this.stop}>Button</button>
-//       </>
-//     );
-//   }
-// }
-// const { videojs } = require("videojs-record");
 
 class Video extends React.Component {
-  state = {
-    blob: [],
-    url: '',
-    urls: []
-  };
+  constructor(props){
+    super(props)
+    this.state = {
+      blob: [],
+      url: '',
+      urls: []
+    }
+    this.videoPlayer = React.createRef()
+
+  }
+  
    updatedBlob=(blobs)=>{
     this.setstate({
       blob : blobs
@@ -136,9 +22,16 @@ class Video extends React.Component {
   }
   
    blobs = [];
+
+  
   componentDidMount() {
     
-     
+    const successCallback=(stream)=> {
+      console.log("getUserMedia() got stream: ", stream);
+      window.stream = stream;
+      console.log('name',this.videoPlayer)
+      this.videoPlayer.current.srcObject = stream;
+    }
    const updateBlob=(recordedBlobs)=>{
     this.setState({
       blob: (this.state.blob || []).concat(recordedBlobs)
@@ -165,15 +58,6 @@ class Video extends React.Component {
     playButton.onclick = play;
     downloadButton.onclick = download;
 
-    // console.log(location.host);
-    // window.isSecureContext could be used for Chrome
-    // var isSecureOrigin = location.protocol === 'https:' ||
-    // location.host.includes('localhost');
-    // if (!isSecureOrigin) {
-    // alert('getUserMedia() must be run from a secure origin: HTTPS or localhost.' +
-    //   '\n\nChanging protocol to HTTPS');
-    // location.protocol = 'HTTPS';
-
     var constraints = {
       audio: true,
       video: true,
@@ -188,11 +72,11 @@ class Video extends React.Component {
       .getUserMedia(constraints)
       .then(successCallback, errorCallback);
 
-    function successCallback(stream) {
-      console.log("getUserMedia() got stream: ", stream);
-      window.stream = stream;
-      gumVideo.srcObject = stream;
-    }
+    // function successCallback(stream) {
+    //   console.log("getUserMedia() got stream: ", stream);
+    //   window.stream = stream;
+    //   // this.videoPlayer.srcObject = stream;
+    // }
 
     function errorCallback(error) {
       console.log("navigator.getUserMedia error: ", error);
@@ -355,6 +239,8 @@ class Video extends React.Component {
       
     console.log(this.state)
     return <>{/* <VideoRecorder/> */}
+        <video id="gum"  autoPlay muted ref={this.videoPlayer} ></video>
+
     <button onClick={e=>this.handleFileStream(e)}>button</button>
     <input
           type="file"
