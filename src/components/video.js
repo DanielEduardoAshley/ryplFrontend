@@ -62,11 +62,7 @@ class Video extends React.Component {
       .getUserMedia(constraints)
       .then(successCallback, errorCallback);
 
-    // function successCallback(stream) {
-    //   console.log("getUserMedia() got stream: ", stream);
-    //   window.stream = stream;
-    //   // this.videoPlayer.srcObject = stream;
-    // }
+ 
 
     function errorCallback(error) {
       console.log("navigator.getUserMedia error: ", error);
