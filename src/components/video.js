@@ -2,46 +2,38 @@ import firebase from "../firebase";
 import { Player } from "video-react";
 import React from "react";
 
-
 class Video extends React.Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       blob: [],
-      url: '',
+      url: "",
       urls: []
-    }
-    this.videoPlayer = React.createRef()
-
+    };
+    this.videoPlayer = React.createRef();
   }
-  
-   updatedBlob=(blobs)=>{
+
+  updatedBlob = blobs => {
     this.setstate({
-      blob : blobs
-    })
-  }
-  
-   blobs = [];
+      blob: blobs
+    });
+  };
 
-  
+  blobs = [];
+
   componentDidMount() {
-    
-    const successCallback=(stream)=> {
+    const successCallback = stream => {
       console.log("getUserMedia() got stream: ", stream);
       window.stream = stream;
-      console.log('name',this.videoPlayer)
+      console.log("name", this.videoPlayer);
       this.videoPlayer.current.srcObject = stream;
-    }
-   const updateBlob=(recordedBlobs)=>{
-    this.setState({
-      blob: (this.state.blob || []).concat(recordedBlobs)
-    })
-    }
-    
+    };
+    const updateBlob = recordedBlobs => {
+      this.setState({
+        blob: (this.state.blob || []).concat(recordedBlobs)
+      });
+    };
 
-    
-  
-    
     var mediaSource = new MediaSource();
     mediaSource.addEventListener("sourceopen", handleSourceOpen, false);
     var mediaRecorder;
@@ -63,16 +55,12 @@ class Video extends React.Component {
       video: true,
       width: 200,
       height: 300,
-      minFrameRate: 60,
-      
-        
+      minFrameRate: 60
     };
 
     navigator.mediaDevices
       .getUserMedia(constraints)
       .then(successCallback, errorCallback);
-
- 
 
     function errorCallback(error) {
       console.log("navigator.getUserMedia error: ", error);
@@ -161,21 +149,20 @@ class Video extends React.Component {
       mediaRecorder.stop();
       console.log("Recorded Blobs: ", recordedBlobs);
       // blobs = recordedBlobs;
-      updateBlob(recordedBlobs)
+      updateBlob(recordedBlobs);
       recordedVideo.controls = true;
     }
-    
+
     function play() {
       var superBuffer = new Blob(recordedBlobs, { type: "video/webm" });
       recordedVideo.src = window.URL.createObjectURL(superBuffer);
-      const url = window.URL.createObjectURL(superBuffer)
-      
+      const url = window.URL.createObjectURL(superBuffer);
     }
 
     function download() {
       var blob = new Blob(recordedBlobs, { type: "video/webm" });
       var url = window.URL.createObjectURL(blob);
-      console.log(url)
+      console.log(url);
 
       var a = document.createElement("a");
       a.style.display = "none";
@@ -187,69 +174,68 @@ class Video extends React.Component {
         document.body.removeChild(a);
         window.URL.revokeObjectURL(url);
       }, 100);
-
-     
     }
   }
-  
-  handleFileStream = async e=> {
+
+  handleFileStream = async e => {
     const superBuffer = new Blob(this.state.blob, { type: "video/webm" });
-      const url = window.URL.createObjectURL(superBuffer)
-        const root = firebase.storage().ref();
-        const newImage = root.child(`vids/${this.state.blob[this.state.blob.length-1]}`);
-    
-        try {
-          const snapshot = await newImage.put(superBuffer);
-          const urls = await snapshot.ref.getDownloadURL();
-          this.setState({
-            url: this.state.url.concat(urls)
-          });
-          console.log(url);
-        } catch (err) {
-          console.log(err);
-        }
-        console.log('hello')
-      };
+    const url = window.URL.createObjectURL(superBuffer);
+    const root = firebase.storage().ref();
+    const newImage = root.child(
+      `vids/${this.state.blob[this.state.blob.length - 1]}`
+    );
 
+    try {
+      const snapshot = await newImage.put(superBuffer);
+      const urls = await snapshot.ref.getDownloadURL();
+      this.setState({
+        url: this.state.url.concat(urls)
+      });
+      console.log(url);
+    } catch (err) {
+      console.log(err);
+    }
+    console.log("hello");
+  };
 
+  handleFileInput = async e => {
+    const firstFile = e.target.files[0];
 
-      handleFileInput = async e => {
-            const firstFile = e.target.files[0];
-        
-            const root = firebase.storage().ref();
-            const newImage = root.child(`vids/${firstFile.name}`);
-        
-            try {
-              const snapshot = await newImage.put(firstFile);
-              const url = await snapshot.ref.getDownloadURL();
-              this.setState({
-                urls: (this.state.urls || []).concat(url)
-              });
-              console.log(url);
-            } catch (err) {
-              console.log(err);
-            }
-          };
+    const root = firebase.storage().ref();
+    const newImage = root.child(`vids/${firstFile.name}`);
+
+    try {
+      const snapshot = await newImage.put(firstFile);
+      const url = await snapshot.ref.getDownloadURL();
+      this.setState({
+        urls: (this.state.urls || []).concat(url)
+      });
+      console.log(url);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   render() {
-      
-    console.log(this.state)
-    return <>{/* <VideoRecorder/> */}
-        <video id="gum"  autoPlay muted ref={this.videoPlayer} ></video>
+    console.log(this.state);
+    return (
+      <>
+        {/* <VideoRecorder/> */}
+        <video id="gum" autoPlay muted ref={this.videoPlayer} />
 
-    <button onClick={e=>this.handleFileStream(e)}>button</button>
-    <input
+        <button onClick={e => this.handleFileStream(e)}>button</button>
+        <input
           type="file"
           name="myfile"
           onChange={e => this.handleFileInput(e)}
           onClick={this.getFirebasetoken}
         />
-    <Player
-        playsInline
-        poster="https://bostoncrusaders.org/wp-content/uploads/2014/12/kid-sad-face-new-york-1r6di21.jpg"
-        src={this.state.url}
-      />
-       {this.state.urls.map((e, i) => {
+        <Player
+          playsInline
+          poster="https://bostoncrusaders.org/wp-content/uploads/2014/12/kid-sad-face-new-york-1r6di21.jpg"
+          src={this.state.url}
+        />
+        {this.state.urls.map((e, i) => {
           return (
             <Player
               playsInline
@@ -258,8 +244,8 @@ class Video extends React.Component {
             />
           );
         })}
-    </>;
-    
+      </>
+    );
   }
 }
 

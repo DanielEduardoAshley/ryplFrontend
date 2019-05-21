@@ -1,7 +1,6 @@
 .entire-view {
   display: flex;
   margin-top: 100px;
-  height: 75%;
 }
 
 .signup-left {
@@ -74,7 +73,7 @@
 }
 
 .input {
-  width: 40%;
+  width: 50%;
   margin: 10px;
   padding: 10px;
   font-size: 14px;
