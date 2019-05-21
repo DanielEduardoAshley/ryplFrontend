@@ -1,0 +1,13 @@
+.video-carousel {
+  width: 100%;
+  height: 500px;
+  margin: 0 auto;
+  padding-bottom: 30px;
+}
+
+.category-carousel {
+  margin-top: 30px;
+  width: 80%;
+  height: 100px;
+  margin: 0 auto;
+}

@@ -62,8 +62,6 @@ class Video extends React.Component {
       .getUserMedia(constraints)
       .then(successCallback, errorCallback);
 
- 
-
     function errorCallback(error) {
       console.log("navigator.getUserMedia error: ", error);
     }
