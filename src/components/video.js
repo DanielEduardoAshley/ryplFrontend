@@ -1,6 +1,7 @@
 import firebase from "../firebase";
 import { Player } from "video-react";
 import React from "react";
+import "./video.css";
 
 class Video extends React.Component {
   constructor(props) {
@@ -230,12 +231,23 @@ class Video extends React.Component {
           onChange={e => this.handleFileInput(e)}
           onClick={this.getFirebasetoken}
         />
-        <Player
-          playsInline
-          poster="https://bostoncrusaders.org/wp-content/uploads/2014/12/kid-sad-face-new-york-1r6di21.jpg"
-          src={this.state.url}
-        />
-        {this.state.urls.map((e, i) => {
+    <div>
+          <button id="record">Start Recording</button>
+          <button id="play" disabled>
+            Play
+          </button>
+          <button id="download" disabled>
+            Download
+          </button>
+        </div>
+        <video id="gum" autoplay muted />
+        <video id="recorded" autoplay loop />
+    <Player
+        playsInline
+        poster="https://bostoncrusaders.org/wp-content/uploads/2014/12/kid-sad-face-new-york-1r6di21.jpg"
+        src={this.state.url}
+      />
+       {this.state.urls.map((e, i) => {
           return (
             <Player
               playsInline
