@@ -2,7 +2,7 @@ import * as firebase from "firebase";
 import dotenv from "dotenv";
 
 dotenv.config();
-console.log(process.env.REACT_APP_FIREBASE_API_KEY);
+
 //Initialize firebase
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -14,7 +14,6 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_FIREBASE_API_APPID
 };
 
-console.log(firebaseConfig);
 firebase.initializeApp(firebaseConfig);
 
 export default firebase;
