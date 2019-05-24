@@ -1,8 +1,10 @@
 import React from "react";
 import firebase from "../firebase";
+import "./style/home.css";
 
 //components
-import CarouselContainer from "../components/carousel";
+import Carousel from "../components/carousel";
+import Category from "../components/category";
 
 class Home extends React.Component {
   state = {};
@@ -11,7 +13,16 @@ class Home extends React.Component {
   render() {
     return (
       <>
-        <CarouselContainer />
+        <div className="entire-page">
+          <div className="carousel-wrapper">
+            <div className="trending">Trending Videos</div>
+            <Carousel />
+          </div>
+          <div className="cateogry-wrapper">
+            <div className="category">Trending Categories</div>
+            <Category />
+          </div>
+        </div>
       </>
     );
   }
