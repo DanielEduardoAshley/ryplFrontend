@@ -9,8 +9,19 @@
   width: 80%;
 }
 
+.logo-name-wrapper {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+}
+
 .navbar-logo {
-  width: 50px;
+  width: 80px;
+  padding-right: 10px;
+}
+
+.navbar-name {
+  width: 30%;
 }
 
 .navbar-right {

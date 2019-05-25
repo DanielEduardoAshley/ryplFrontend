@@ -231,7 +231,7 @@ class Video extends React.Component {
           onChange={e => this.handleFileInput(e)}
           onClick={this.getFirebasetoken}
         />
-    <div>
+        <div>
           <button id="record">Start Recording</button>
           <button id="play" disabled>
             Play
@@ -242,12 +242,12 @@ class Video extends React.Component {
         </div>
         <video id="gum" autoplay muted />
         <video id="recorded" autoplay loop />
-    <Player
-        playsInline
-        poster="https://bostoncrusaders.org/wp-content/uploads/2014/12/kid-sad-face-new-york-1r6di21.jpg"
-        src={this.state.url}
-      />
-       {this.state.urls.map((e, i) => {
+        <Player
+          playsInline
+          poster="https://bostoncrusaders.org/wp-content/uploads/2014/12/kid-sad-face-new-york-1r6di21.jpg"
+          src={this.state.url}
+        />
+        {this.state.urls.map((e, i) => {
           return (
             <Player
               playsInline

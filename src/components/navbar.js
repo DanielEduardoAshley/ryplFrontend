@@ -14,9 +14,15 @@ const Navbar = props => {
               <>
                 <div className="navbar">
                   <div className="navbar-left">
-                    <Link to="/" style={{ textDecoration: "none" }}>
-                      <img className="navbar-logo" src={logo} alt="logo" />
-                    </Link>
+                    <div
+                      className="logo-name-wrapper"
+                      style={{ textDecoration: "none" }}
+                    >
+                      <Link to="/" style={{ textDecoration: "none" }}>
+                        <img className="navbar-logo" src={logo} alt="logo" />
+                      </Link>
+                      <h3 className="navbar-name">RYPL</h3>
+                    </div>
                   </div>
                   <div className="navbar-right">
                     <Link
@@ -34,9 +40,15 @@ const Navbar = props => {
             return (
               <div className="navbar">
                 <div className="navbar-left">
-                  <Link to="/" style={{ textDecoration: "none" }}>
-                    <img className="navbar-logo" src={logo} alt="logo" />
-                  </Link>
+                  <div
+                    className="logo-name-wrapper"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <Link to="/" style={{ textDecoration: "none" }}>
+                      <img className="navbar-logo" src={logo} alt="logo" />
+                    </Link>
+                    <h3 className="navbar-name">RYPL</h3>
+                  </div>
                 </div>
                 <div className="navbar-right">
                   <Link

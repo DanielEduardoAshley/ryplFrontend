@@ -2,15 +2,17 @@ import React from "react";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 
-class Carousel extends React.Component {
+class Category extends React.Component {
   //dummy data
   items = [
-    "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0dhttps://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=ef00bea4-b2c2-48d8-9666-1f6e8aba80ad",
-    "https://firebasestorage.googleapis.com/v0/b/cactus-338da.appspot.com/o/video2.mp4?alt=media&token=d4a19c46-9e7b-44b7-890b-c9f602a71452",
-    "https://firebasestorage.googleapis.com/v0/b/cactus-338da.appspot.com/o/video1.mp4?alt=media&token=efa054c4-6edf-456c-b450-ffef9c3f634e",
-    "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0dhttps://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=ef00bea4-b2c2-48d8-9666-1f6e8aba80ad",
-    "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0dhttps://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=ef00bea4-b2c2-48d8-9666-1f6e8aba80ad",
-    "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0dhttps://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=ef00bea4-b2c2-48d8-9666-1f6e8aba80ad"
+    "News",
+    "Sports",
+    "Entertainment",
+    "Education",
+    "Funny",
+    "Shows",
+    "Cool",
+    "International"
   ];
 
   state = {
@@ -18,10 +20,10 @@ class Carousel extends React.Component {
     itemsInSlide: 1,
     responsive: {
       0: {
-        items: 1
+        items: 3
       },
       1024: {
-        items: 3
+        items: 6
       }
     },
     stagePadding: {
@@ -42,9 +44,23 @@ class Carousel extends React.Component {
 
   galleryItems() {
     return this.items.map(i => (
-      <video key={i} controls style={{ width: "97%" }}>
-        <source src={i} />
-      </video>
+      <button
+        className="category-btn"
+        style={{
+          textAlign: "center",
+          fontSize: "20px",
+          fontWeight: "700",
+          paddingTop: "5px",
+          paddingBottom: "5px",
+          backgroundColor: "#009ddc",
+          color: "#efefef",
+          width: "95%",
+          borderRadius: "15px"
+        }}
+        key={i}
+      >
+        {i}
+      </button>
     ));
   }
 
@@ -83,14 +99,14 @@ class Carousel extends React.Component {
           onResized={this.handleOnSlideChange}
           stagePadding={stagePadding}
           buttonsDisabled={true}
-          dotsDisabled={false}
+          dotsDisabled={true}
           swipeDisabled={true} //for mobile swipe?
           autoPlay={true}
-          duration={3000}
+          duration={800}
           // infinite={true}
           disableAutoPlayOnAction={true}
           stopAutoPlayOnHover={true}
-          playButtonEnabled={true}
+          playButtonEnabled={false}
         />
         {/* <button onClick={this.slidePrevPage}>Prev</button>
         <button onClick={this.slideNextPage}>Next</button> */}
@@ -99,4 +115,4 @@ class Carousel extends React.Component {
   }
 }
 
-export default Carousel;
+export default Category;

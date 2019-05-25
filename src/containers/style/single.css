@@ -1,0 +1,22 @@
+.video-container {
+  padding: 20px;
+  display: flex;
+  height: 100vh;
+}
+
+.left-panel {
+  width: 50%;
+  background-color: #f6f6f6;
+  display: flex;
+  padding: 20px;
+  justify-content: center;
+}
+
+.mid-panel {
+  width: 30%;
+  background-color: #fafafa;
+}
+
+.right-panel {
+  width: 20%;
+}

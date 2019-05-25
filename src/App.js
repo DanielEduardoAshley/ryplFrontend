@@ -13,6 +13,8 @@ import SignUp from "./containers/signup";
 import Logout from "./components/logout";
 import Home from "./containers/home";
 import Video from "./components/video";
+import SingleVideo from "./containers/singleVideoPage";
+import VerticalMode from "./components/singleVideoLeft";
 
 class App extends React.Component {
   state = {
@@ -45,6 +47,7 @@ class App extends React.Component {
             <Route path="/signup" exact component={SignUp} />
             <Route path="/logout" exact component={Logout} />
             <Route path="/video" exact component={Video} />
+            <Route path="/videopage" component={SingleVideo} />
           </Switch>
         </AuthContext.Provider>
       </HashRouter>
