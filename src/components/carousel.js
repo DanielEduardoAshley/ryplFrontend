@@ -42,7 +42,7 @@ class Carousel extends React.Component {
 
   galleryItems() {
     return this.items.map(i => (
-      <video key={i} controls style={{ width: "100%" }}>
+      <video key={i} controls style={{ width: "97%" }}>
         <source src={i} />
       </video>
     ));

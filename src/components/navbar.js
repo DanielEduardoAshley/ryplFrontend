@@ -14,13 +14,15 @@ const Navbar = props => {
               <>
                 <div className="navbar">
                   <div className="navbar-left">
-                    <Link to="/" style={{ textDecoration: "none" }}>
-                      <div className="logo-name-wrapper">
+                    <div
+                      className="logo-name-wrapper"
+                      style={{ textDecoration: "none" }}
+                    >
+                      <Link to="/" style={{ textDecoration: "none" }}>
                         <img className="navbar-logo" src={logo} alt="logo" />
-                        <div className="navbar-name">RYPL</div>
-                      </div>
-                    </Link>
-                    <div className="navbar-name">RYPL</div>
+                      </Link>
+                      <h3 className="navbar-name">RYPL</h3>
+                    </div>
                   </div>
                   <div className="navbar-right">
                     <Link

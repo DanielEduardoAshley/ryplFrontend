@@ -15,11 +15,11 @@ class Home extends React.Component {
       <>
         <div className="entire-page">
           <div className="carousel-wrapper">
-            <div className="trending">Trending Videos</div>
+            <div className="trending">Popular Videos</div>
             <Carousel />
           </div>
           <div className="cateogry-wrapper">
-            <div className="category">Trending Categories</div>
+            <div className="category">Popular Categories</div>
             <Category />
           </div>
         </div>
