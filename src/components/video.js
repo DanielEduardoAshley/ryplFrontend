@@ -2,6 +2,11 @@ import firebase from "../firebase";
 import { Player } from "video-react";
 import React from "react";
 import "./video.css";
+import VideoRecorder from "react-video-recorder";
+import PropTypes from "prop-types";
+import SpeechRecognition from "./annotation";
+
+
 
 class Video extends React.Component {
   constructor(props) {
@@ -14,169 +19,169 @@ class Video extends React.Component {
     this.videoPlayer = React.createRef();
   }
 
-  updatedBlob = blobs => {
-    this.setstate({
-      blob: blobs
-    });
-  };
+  // updatedBlob = blobs => {
+  //   this.setstate({
+  //     blob: blobs
+  //   });
+  // };
 
-  blobs = [];
+  // blobs = [];
 
-  componentDidMount() {
-    const successCallback = stream => {
-      console.log("getUserMedia() got stream: ", stream);
-      window.stream = stream;
-      console.log("name", this.videoPlayer);
-      this.videoPlayer.current.srcObject = stream;
-    };
-    const updateBlob = recordedBlobs => {
-      this.setState({
-        blob: (this.state.blob || []).concat(recordedBlobs)
-      });
-    };
+  // componentDidMount() {
+  //   const successCallback = stream => {
+  //     console.log("getUserMedia() got stream: ", stream);
+  //     window.stream = stream;
+  //     console.log("name", this.videoPlayer);
+  //     this.videoPlayer.current.srcObject = stream;
+  //   };
+  // const updateBlob = recordedBlobs => {
+  //     this.setState({
+  //       blob: (this.state.blob || []).concat(recordedBlobs)
+  //     });
+  //   };
 
-    var mediaSource = new MediaSource();
-    mediaSource.addEventListener("sourceopen", handleSourceOpen, false);
-    var mediaRecorder;
-    var recordedBlobs;
-    var sourceBuffer;
+  //   var mediaSource = new MediaSource();
+  //   mediaSource.addEventListener("sourceopen", handleSourceOpen, false);
+  //   var mediaRecorder;
+  //   var recordedBlobs;
+  //   var sourceBuffer;
 
-    var gumVideo = document.querySelector("video#gum");
-    var recordedVideo = document.querySelector("video#recorded");
+  //   var gumVideo = document.querySelector("video#gum");
+  //   var recordedVideo = document.querySelector("video#recorded");
 
-    var recordButton = document.querySelector("button#record");
-    var playButton = document.querySelector("button#play");
-    var downloadButton = document.querySelector("button#download");
-    recordButton.onclick = toggleRecording;
-    playButton.onclick = play;
-    downloadButton.onclick = download;
+  //   var recordButton = document.querySelector("button#record");
+  //   var playButton = document.querySelector("button#play");
+  //   var downloadButton = document.querySelector("button#download");
+  //   recordButton.onclick = toggleRecording;
+  //   playButton.onclick = play;
+  //   downloadButton.onclick = download;
 
-    var constraints = {
-      audio: true,
-      video: true,
-      width: 200,
-      height: 300,
-      minFrameRate: 60
-    };
+  //   var constraints = {
+  //     audio: true,
+  //     video: true,
+  //     width: 200,
+  //     height: 300,
+  //     minFrameRate: 60
+  //   };
 
-    navigator.mediaDevices
-      .getUserMedia(constraints)
-      .then(successCallback, errorCallback);
+  //   navigator.mediaDevices
+  //     .getUserMedia(constraints)
+  //     .then(successCallback, errorCallback);
 
-    function errorCallback(error) {
-      console.log("navigator.getUserMedia error: ", error);
-    }
+  //   function errorCallback(error) {
+  //     console.log("navigator.getUserMedia error: ", error);
+  //   }
 
-    function handleSourceOpen(event) {
-      console.log("MediaSource opened");
-      sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs="vp8"');
-      console.log("Source buffer: ", sourceBuffer);
-    }
+  //   function handleSourceOpen(event) {
+  //     console.log("MediaSource opened");
+  //     sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs="vp8"');
+  //     console.log("Source buffer: ", sourceBuffer);
+  //   }
 
-    function handleDataAvailable(event) {
-      if (event.data && event.data.size > 0) {
-        recordedBlobs.push(event.data);
-      }
-    }
+  //   function handleDataAvailable(event) {
+  //     if (event.data && event.data.size > 0) {
+  //       recordedBlobs.push(event.data);
+  //     }
+  //   }
 
-    function handleStop(event) {
-      console.log("Recorder stopped: ", event);
-    }
+  //   function handleStop(event) {
+  //     console.log("Recorder stopped: ", event);
+  //   }
 
-    function toggleRecording() {
-      if (recordButton.textContent === "Start Recording") {
-        startRecording();
-      } else {
-        stopRecording();
-        recordButton.textContent = "Start Recording";
-        playButton.disabled = false;
-        downloadButton.disabled = false;
-      }
-    }
+  //   function toggleRecording() {
+  //     if (recordButton.textContent === "Start Recording") {
+  //       startRecording();
+  //     } else {
+  //       stopRecording();
+  //       recordButton.textContent = "Start Recording";
+  //       playButton.disabled = false;
+  //       downloadButton.disabled = false;
+  //     }
+  //   }
 
-    // The nested try blocks will be simplified when Chrome 47 moves to Stable
-    function startRecording() {
-      var options = {
-        mimeType: "video/webm;codecs=vp9",
-        bitsPerSecond: 10000000
-      };
-      recordedBlobs = [];
-      try {
-        mediaRecorder = new MediaRecorder(window.stream, options);
-      } catch (e0) {
-        console.log(
-          "Unable to create MediaRecorder with options Object: ",
-          options,
-          e0
-        );
-        try {
-          options = {
-            mimeType: "video/webm;codecs=vp8",
-            bitsPerSecond: 10000000
-          };
-          mediaRecorder = new MediaRecorder(window.stream, options);
-        } catch (e1) {
-          console.log(
-            "Unable to create MediaRecorder with options Object: ",
-            options,
-            e1
-          );
-          try {
-            options = "video/mp4";
-            mediaRecorder = new MediaRecorder(window.stream, options);
-          } catch (e2) {
-            alert("MediaRecorder is not supported by this browser.");
-            console.error("Exception while creating MediaRecorder:", e2);
-            return;
-          }
-        }
-      }
-      console.log(
-        "Created MediaRecorder",
-        mediaRecorder,
-        "with options",
-        options
-      );
-      recordButton.textContent = "Stop Recording";
-      playButton.disabled = true;
-      downloadButton.disabled = true;
-      mediaRecorder.onstop = handleStop;
-      mediaRecorder.ondataavailable = handleDataAvailable;
-      mediaRecorder.start(10); // collect 10ms of data
-      console.log("MediaRecorder started", mediaRecorder);
-    }
+  //   // The nested try blocks will be simplified when Chrome 47 moves to Stable
+  //   function startRecording() {
+  //     var options = {
+  //       mimeType: "video/webm;codecs=vp9",
+  //       bitsPerSecond: 10000000
+  //     };
+  //     recordedBlobs = [];
+  //     try {
+  //       mediaRecorder = new MediaRecorder(window.stream, options);
+  //     } catch (e0) {
+  //       console.log(
+  //         "Unable to create MediaRecorder with options Object: ",
+  //         options,
+  //         e0
+  //       );
+  //       try {
+  //         options = {
+  //           mimeType: "video/webm;codecs=vp8",
+  //           bitsPerSecond: 10000000
+  //         };
+  //         mediaRecorder = new MediaRecorder(window.stream, options);
+  //       } catch (e1) {
+  //         console.log(
+  //           "Unable to create MediaRecorder with options Object: ",
+  //           options,
+  //           e1
+  //         );
+  //         try {
+  //           options = "video/mp4";
+  //           mediaRecorder = new MediaRecorder(window.stream, options);
+  //         } catch (e2) {
+  //           alert("MediaRecorder is not supported by this browser.");
+  //           console.error("Exception while creating MediaRecorder:", e2);
+  //           return;
+  //         }
+  //       }
+  //     }
+  //     console.log(
+  //       "Created MediaRecorder",
+  //       mediaRecorder,
+  //       "with options",
+  //       options
+  //     );
+  //     recordButton.textContent = "Stop Recording";
+  //     playButton.disabled = true;
+  //     downloadButton.disabled = true;
+  //     mediaRecorder.onstop = handleStop;
+  //     mediaRecorder.ondataavailable = handleDataAvailable;
+  //     mediaRecorder.start(10); // collect 10ms of data
+  //     console.log("MediaRecorder started", mediaRecorder);
+  //   }
 
-    function stopRecording() {
-      mediaRecorder.stop();
-      console.log("Recorded Blobs: ", recordedBlobs);
-      // blobs = recordedBlobs;
-      updateBlob(recordedBlobs);
-      recordedVideo.controls = true;
-    }
+  //   function stopRecording() {
+  //     mediaRecorder.stop();
+  //     console.log("Recorded Blobs: ", recordedBlobs);
+  //     // blobs = recordedBlobs;
+  //     updateBlob(recordedBlobs);
+  //     recordedVideo.controls = true;
+  //   }
 
-    function play() {
-      var superBuffer = new Blob(recordedBlobs, { type: "video/webm" });
-      recordedVideo.src = window.URL.createObjectURL(superBuffer);
-      const url = window.URL.createObjectURL(superBuffer);
-    }
+  //   function play() {
+  //     var superBuffer = new Blob(recordedBlobs, { type: "video/webm" });
+  //     recordedVideo.src = window.URL.createObjectURL(superBuffer);
+  //     const url = window.URL.createObjectURL(superBuffer);
+  //   }
 
-    function download() {
-      var blob = new Blob(recordedBlobs, { type: "video/webm" });
-      var url = window.URL.createObjectURL(blob);
-      console.log(url);
+  //   function download() {
+  //     var blob = new Blob(recordedBlobs, { type: "video/webm" });
+  //     var url = window.URL.createObjectURL(blob);
+  //     console.log(url);
 
-      var a = document.createElement("a");
-      a.style.display = "none";
-      a.href = url;
-      a.download = "test.webm";
-      document.body.appendChild(a);
-      a.click();
-      setTimeout(function() {
-        document.body.removeChild(a);
-        window.URL.revokeObjectURL(url);
-      }, 100);
-    }
-  }
+  //     var a = document.createElement("a");
+  //     a.style.display = "none";
+  //     a.href = url;
+  //     a.download = "test.webm";
+  //     document.body.appendChild(a);
+  //     a.click();
+  //     setTimeout(function() {
+  //       document.body.removeChild(a);
+  //       window.URL.revokeObjectURL(url);
+  //     }, 100);
+  //   }
+  // }
 
   handleFileStream = async e => {
     const superBuffer = new Blob(this.state.blob, { type: "video/webm" });
@@ -217,37 +222,54 @@ class Video extends React.Component {
     }
   };
 
+
   render() {
-    console.log(this.state);
+
+
     return (
       <>
-        {/* <VideoRecorder/> */}
-        <video id="gum" autoPlay muted ref={this.videoPlayer} />
+     
+        <div className='player  '>
+       <VideoRecorder
+          onRecordingComplete={(
+            videoblob,
+            startedAt,
+            thumbnailBlob,
+            duration
+          ) => {
+            console.log(videoblob);
+            console.log('thumb',thumbnailBlob);
+            console.log(URL.createObjectURL(videoblob));
+            const storageRef = firebase.storage().ref();
+            const ref = storageRef.child("test/test.mp4");
 
-        <button onClick={e => this.handleFileStream(e)}>button</button>
-        <input
-          type="file"
-          name="myfile"
-          onChange={e => this.handleFileInput(e)}
-          onClick={this.getFirebasetoken}
+            ref.put(videoblob).then(function(snapshot) {
+              console.log("Uploaded a blob or file!", snapshot);
+            });
+          }}
+          isOnInitially={false}
+          OnStopRecording={(isReplayingVideo)=>{ console.log('replay',isReplayingVideo)         
+        }}
+            
         />
-    <div>
-          <button id="record">Start Recording</button>
-          <button id="play" disabled>
-            Play
-          </button>
-          <button id="download" disabled>
-            Download
-          </button>
+        <div className='annotation'> <SpeechRecognition /></div>
+
         </div>
-        <video id="gum" autoplay muted />
-        <video id="recorded" autoplay loop />
-    <Player
-        playsInline
-        poster="https://bostoncrusaders.org/wp-content/uploads/2014/12/kid-sad-face-new-york-1r6di21.jpg"
-        src={this.state.url}
-      />
-       {this.state.urls.map((e, i) => {
+       
+
+        <div className="upload-btn-wrapper">
+          <button onClick={e => this.handleFileStream(e)} className="btn">Submit</button>
+          <button className="btn">Upload a file</button>
+          <input
+            type="file"
+            name="myfile"
+            onChange={e => this.handleFileInput(e)}
+            onClick={this.getFirebasetoken}
+          />
+        </div>
+    
+      
+        {this.state.urls.map((e, i) => {
           return (
             <Player
               playsInline

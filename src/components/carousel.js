@@ -3,60 +3,6 @@ import Carousel from "react-spring-3d-carousel";
 import uuidv4 from "uuid";
 import "./style/carousel.css";
 
-let slides = [
-  {
-    key: uuidv4(),
-    content: (
-      <video width="640" height="480" controls>
-        <source
-          src="https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0d"
-          type="video/webm"
-          title="example title"
-        />
-      </video>
-    )
-  },
-
-  {
-    key: uuidv4(),
-    content: (
-      <video width="640" height="480" controls>
-        <source
-          src="https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0dhttps://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=ef00bea4-b2c2-48d8-9666-1f6e8aba80ad"
-          type="video/webm"
-        />
-      </video>
-    )
-  },
-  {
-    key: uuidv4(),
-    content: (
-      <video width="640" height="480" controls>
-        <source
-          src="https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0dhttps://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=ef00bea4-b2c2-48d8-9666-1f6e8aba80ad"
-          type="video/webm"
-        />
-      </video>
-    )
-  },
-
-  {
-    key: uuidv4(),
-    content: <img src="https://picsum.photos/800/802/?random" alt="2" />
-  },
-  {
-    key: uuidv4(),
-    content: <img src="https://picsum.photos/600/803/?random" alt="3" />
-  },
-  {
-    key: uuidv4(),
-    content: <img src="https://picsum.photos/800/500/?random" alt="4" />
-  },
-  {
-    key: uuidv4(),
-    content: <img src="https://picsum.photos/800/804/?random" alt="5" />
-  }
-];
 
 let categoryList = [
   {
@@ -93,23 +39,89 @@ export default class CarouselContainer extends Component {
     super(props);
 
     this.state = {
-      showNavigation: true
+      showNavigation: false,
+      clickedSlide: 0,
+      videos: [
+        {
+          key: 0,
+          src:
+            "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0d",
+          title: "example title"
+        },
+        {
+          key: 1,
+          src:
+            "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0d",
+          title: "example title"
+        },
+        {
+          key: 2,
+          src:
+            "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0d",
+          title: "example title"
+        },
+        {
+          key: 3,
+          src:
+            "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0d",
+          title: "example title"
+        },
+        {
+          key: 4,
+          src:
+            "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0d",
+          title: "example title"
+        },
+        {
+          key: 5,
+          src:
+            "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0d",
+          title: "example title"
+        }
+      ]
     };
   }
+  handleClick = event => {
+    console.log(event)
+  this.setState({
+    clickedSlide: event.target.key
+  });
+};
 
-  onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  renderSlides = () => {
+    const videos = this.state.videos.map(video => {
+      return {
+        key: video.key,
+        onClick: this.handleClick,
+        content: (
+          <div key={video.key} onClick={this.handleClick}>
+            <video width="140" height="80" controls>
+              <source src={video.src} type="video/webm" />
+            </video>
+          </div>
+        )
+      };
+    });
+    console.log(videos)
+    return videos
+  };
+
+  onChangeInput = e => {
     this.setState({
       [e.target.name]: parseInt(e.target.value, 10) || 0
     });
   };
 
+ 
   render() {
     return (
       <>
         <div className="window-view">
           <div className="video-carousel">
             <Carousel
-              slides={slides}
+              slides={this.renderSlides()}
+              handleGoToSlide={this.handleClick}
+              goToSlide={this.state.clickedSlide}
               showNavigation={this.state.showNavigation}
             />
           </div>
