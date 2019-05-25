@@ -1,0 +1,11 @@
+.wrapper {
+  display: flex;
+}
+
+.col-3 {
+  width: calc(3 * 8.333%);
+}
+
+.col-8 {
+  width: calc(10 * 8.333%);
+}
