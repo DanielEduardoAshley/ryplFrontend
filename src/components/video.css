@@ -49,3 +49,31 @@
   top: 0;
   opacity: 0;
 }
+
+.btnContainer {
+  display: flex;
+  height: 100%;
+  flex: wrap;
+  width: 10%;
+}
+
+.upload-btn-wrapper input[type="file"] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.videoContainer {
+  height: 500px;
+  width: 500px;
+  background-color: grey;
+}
+
+.annotation {
+  height: 500px;
+  width: 500px;
+  background-color: skyblue;
+  overflow-y: scroll;
+}
