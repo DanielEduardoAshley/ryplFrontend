@@ -1,4 +1,4 @@
-import firebase from "../firebase";
+import firebase from "../firebase"
 import { Player } from "video-react";
 import React from "react";
 import "./video.css";
