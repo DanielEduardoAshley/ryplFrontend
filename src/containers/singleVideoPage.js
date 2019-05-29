@@ -2,6 +2,7 @@ import React from "react";
 import "./style/single.css";
 
 //Left panel (Original)
+import LeftPanel from "./videoComponents/videoComponent1";
 //Middle panel (Reaction)
 //Right panel (Reaction to reaction)
 // import VerticalMode from "../components/singleVideoLeft";
@@ -29,6 +30,7 @@ class SingleVideo extends React.Component {
               </div>
             </div>
           </div>
+          {/* <LeftPanel /> */}
           {/*-----ORIGINAL VIDEO END----- */}
           <div className="mid-panel">
             <div>Reaction Video</div>
