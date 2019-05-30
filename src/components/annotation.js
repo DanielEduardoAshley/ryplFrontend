@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import SpeechRecognition from "react-speech-recognition";
-import axios from "axios";
 
 const propTypes = {
   // Props injected by SpeechRecognition
@@ -13,14 +12,14 @@ const propTypes = {
 const Dictaphone = ({
   transcript,
   resetTranscript,
-  browserSupportsSpeechRecognition
+  browserSupportsSpeechRecognition,
 }) => {
   if (!browserSupportsSpeechRecognition) {
     return null;
   }
-
   return (
     <div>
+      {/* {props.reset? resetTranscript: null} */}
       <button onClick={resetTranscript}>Reset</button>
       <button >Submit</button>
 

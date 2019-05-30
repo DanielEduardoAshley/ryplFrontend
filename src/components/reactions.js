@@ -1,4 +1,4 @@
-import firebase from "../firebase"
+import firebase from "../firebase";
 import { Player } from "video-react";
 import React from "react";
 import "./video.css";
@@ -8,14 +8,13 @@ import SpeechRecognition from "./annotation";
 
 
 
-class Video extends React.Component {
+class Reactions extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       blob: [],
       url: "",
-      urls: [],
-      stopRecord: false,
+      urls: []
     };
     this.videoPlayer = React.createRef();
   }
@@ -42,28 +41,8 @@ class Video extends React.Component {
     console.log("hello");
   };
 
-  handleFileInput = async e => {
-    const firstFile = e.target.files[0];
+  
 
-    const root = firebase.storage().ref();
-    const newImage = root.child(`vids/${firstFile.name}`);
-
-    try {
-      const snapshot = await newImage.put(firstFile);
-      const url = await snapshot.ref.getDownloadURL();
-      this.setState({
-        urls: (this.state.urls || []).concat(url)
-      });
-      console.log(url);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-stopRecording=()=>{
-  this.setState({
-    stopRecord : true,
-  })
-}
 
   render() {
 
@@ -94,20 +73,14 @@ stopRecording=()=>{
         }}
             
         />
-        <div className='annotation'> <SpeechRecognition reset={this.state.stopRecord} /></div>
+        <div className='annotation'> <SpeechRecognition /></div>
 
         </div>
        
 
         <div className="upload-btn-wrapper">
           <button onClick={e => this.handleFileStream(e)} className="btn">Submit</button>
-          <button className="btn" onClick={this.stopRecording}>Upload a file</button>
-          <input
-            type="file"
-            name="myfile"
-            onChange={e => this.handleFileInput(e)}
-            onClick={this.getFirebasetoken}
-          />
+        
         </div>
     
       
@@ -125,4 +98,4 @@ stopRecording=()=>{
   }
 }
 
-export default Video;
+export default Reactions;
