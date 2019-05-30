@@ -69,7 +69,6 @@ class Carousel extends React.Component {
     this.setState({ itemsInSlide, currentIndex: item });
   };
 
- 
   render() {
     const { currentIndex, galleryItems, responsive, stagePadding } = this.state;
 
