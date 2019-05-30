@@ -1,45 +1,23 @@
 .player {
-  display: flex;
-  width: calc(6 * 8.333%);
-  margin-top: 5%;
-  margin-left: 20%;
-  height: 500px;
-  width: 1000px;
-  border:skyblue;  
-}
-.row{
-  display:flex;
-  justify-content: space-around;
-  
-}
-.c-2{
-  width: calc(6 * 8.333%);
+  margin-left: 25%;
+  margin-top: 25%;
 }
 
 .upload-btn-wrapper {
   position: relative;
   overflow: hidden;
   display: inline-block;
-  margin-left: 490px;
-  margin-top: 25px;
-  width:500px;
-  height:150px;
-  justify-content: space-around;
-  background-color: grey;
-
 }
 
 .btn {
-  border: 2px solid rgb(8, 8, 34);
-  color: rgb(15, 149, 202);
+  border: 2px solid gray;
+  color: gray;
   background-color: white;
   padding: 8px 20px;
   border-radius: 8px;
   font-size: 20px;
   font-weight: bold;
   margin-left: 20px;
-  margin-top:10%;
-  margin-left:15%;
 }
 .btn1 {
   margin-top: 50px;
@@ -72,15 +50,30 @@
   opacity: 0;
 }
 
-.videoContainer{
-    height: 500px;
-    width: 500px;
-    background-color: grey;
+.btnContainer {
+  display: flex;
+  height: 100%;
+  flex: wrap;
+  width: 10%;
 }
 
-.annotation{
-    height: 500px;
-    width:500px;
-    background-color:skyblue;
-    overflow-y: scroll ;
+.upload-btn-wrapper input[type="file"] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.videoContainer {
+  height: 500px;
+  width: 500px;
+  background-color: grey;
+}
+
+.annotation {
+  height: 500px;
+  width: 500px;
+  background-color: skyblue;
+  overflow-y: scroll;
 }
