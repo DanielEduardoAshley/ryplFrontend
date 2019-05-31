@@ -1,7 +1,7 @@
 import firebase from "../firebase"
 import { Player } from "video-react";
 import React from "react";
-import "./video.css";
+import "./videoplayer.css";
 import VideoRecorder from "react-video-recorder";
 import PropTypes from "prop-types";
 import SpeechRecognition from "./annotation";
