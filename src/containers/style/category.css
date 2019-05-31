@@ -21,6 +21,20 @@
   padding-right: 0;
   justify-content: left;
 }
+
+.category-name {
+  margin: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.5em;
+}
+
+hr {
+  display: block;
+  width: 100vw;
+  height: 1px;
+  border-top: 1px solid #ccc;
+}
+
 .responses-row {
   white-space: nowrap;
   overflow-x: scroll;
@@ -49,34 +63,6 @@
   overflow-wrap: break-word;
 }
 
-/* .card { */
-/* background: white;
-  border-radius: 8px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  cursor: pointer;
-  height: 300px;
-  margin: 20px;
-  padding: 0 20px;
-  position: relative;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.025);
-  text-align: center;
-  transition: height 1000ms;
-  width: 260px; */
-/* box-shadow: -1rem 0 1rem gray; */
-
-/* cursor: pointer;
-  display: flex;
-  border-radius: 10px;
-  transition: 0.4s ease-out;
-  position: relative;
-  left: 0px;
-  margin: 10px;
-  max-height: 15rem;
-  overflow: scroll;
-  box-sizing: border-box;
-  max-width: 15rem;
-  border: #3c3735 solid 1px;
-} */
 .card {
   background-color: #fff;
   bottom: 0;
@@ -96,6 +82,12 @@
   transition: all 0.4s ease-in-out;
 }
 
+.arrow1 {
+  -webkit-animation: slide1 1s ease-in-out infinite;
+  animation: slide1 1s ease-in-out infinite;
+  margin-left: 9px;
+}
+
 .flex_row {
   display: flex;
   overflow: hidden;
@@ -110,7 +102,7 @@
 
 .unstyled {
   list-style: none;
-  padding: 0;
+  padding: 15%;
   margin: 0;
 }
 .unstyled a {
@@ -128,7 +120,6 @@
   position: relative;
   left: 0;
   top: 0;
-  /* bottom: 0; */
   height: 100vh;
   background: #2a2d34;
 }
@@ -144,7 +135,6 @@
   color: #dfdbd9;
   font: 400 1.125em "Source Sans Pro", Helvetica, Arial, sans-serif;
   text-align: center;
-  text-transform: lowercase;
 }
 .main-nav a:hover {
   color: #fff;
@@ -178,6 +168,33 @@
   left: 0;
 }
 
-.list-item {
-  font-weight: 700;
-}
+/* OLD CARDS STYLES
+
+/* .card { */
+/* background: white;
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  cursor: pointer;
+  height: 300px;
+  margin: 20px;
+  padding: 0 20px;
+  position: relative;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.025);
+  text-align: center;
+  transition: height 1000ms;
+  width: 260px; */
+/* box-shadow: -1rem 0 1rem gray; */
+
+/* cursor: pointer;
+  display: flex;
+  border-radius: 10px;
+  transition: 0.4s ease-out;
+  position: relative;
+  left: 0px;
+  margin: 10px;
+  max-height: 15rem;
+  overflow: scroll;
+  box-sizing: border-box;
+  max-width: 15rem;
+  border: #3c3735 solid 1px;
+} */
