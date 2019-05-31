@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../images/rypl.png";
+import searchIcon from "./images/searchIcon.png";
 import "./style/navbar.css";
 import AuthContext from "../contexts/auth";
 
@@ -22,6 +23,20 @@ const Navbar = props => {
                         <img className="navbar-logo" src={logo} alt="logo" />
                       </Link>
                       <h3 className="navbar-name">RYPL</h3>
+                    </div>
+                  </div>
+                  <div className="nav-search">
+                    <input
+                      type="text"
+                      placeholder="search a rypl..."
+                      style={{ fontSize: "14px", padding: "5px", width: "80%" }}
+                    />
+                    <div>
+                      <img
+                        src={searchIcon}
+                        alt="icon"
+                        style={{ width: "25px" }}
+                      />
                     </div>
                   </div>
                   <div className="navbar-right">
@@ -48,6 +63,20 @@ const Navbar = props => {
                       <img className="navbar-logo" src={logo} alt="logo" />
                     </Link>
                     <h3 className="navbar-name">RYPL</h3>
+                  </div>
+                </div>
+                <div className="nav-search">
+                  <input
+                    type="text"
+                    placeholder="search a rypl..."
+                    style={{ fontSize: "14px", padding: "5px", width: "80%" }}
+                  />
+                  <div>
+                    <img
+                      src={searchIcon}
+                      alt="icon"
+                      style={{ width: "25px" }}
+                    />
                   </div>
                 </div>
                 <div className="navbar-right">

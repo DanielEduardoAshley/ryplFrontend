@@ -1,6 +1,6 @@
 import React from "react";
 import "../style/single.css";
-import { useSpring, animated } from "react-spring";
+import { useSpring, animated, useTransition } from "react-spring";
 
 const LeftPanel = () => {
   const props = useSpring({

@@ -121,7 +121,7 @@ class Category extends Component {
               <div class="nav-wrap">
                 <nav class="main-nav" role="navigation">
                   <ul class="unstyled list-hover-slide">
-                    <li>
+                    <li class="list-item">
                       <a href="#">News</a>
                     </li>
                     <li>

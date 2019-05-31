@@ -4,11 +4,11 @@
 }
 
 .col-2 {
-  width: calc(3 * 8.33333%);
+  width: calc(2 * 8.33333%);
 }
 
 .col-9 {
-  width: calc(9 * 8.33333%);
+  width: calc(10 * 8.33333%);
 }
 
 .content {
@@ -176,4 +176,8 @@
 .list-hover-slide a.is-current:before,
 .list-hover-slide a:hover:before {
   left: 0;
+}
+
+.list-item {
+  font-weight: 700;
 }

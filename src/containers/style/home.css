@@ -1,13 +1,15 @@
 .entire-page {
   height: 100vh;
+  /* display: flex;
+  flex-wrap: nowrap; */
 }
 
 .carousel-wrapper {
   margin: 30px;
   padding: 30px;
   text-align: center;
-  height: 50%;
-  background-color: #efefef;
+  height: 45%;
+  /* background-color: #efefef; */
 }
 
 .trending {
