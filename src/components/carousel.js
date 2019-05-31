@@ -73,7 +73,7 @@ class Carousel extends React.Component {
     const { currentIndex, galleryItems, responsive, stagePadding } = this.state;
 
     return (
-      <div>
+      <div className="col-9 content">
         <AliceCarousel
           items={galleryItems}
           slideToIndex={currentIndex}

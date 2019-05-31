@@ -1,43 +1,49 @@
-import React from "react";
+import React, { Component } from "react";
 import "../containers/style/category.css";
 
-const SideNavBar = props => {
-  return (
-    <div className="col-2 menu">
-      <header class="header" role="banner">
+class SideNavBar extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      categoryList: [
+        "Sport",
+        "News",
+        "Politics",
+        "Tech",
+        "Culture",
+        "Music",
+        "Comedy",
+        "Family",
+        "Science"
+      ]
+    };
+  }
+
+  render() {
+    return (
+      <div className="col-2 menu">
+        {/* <header class="header" role="banner"> */}
         <div class="nav-wrap">
           <nav class="main-nav" role="navigation">
             <ul class="unstyled list-hover-slide">
-              <li>
-                <a href="#">News</a>
-              </li>
-              <li>
-                <a href="#">Politics</a>
-              </li>
-              <li>
-                <a href="#">Culture</a>
-              </li>
-              <li>
-                <a href="#">Entertainment</a>
-              </li>
-              <li>
-                <a href="#">Music</a>
-              </li>
-              <li>
-                <a href="#">Comedy</a>
-              </li>
-              <li>
-                <a href="#">Family</a>
-              </li>
-              <li>
-                <a href="#">Science</a>
-              </li>
+              {this.state.categoryList.map((cat, idx) => {
+                return (
+                  <li>
+                    <a type={idx} onClick={this.changeCategory}>
+                      {" "}
+                      {cat}
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
         </div>
-      </header>
-    </div>
-  );
-};
+        {/* </header> */}
+      </div>
+    );
+  }
+}
 
 export default SideNavBar;
