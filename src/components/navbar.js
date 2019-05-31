@@ -29,7 +29,12 @@ const Navbar = props => {
                     <input
                       type="text"
                       placeholder="search a rypl..."
-                      style={{ fontSize: "14px", padding: "5px", width: "80%" }}
+                      style={{
+                        fontSize: "14px",
+                        padding: "5px",
+                        width: "80%",
+                        borderRadius: "5px"
+                      }}
                     />
                     <div>
                       <img
@@ -69,7 +74,12 @@ const Navbar = props => {
                   <input
                     type="text"
                     placeholder="search a rypl..."
-                    style={{ fontSize: "14px", padding: "5px", width: "80%" }}
+                    style={{
+                      fontSize: "14px",
+                      padding: "5px",
+                      width: "80%",
+                      borderRadius: "5px"
+                    }}
                   />
                   <div>
                     <img
