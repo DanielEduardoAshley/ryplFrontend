@@ -2,21 +2,21 @@
   display: flex;
   background-color: #2a2d34;
   color: white;
-  padding: 15px;
+  padding: 5px;
 }
 
 .navbar-left {
-  width: 80%;
+  width: 60%;
 }
 
 .logo-name-wrapper {
   display: flex;
   align-items: center;
-  padding-left: 20px;
+  padding-left: 30px;
 }
 
 .navbar-logo {
-  width: 80px;
+  width: 90px;
   padding-right: 10px;
 }
 
@@ -26,7 +26,15 @@
 
 .navbar-right {
   display: flex;
-  width: 20%;
+  width: 15%;
   justify-content: space-around;
+  align-items: center;
+}
+
+.nav-search {
+  padding-top: 15px;
+  width: 20%;
+  height: 50%;
+  display: flex;
   align-items: center;
 }
