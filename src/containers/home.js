@@ -23,17 +23,7 @@ class Home extends React.Component {
   ];
 
   state = {
-    categoryList: [
-      "Sport",
-      "News",
-      "Politics",
-      "Tech",
-      "Culture",
-      "Music",
-      "Comedy",
-      "Family",
-      "Science"
-    ],
+    categoryList: [],
     currentIndex: 0,
     itemsInSlide: 1,
     responsive: {
@@ -86,7 +76,10 @@ class Home extends React.Component {
   componentDidMount() {
     serviceWorker
       .getMostViewedVids()
-      .then(data => console.log(data.data))
+      .then(data => {
+        console.log(data.data);
+        this.setState({ categoryList: data.data.allCategories });
+      })
       .catch(err => console.log(err));
   }
 
@@ -106,7 +99,7 @@ class Home extends React.Component {
                         <li style={{ fontSize: "14px" }} key={idx}>
                           <a type={idx} onClick={this.changeCategory}>
                             {" "}
-                            {cat}
+                            {cat.name}
                           </a>
                         </li>
                       );
