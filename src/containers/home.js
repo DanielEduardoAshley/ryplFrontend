@@ -3,6 +3,7 @@ import "./style/home.css";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import serviceWorker from "../services/services";
+import { Link } from "react-router-dom";
 
 //components
 // import Carousel from "../components/carousel";
@@ -94,13 +95,15 @@ class Home extends React.Component {
               <div className="nav-wrap">
                 <nav className="main-nav" role="navigation">
                   <ul className="unstyled list-hover-slide">
-                    {this.state.categoryList.map((cat, idx) => {
+                    {this.state.categoryList.map((cat, i) => {
                       return (
-                        <li style={{ fontSize: "14px" }} key={idx}>
-                          <a type={idx} onClick={this.changeCategory}>
-                            {" "}
-                            {cat.name}
-                          </a>
+                        <li
+                          className="cat_item"
+                          style={{ fontSize: "14px" }}
+                          key={i}
+                          id={i}
+                        >
+                          <Link to={`/category/${cat.id}`}>{cat.name}</Link>
                         </li>
                       );
                     })}
