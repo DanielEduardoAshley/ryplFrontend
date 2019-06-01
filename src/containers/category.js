@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import "./style/category.css";
+import "./style/home.css";
+
 class Category extends Component {
   constructor(props) {
     super(props);
@@ -133,15 +135,15 @@ class Category extends Component {
   render() {
     return (
       <>
-        <div className="row wrapper">
-          <div className="col-2 menu">
+        <div className="entire-page">
+          <div className="sideNav-wrapper">
             <header class="header" role="banner">
               <div class="nav-wrap">
                 <nav class="main-nav" role="navigation">
                   <ul class="unstyled list-hover-slide">
                     {this.state.categoryList.map((cat, idx) => {
                       return (
-                        <li>
+                        <li style={{ fontSize: "14px" }}>
                           <a type={idx} onClick={this.changeCategory}>
                             {" "}
                             {cat}
@@ -154,7 +156,7 @@ class Category extends Component {
               </div>
             </header>
           </div>
-          <div className="col-9 content">
+          <div className="content-wrapper">
             <div className="row category-name">
               <div>{this.state.category}</div>
               <hr />
