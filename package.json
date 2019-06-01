@@ -23,6 +23,7 @@
     "recordrtc": "^5.5.4",
     "slick-carousel": "^1.8.1",
     "styled-components": "^4.2.0",
+    "uuid": "^3.3.2",
     "video-react": "^0.13.7",
     "videojs-record": "^3.6.0"
   },
