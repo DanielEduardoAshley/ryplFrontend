@@ -75,6 +75,17 @@ class Home extends React.Component {
     const { itemsInSlide, item } = event;
     this.setState({ itemsInSlide, currentIndex: item });
   };
+
+  onSlideChange(e) {
+    console.debug("Item`s position during a change: ", e.item);
+    console.debug("Slide`s position during a change: ", e.slide);
+  }
+
+  onSlideChanged(e) {
+    console.debug("Item`s position after changes: ", e.item);
+    console.debug("Slide`s position after changes: ", e.slide);
+  }
+
   render() {
     const { currentIndex, galleryItems, responsive, stagePadding } = this.state;
 
@@ -122,6 +133,8 @@ class Home extends React.Component {
               disableAutoPlayOnAction={true}
               stopAutoPlayOnHover={true}
               playButtonEnabled={false}
+              onSlideChange={this.onSlideChange}
+              onSlideChanged={this.onSlideChanged}
             />
           </div>
         </div>

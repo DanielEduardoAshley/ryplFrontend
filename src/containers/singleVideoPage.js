@@ -30,23 +30,29 @@ class SingleVideo extends React.Component {
   render() {
     return (
       <>
-        <div
-          className="upper-master-display"
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            paddingTop: "30px",
-            border: "1px solid black"
-          }}
+        <Animated
+          animationIn="slideInDown"
+          animationInDuration={2000}
+          animationInDelay={1000}
         >
-          <img src={rypl} style={{ width: "100%", height: "50vh" }}>
-            {/* <source src="https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0dhttps://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=ef00bea4-b2c2-48d8-9666-1f6e8aba80ad" /> */}
-          </img>
-          <div style={{ width: "20%", textAlign: "center" }}>
-            <h1>Title</h1>
-            <p>Whatever description</p>
+          <div
+            className="upper-master-display"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              paddingTop: "30px",
+              border: "1px solid black"
+            }}
+          >
+            <img src={rypl} style={{ width: "100%", height: "50vh" }}>
+              {/* <source src="https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0dhttps://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=ef00bea4-b2c2-48d8-9666-1f6e8aba80ad" /> */}
+            </img>
+            <div style={{ width: "20%", textAlign: "center" }}>
+              <h1>Title</h1>
+              <p>Whatever description</p>
+            </div>
           </div>
-        </div>
+        </Animated>
 
         <div className="video-container">
           <Animated
