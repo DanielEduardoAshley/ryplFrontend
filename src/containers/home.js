@@ -8,16 +8,15 @@ import "react-alice-carousel/lib/alice-carousel.css";
 // import SideNavBar from "../components/sideNavBar";
 
 class Home extends React.Component {
-  items = [
-    "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0dhttps://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=ef00bea4-b2c2-48d8-9666-1f6e8aba80ad",
-    "https://firebasestorage.googleapis.com/v0/b/cactus-338da.appspot.com/o/video2.mp4?alt=media&token=d4a19c46-9e7b-44b7-890b-c9f602a71452",
-    "https://firebasestorage.googleapis.com/v0/b/cactus-338da.appspot.com/o/video1.mp4?alt=media&token=efa054c4-6edf-456c-b450-ffef9c3f634e",
-    "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0dhttps://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=ef00bea4-b2c2-48d8-9666-1f6e8aba80ad",
-    "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0dhttps://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=ef00bea4-b2c2-48d8-9666-1f6e8aba80ad",
-    "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0dhttps://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=ef00bea4-b2c2-48d8-9666-1f6e8aba80ad"
-  ];
-
   state = {
+    items: [
+      "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0dhttps://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=ef00bea4-b2c2-48d8-9666-1f6e8aba80ad",
+      "https://firebasestorage.googleapis.com/v0/b/cactus-338da.appspot.com/o/video2.mp4?alt=media&token=d4a19c46-9e7b-44b7-890b-c9f602a71452",
+      "https://firebasestorage.googleapis.com/v0/b/cactus-338da.appspot.com/o/video1.mp4?alt=media&token=efa054c4-6edf-456c-b450-ffef9c3f634e",
+      "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0dhttps://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=ef00bea4-b2c2-48d8-9666-1f6e8aba80ad",
+      "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0dhttps://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=ef00bea4-b2c2-48d8-9666-1f6e8aba80ad",
+      "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0dhttps://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=ef00bea4-b2c2-48d8-9666-1f6e8aba80ad"
+    ],
     categoryList: [
       "Sport",
       "News",
@@ -28,6 +27,14 @@ class Home extends React.Component {
       "Comedy",
       "Family",
       "Science"
+    ],
+    videotitle: [
+      "Dan is so funny",
+      "Abdul is awesome and a father of 2",
+      "Syed is the lunch guy..",
+      "Nadav is a loser",
+      "Yun is amazing",
+      "Where is MO???"
     ],
     currentIndex: 0,
     itemsInSlide: 1,
@@ -43,17 +50,17 @@ class Home extends React.Component {
       //overlay effect
       paddingLeft: 0,
       paddingRight: 0
-    },
-    galleryItems: this.galleryItems()
+    }
+    // galleryItems: this.galleryItems()
   };
 
-  galleryItems() {
-    return this.items.map(i => (
-      <video key={i} controls style={{ width: "97%" }}>
-        <source src={i} />
-      </video>
-    ));
-  }
+  // galleryItems() {
+  //   return this.items.map(i => (
+  //     <video key={i} controls style={{ width: "97%" }}>
+  //       <source src={i} />
+  //     </video>
+  //   ));
+  // }
 
   slidePrevPage = () => {
     const currentIndex = this.state.currentIndex - this.state.itemsInSlide;
@@ -76,14 +83,42 @@ class Home extends React.Component {
     this.setState({ itemsInSlide, currentIndex: item });
   };
 
-  onSlideChange(e) {
-    console.debug("Item`s position during a change: ", e.item);
-    console.debug("Slide`s position during a change: ", e.slide);
-  }
+  slideTo = i => this.setState({ currentIndex: i });
 
-  onSlideChanged(e) {
-    console.debug("Item`s position after changes: ", e.item);
-    console.debug("Slide`s position after changes: ", e.slide);
+  onSlideChanged = e => this.setState({ currentIndex: e.item });
+
+  renderThumbs = () => (
+    <ul>
+      {this.state.videotitle.map((item, i) => (
+        <button
+          style={{ border: "none", outline: "none", width: "30%" }}
+          key={i}
+          onClick={() => this.slideTo(i)}
+        >
+          {item}
+        </button>
+      ))}
+    </ul>
+  );
+
+  renderGallery() {
+    const { currentIndex, items } = this.state;
+
+    return (
+      <AliceCarousel
+        dotsDisabled={false}
+        buttonsDisabled={true}
+        slideToIndex={currentIndex}
+        onSlideChanged={this.onSlideChanged}
+        responsive={this.state.responsive}
+      >
+        {items.map((item, i) => (
+          <video key={i} controls style={{ width: "97%" }}>
+            <source src={item} />
+          </video>
+        ))}
+      </AliceCarousel>
+    );
   }
 
   render() {
@@ -115,7 +150,7 @@ class Home extends React.Component {
           {/* ---- SIDE NAV BAR ---- */}
           <div className="content-wrapper">
             <div className="trending">Most Viewed</div>
-
+            {/* 
             <AliceCarousel
               items={galleryItems}
               slideToIndex={currentIndex}
@@ -135,7 +170,9 @@ class Home extends React.Component {
               playButtonEnabled={false}
               onSlideChange={this.onSlideChange}
               onSlideChanged={this.onSlideChanged}
-            />
+            /> */}
+            <div>{this.renderGallery()}</div>
+            {this.renderThumbs()}
           </div>
         </div>
       </>
