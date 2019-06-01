@@ -1,5 +1,7 @@
-import firebase from "../firebase"
-import { Player } from "video-react";
+import firebase from "../firebase";
+import {
+  Player
+} from "video-react";
 import React from "react";
 import "./video.css";
 import VideoRecorder from "react-video-recorder";
@@ -20,9 +22,11 @@ class Video extends React.Component {
     this.videoPlayer = React.createRef();
   }
 
- 
+
   handleFileStream = async e => {
-    const superBuffer = new Blob(this.state.blob, { type: "video/webm" });
+    const superBuffer = new Blob(this.state.blob, {
+      type: "video/webm"
+    });
     const url = window.URL.createObjectURL(superBuffer);
     const root = firebase.storage().ref();
     const newImage = root.child(
@@ -59,68 +63,93 @@ class Video extends React.Component {
       console.log(err);
     }
   };
-stopRecording=()=>{
-  this.setState({
-    stopRecord : true,
-  })
-}
+  stopRecording = () => {
+    this.setState({
+      stopRecord: true,
+    })
+  }
 
   render() {
 
 
-    return (
-      <>
-     
-        <div className='player  '>
-       <VideoRecorder
-          onRecordingComplete={(
-            videoblob,
-            startedAt,
-            thumbnailBlob,
-            duration
-          ) => {
-            console.log(videoblob);
-            console.log('thumb',thumbnailBlob);
-            console.log(URL.createObjectURL(videoblob));
-            const storageRef = firebase.storage().ref();
-            const ref = storageRef.child("test/test.mp4");
+    return ( <
+      >
 
-            ref.put(videoblob).then(function(snapshot) {
-              console.log("Uploaded a blob or file!", snapshot);
-            });
-          }}
-          isOnInitially={false}
-          OnStopRecording={(isReplayingVideo)=>{ console.log('replay',isReplayingVideo)         
-        }}
-            
-        />
-        <div className='annotation'> <SpeechRecognition reset={this.state.stopRecord} /></div>
+      <
+      div className = 'player  ' >
+      <
+      VideoRecorder onRecordingComplete = {
+        (
+          videoblob,
+          startedAt,
+          thumbnailBlob,
+          duration
+        ) => {
+          console.log(videoblob);
+          console.log('thumb', thumbnailBlob);
+          console.log(URL.createObjectURL(videoblob));
+          const storageRef = firebase.storage().ref();
+          const ref = storageRef.child("test/test.mp4");
 
-        </div>
-       
+          ref.put(videoblob).then(function (snapshot) {
+            console.log("Uploaded a blob or file!", snapshot);
+          });
+        }
+      }
+      isOnInitially = {
+        false
+      }
+      OnStopRecording = {
+        (isReplayingVideo) => {
+          console.log('replay', isReplayingVideo)
+        }
+      }
 
-        <div className="upload-btn-wrapper">
-          <button onClick={e => this.handleFileStream(e)} className="btn">Submit</button>
-          <button className="btn" onClick={this.stopRecording}>Upload a file</button>
-          <input
-            type="file"
-            name="myfile"
-            onChange={e => this.handleFileInput(e)}
-            onClick={this.getFirebasetoken}
-          />
-        </div>
-    
-      
-        {this.state.urls.map((e, i) => {
-          return (
-            <Player
-              playsInline
-              poster="https://bostoncrusaders.org/wp-content/uploads/2014/12/kid-sad-face-new-york-1r6di21.jpg"
-              src={`${e}`}
+      /> <
+      div className = 'annotation' > < SpeechRecognition reset = {
+        this.state.stopRecord
+      }
+      /></div >
+
+      <
+      /div>
+
+
+      <
+      div className = "upload-btn-wrapper" >
+      <
+      button onClick = {
+        e => this.handleFileStream(e)
+      }
+      className = "btn" > Submit < /button> <
+      button className = "btn"
+      onClick = {
+        this.stopRecording
+      } > Upload a file < /button> <
+      input type = "file"
+      name = "myfile"
+      onChange = {
+        e => this.handleFileInput(e)
+      }
+      onClick = {
+        this.getFirebasetoken
+      }
+      /> < /
+      div >
+
+
+      {
+        this.state.urls.map((e, i) => {
+          return ( <
+            Player playsInline poster = "https://bostoncrusaders.org/wp-content/uploads/2014/12/kid-sad-face-new-york-1r6di21.jpg"
+            src = {
+              `${e}`
+            }
             />
           );
-        })}
-      </>
+        })
+      } <
+      />
     );
   }
 }
