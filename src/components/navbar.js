@@ -46,6 +46,13 @@ const Navbar = props => {
                   </div>
                   <div className="navbar-right">
                     <Link
+                      to="/video"
+                      className="nav-item"
+                      style={{ textDecoration: "none", color: "white" }}
+                    >
+                      Upload
+                    </Link>
+                    <Link
                       to="/logout"
                       className="nav-item"
                       style={{ textDecoration: "none", color: "white" }}

@@ -50,7 +50,7 @@ class App extends React.Component {
             <Route path="/logout" exact component={Logout} />
             <Route path="/video" exact component={Video} />
             <Route path="/videopage" component={SingleVideo} />
-            <Route path="/category" exact component={Category} />
+            <Route path="/category/:id" exact component={Category} />
             <Route path="/trial" exact component={Trial} />
           </Switch>
         </AuthContext.Provider>
