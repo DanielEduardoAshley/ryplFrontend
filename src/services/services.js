@@ -1,16 +1,17 @@
 const axios = require("axios");
+const port = require('./port');
 const serviceWorker = {};
 
 serviceWorker.getMostViewedVids = () => {
-  return axios.get("http://localhost:3000/video/home");
+  return axios.get(`http://localhost:${port}/video/home`);
 };
 
 serviceWorker.getVidThread = id => {
-  return axios.get(`http://localhost:3000/video/singlevid/${id}`);
+  return axios.get(`http://localhost:${port}/video/singlevid/${id}`);
 };
 
 serviceWorker.getVidsOfCategory = id => {
-  return axios.get(`http://localhost:3000/video/category/${id}`);
+  return axios.get(`http://localhost:${port}/video/category/${id}`);
 };
 
 serviceWorker.postVideo = (
@@ -23,7 +24,7 @@ serviceWorker.postVideo = (
   annotation,
   description
 ) => {
-  return axios.post("http://localhost:3000/video", {
+  return axios.post(`http://localhost:${port}/video`, {
     userId,
     categoryId,
     title,
@@ -43,7 +44,7 @@ serviceWorker.postUser = (
   lastName,
   imgUrl
 ) => {
-  return axios.post("http://localhost:3000/user", {
+  return axios.post(`http://localhost:${port}/user`, {
     username,
     email,
     firebaseUid,
@@ -54,17 +55,17 @@ serviceWorker.postUser = (
 };
 
 serviceWorker.getUser = id => {
-  return axios.get(`http://localhost:3000/user/${id}`);
+  return axios.get(`http://localhost:${port}/user/${id}`);
 };
 
 serviceWorker.deleteVideo = id => {
-  return axios.delete("http://localhost:3000/video", {
+  return axios.delete(`http://localhost:${port}/video`, {
     id
   });
 };
 
 serviceWorker.getAllCategories = () => {
-  return axios.get("http://localhost:3000/video/categories");
+  return axios.get(`http://localhost:${port}/video/categories`);
 };
 
 module.exports = serviceWorker;
