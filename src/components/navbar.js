@@ -30,7 +30,7 @@ const Navbar = props => {
                       type="text"
                       placeholder="search a rypl..."
                       style={{
-                        fontSize: "14px",
+                        fontSize: "18px",
                         padding: "5px",
                         width: "80%",
                         borderRadius: "5px"
