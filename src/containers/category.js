@@ -121,7 +121,7 @@ class Category extends Component {
       .then(data => {
         const { categories, vidsOfCategory } = data.data.info;
         const { name } = data.data.info.categoryName;
-        console.log(name);
+        console.log("video:", vidsOfCategory);
 
         this.setState({
           categoryList: categories,
@@ -141,7 +141,7 @@ class Category extends Component {
         .then(data => {
           const { categories, vidsOfCategory } = data.data.info;
           const { name } = data.data.info.categoryName;
-          console.log(name);
+
           this.setState({
             categoryList: categories,
             videosList: vidsOfCategory,
@@ -153,6 +153,7 @@ class Category extends Component {
   }
 
   render() {
+    console.log("STATE in category: ", this.state);
     const page = (
       <>
         <div className="entire-page">
@@ -161,17 +162,18 @@ class Category extends Component {
             <div className="row category-name">
               <div> {this.state.category} </div> <hr />
             </div>{" "}
-            <div className="row cards-display content">
+            <div className="row this_cards-display content">
               {" "}
               {this.state.videosList.map((e, i) => {
                 return (
-                  <Link to="/VideoPage/1">
-                    <div className="card" key={i}>
+                  <Link to={`/VideoPage/ ${e.id}`}>
+                    <div className="this_card" key={i}>
                       <div className="row flex_row">
-                        <div className="main-video ">
+                        <div className="main-videos ">
                           <video
-                            className="video_container"
-                            autoPlay={true}
+                            id={e.id}
+                            className="video_containerrs"
+                            autoPlay={false}
                             loop={false}
                             muted=""
                           >
@@ -180,7 +182,7 @@ class Category extends Component {
                         </div>{" "}
                       </div>{" "}
                       <div className="row flex_row">
-                        <div className="card_content">
+                        <div className="this_card_content">
                           <h3>{e.video_title}</h3>{" "}
                           <h4 className="reactions">
                             Reactions: {e.responses.length}{" "}
@@ -194,7 +196,7 @@ class Category extends Component {
                             return (
                               <video
                                 className="response_container"
-                                autoPlay={true}
+                                autoPlay={false}
                                 loop={false}
                                 muted=""
                                 key={i}
@@ -223,7 +225,7 @@ export default Category;
 {
   /* OLD CARDS DISPLAY
    return (
-                <div className="card">
+                <div className="this_card">
                   <div className="row flex_row">
                     <div className="main-video ">
                       <video
@@ -235,7 +237,7 @@ export default Category;
                         <source src={e.vidUrl} />;
                       </video>
 
-                      <div className="card_content">
+                      <div className="this_card_content">
                         <h3>Title</h3>
                         <p> Description</p>
                       </div>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./style/VideoPage.css";
 import ShowReplies from "../components/replies";
 import Axios from "axios";
-import serviceWorker from "./../services/services";
+import serviceWorker from "../services/services";
 
 class VideoPage extends Component {
   constructor(props) {

@@ -16,7 +16,7 @@ import Video from "./components/video";
 import SingleVideo from "./containers/singleVideoPage";
 import VerticalMode from "./components/singleVideoLeft";
 import Category from "./containers/category";
-import VideoPage from "./containers/trial";
+import VideoPage from "./containers/videoPage";
 
 class App extends React.Component {
   state = {
