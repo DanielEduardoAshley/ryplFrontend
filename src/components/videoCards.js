@@ -2,9 +2,6 @@ import React from "react";
 import "./videoCards.css";
 import { Animated } from "react-animated-css";
 
-const sampleVideo =
-  "https://firebasestorage.googleapis.com/v0/b/cactus-338da.appspot.com/o/video2.mp4?alt=media&token=d4a19c46-9e7b-44b7-890b-c9f602a71452";
-
 const VideoCards = props => {
   return (
     <Animated
