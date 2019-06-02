@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import "./style/trial.css";
+import "./style/VideoPage.css";
 import ShowReplies from "../components/replies";
 import Axios from "axios";
+import serviceWorker from "./../services/services";
 
-class Trial extends Component {
+class VideoPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,14 +29,29 @@ class Trial extends Component {
         main: "col-2 main-video",
         reaction: "col-4 reactions-videos",
         reply: "col-6 replies-videos"
+      },
+      video: {
+        masterVid: {},
+        responseToMaster: []
       }
     };
   }
 
   componentDidMount() {
-    Axios.get("http://localhost:3000/video/singlevid/1").then(data => {
-      console.log("data: ", data);
-    });
+    const path = this.props.location.pathname.split("/");
+    const id = parseInt(path[path.length - 1]);
+    serviceWorker
+      .getVidThread(id)
+      .then(data => {
+        console.log("video: ", data.data.data);
+        this.setState({
+          video: data.data.data
+        });
+        console.log("state is here: ", this.state);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   toggleMode = e => {
@@ -49,7 +65,7 @@ class Trial extends Component {
 
   handleResponseClick = e => {
     const index = e.target.getAttribute("index");
-    const len = this.state.video.responses.length;
+    const len = this.state.video.responseToMaster.length;
     if (index) {
       this.setState({
         repliesStatus: true,
@@ -63,75 +79,85 @@ class Trial extends Component {
     return (
       <>
         <div className="wrapper">
-          <div
-            name="mode1"
-            className={this.state.default["main"]}
-            onClick={this.toggleMode}
-          >
-            <div className="mycard-container">
-              <video className="mycard" controls>
-                <source src={this.state.video.vidUrl} />
-              </video>
-              );
-              {/* <video className="mycard" autoplay={false} loop={false} muted="">
-                <source src="https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0dhttps://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=ef00bea4-b2c2-48d8-9666-1f6e8aba80ad" />
-                // source="https://source.unsplash.com/800x600/?video,1"
-              </video> */}
-              <div className="video-info">
-                <h2>Title</h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div
-            name="mode2"
-            className={this.state.default["reaction"]}
-            onClick={this.toggleMode}
-          >
-            <div className="mycard-container responses">
-              {this.state.video.responses.map((vid, idx) => {
-                return (
-                  <video
-                    className="mycard response"
-                    controls
-                    index={idx}
-                    onClick={this.handleResponseClick}
-                  >
-                    <source src={vid.responseUrl} />
+          {!this.state.video ? (
+            <></>
+          ) : (
+            <>
+              <div
+                name="mode1"
+                className={this.state.default["main"]}
+                onClick={this.toggleMode}
+              >
+                <div className="mycard-container">
+                  <video className="mycard" controls>
+                    <source src={this.state.video.masterVid.video_url} />
                   </video>
-                );
-              })}
-            </div>
-          </div>
-          <div
-            name="mode3 fade-in"
-            className={this.state.default["reply"]}
-            onClick={this.toggleMode}
-          >
-            <div className="mycard-container replies">
-              {!this.state.repliesStatus || !this.state.repliesIdx
-                ? null
-                : this.state.video.responses[idx].replies.map((reply, idx) => {
-                    return <ShowReplies url={reply.replyUrl} />;
-                  })}
-            </div>
-          </div>
+                  );
+                  <div className="video-info">
+                    <h2>Title</h2>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      Duis aute irure dolor in reprehenderit in voluptate velit
+                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                      sint occaecat cupidatat non proident, sunt in culpa qui
+                      officia deserunt mollit anim id est laborum.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                name="mode2"
+                className={this.state.default["reaction"]}
+                onClick={this.toggleMode}
+              >
+                <div className="mycard-container responses">
+                  {!this.state.video.responseToMaster.length ? (
+                    <></>
+                  ) : (
+                    this.state.video.responseToMaster.map((vid, idx) => {
+                      return (
+                        <video
+                          className="mycard response"
+                          controls
+                          index={idx}
+                          onClick={this.handleResponseClick}
+                        >
+                          <source src={vid.video_url} />
+                        </video>
+                      );
+                    })
+                  )}
+                </div>
+              </div>
+              <div
+                name="mode3"
+                className={this.state.default["reply"]}
+                onClick={this.toggleMode}
+              >
+                <div className="mycard-container replies">
+                  {!this.state.repliesStatus || !this.state.repliesIdx ? (
+                    <></>
+                  ) : (
+                    this.state.video.responseToMaster[idx].response.map(
+                      (reply, idx) => {
+                        return <ShowReplies url={reply.video_url} />;
+                      }
+                    )
+                  )}
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </>
     );
   }
 }
 
-export default Trial;
+export default VideoPage;
 
 // Old Dummy Data:
 // video: {

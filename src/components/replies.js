@@ -1,5 +1,5 @@
 import React from "react";
-import "../containers/style/trial.css";
+import "../containers/style/VideoPage.css";
 
 const ShowReplies = ({ url }) => {
   return (

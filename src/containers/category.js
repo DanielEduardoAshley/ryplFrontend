@@ -3,6 +3,7 @@ import "./style/category.css";
 import "./style/home.css";
 import SideNavBar from "./../components/sideNavBar";
 import serviceWorker from "./../services/services";
+import { Link } from "react-router-dom";
 
 class Category extends Component {
   constructor(props) {
@@ -164,46 +165,48 @@ class Category extends Component {
               {" "}
               {this.state.videosList.map((e, i) => {
                 return (
-                  <div className="card" key={i}>
-                    <div className="row flex_row">
-                      <div className="main-video ">
-                        <video
-                          className="video_container"
-                          autoPlay={true}
-                          loop={false}
-                          muted=""
-                        >
-                          <source src={e.video_url} />;{" "}
-                        </video>{" "}
+                  <Link to="/VideoPage/1">
+                    <div className="card" key={i}>
+                      <div className="row flex_row">
+                        <div className="main-video ">
+                          <video
+                            className="video_container"
+                            autoPlay={true}
+                            loop={false}
+                            muted=""
+                          >
+                            <source src={e.video_url} />;{" "}
+                          </video>{" "}
+                        </div>{" "}
                       </div>{" "}
-                    </div>{" "}
-                    <div className="row flex_row">
-                      <div className="card_content">
-                        <h3>{e.video_title}</h3>{" "}
-                        <h4 className="reactions">
-                          Reactions: {e.responses.length}{" "}
-                        </h4>{" "}
+                      <div className="row flex_row">
+                        <div className="card_content">
+                          <h3>{e.video_title}</h3>{" "}
+                          <h4 className="reactions">
+                            Reactions: {e.responses.length}{" "}
+                          </h4>{" "}
+                        </div>{" "}
                       </div>{" "}
-                    </div>{" "}
-                    <div className="row responses-row">
-                      <div className="video_responses  col-9">
-                        {" "}
-                        {e.responses.map((res, i) => {
-                          return (
-                            <video
-                              className="response_container"
-                              autoPlay={true}
-                              loop={false}
-                              muted=""
-                              key={i}
-                            >
-                              <source src={res.video_url} />{" "}
-                            </video>
-                          );
-                        })}{" "}
+                      <div className="row responses-row">
+                        <div className="video_responses  col-9">
+                          {" "}
+                          {e.responses.map((res, i) => {
+                            return (
+                              <video
+                                className="response_container"
+                                autoPlay={true}
+                                loop={false}
+                                muted=""
+                                key={i}
+                              >
+                                <source src={res.video_url} />{" "}
+                              </video>
+                            );
+                          })}{" "}
+                        </div>{" "}
                       </div>{" "}
-                    </div>{" "}
-                  </div>
+                    </div>
+                  </Link>
                 );
               })}{" "}
             </div>{" "}
