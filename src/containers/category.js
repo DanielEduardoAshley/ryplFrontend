@@ -166,18 +166,20 @@ class Category extends Component {
               {" "}
               {this.state.videosList.map((e, i) => {
                 return (
-                  <div className="card" key={i}>
-                    <div className="row flex_row">
-                      <div className="main-video ">
-                        <video
-                          className="video_container"
-                          autoPlay={false}
-                          loop={false}
-                          muted=""
-                          controls
-                        >
-                          <source src={e.video_url} />;{" "}
-                        </video>{" "}
+                  <Link to={`/VideoPage/ ${e.id}`}>
+                    <div className="this_card" key={i}>
+                      <div className="row flex_row">
+                        <div className="main-videos ">
+                          <video
+                            id={e.id}
+                            className="video_containerrs"
+                            autoPlay={false}
+                            loop={false}
+                            muted=""
+                          >
+                            <source src={e.video_url} />;{" "}
+                          </video>{" "}
+                        </div>{" "}
                       </div>{" "}
                       <div className="row flex_row">
                         <div className="this_card_content">
@@ -187,26 +189,24 @@ class Category extends Component {
                           </h4>{" "}
                         </div>{" "}
                       </div>{" "}
-
-                    </div>{" "}
-                    <div className="row responses-row">
-                      <div className="video_responses  col-9">
-                        {" "}
-                        {e.responses.map((res, i) => {
-                          return (
-                            <video
-                              className="response_container"
-                              autoPlay={false}
-                              loop={false}
-                              muted=""
-                              key={i}
-                              controls
-                            >
-                              <source src={res.video_url} />{" "}
-                            </video>
-                          );
-                        })}{" "}
-    </div>{" "}
+                      <div className="row responses-row">
+                        <div className="video_responses  col-9">
+                          {" "}
+                          {e.responses.map((res, i) => {
+                            return (
+                              <video
+                                className="response_container"
+                                autoPlay={false}
+                                loop={false}
+                                muted=""
+                                key={i}
+                              >
+                                <source src={res.video_url} />{" "}
+                              </video>
+                            );
+                          })}{" "}
+                        </div>{" "}
+                      </div>{" "}
                     </div>
                   </Link>
                 );
@@ -230,7 +230,7 @@ export default Category;
                     <div className="main-video ">
                       <video
                         className="video_container"
-                        autoplay={false}
+                        autoplay={true}
                         loop={false}
                         muted=""
                       >
