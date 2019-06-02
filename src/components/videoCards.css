@@ -1,0 +1,40 @@
+.videoCard-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 10px;
+  /* border: 1px solid orange; */
+  overflow: scroll;
+}
+
+.video-card {
+  width: 45%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  margin: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.video {
+  /* border: 1px solid black; */
+  /* width: 100%; */
+}
+
+.video-title {
+  word-break: break-all;
+}
+
+.video-card-btn {
+  border: none;
+  font-size: 14px;
+  background-color: #009ddc;
+  color: #efefef;
+  border-radius: 3px;
+  padding: 10px;
+}
+
+.video-card-btn:hover {
+  background-color: #2a2d34;
+}
