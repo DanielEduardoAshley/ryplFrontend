@@ -76,7 +76,7 @@ class VideoPage extends Component {
 
   render() {
     const idx = this.state.repliesIdx;
-    return (
+    const page = (
       <>
         <div className="wrapper">
           {!this.state.video ? (
@@ -154,6 +154,7 @@ class VideoPage extends Component {
         </div>
       </>
     );
+    return this.state.video.masterVid.video_url ? page : <div />;
   }
 }
 

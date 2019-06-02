@@ -4,11 +4,9 @@ import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import serviceWorker from "../services/services";
 import { Link } from "react-router-dom";
-import SideNavBar from "../components/sideNavBar";
-
 //components
-// import Carousel from "../components/carousel";
-// import SideNavBar from "../components/sideNavBar";
+import SideNavBar from "../components/sideNavBar";
+import VideoCards from "../components/videoCards";
 
 class Home extends React.Component {
   items = [
@@ -23,7 +21,6 @@ class Home extends React.Component {
     "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0dhttps://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=ef00bea4-b2c2-48d8-9666-1f6e8aba80ad",
     "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0dhttps://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=ef00bea4-b2c2-48d8-9666-1f6e8aba80ad"
   ];
-
   state = {
     categoryList: [],
     currentIndex: 0,
@@ -43,7 +40,6 @@ class Home extends React.Component {
     },
     galleryItems: this.galleryItems()
   };
-
   galleryItems() {
     return this.items.map(i => (
       <div>
@@ -53,12 +49,10 @@ class Home extends React.Component {
       </div>
     ));
   }
-
   slidePrevPage = () => {
     const currentIndex = this.state.currentIndex - this.state.itemsInSlide;
     this.setState({ currentIndex });
   };
-
   slideNextPage = () => {
     const {
       itemsInSlide,
@@ -66,15 +60,12 @@ class Home extends React.Component {
     } = this.state;
     let currentIndex = this.state.currentIndex + itemsInSlide;
     if (currentIndex > length) currentIndex = length;
-
     this.setState({ currentIndex });
   };
-
   handleOnSlideChange = event => {
     const { itemsInSlide, item } = event;
     this.setState({ itemsInSlide, currentIndex: item });
   };
-
   componentDidMount() {
     serviceWorker
       .getMostViewedVids()
@@ -84,7 +75,6 @@ class Home extends React.Component {
       })
       .catch(err => console.log(err));
   }
-
   render() {
     const { currentIndex, galleryItems, responsive, stagePadding } = this.state;
     const page = (
@@ -115,8 +105,7 @@ class Home extends React.Component {
         {/* ---- SIDE NAV BAR ---- */}
         <div className="content-wrapper">
           <div className="trending">Most Viewed</div>
-
-          <AliceCarousel
+          {/* <AliceCarousel
             items={galleryItems}
             slideToIndex={currentIndex}
             responsive={responsive}
@@ -133,13 +122,13 @@ class Home extends React.Component {
             disableAutoPlayOnAction={true}
             stopAutoPlayOnHover={true}
             playButtonEnabled={false}
-          />
+          /> */}
+          <VideoCards />
         </div>
       </div>
     );
-
+    // return page;
     return this.state.categoryList.length === 0 ? <div /> : page;
   }
 }
-
 export default Home;
