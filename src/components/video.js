@@ -4,39 +4,60 @@ import React from "react";
 import "./video.css";
 import VideoRecorder from "react-video-recorder";
 import PropTypes from "prop-types";
-import SpeechRecognition from "./annotation";
+  import SpeechRecognition, { StartAnontation, StopAnontation} from "./annotation";
+const uuid = require('uuid/v1')
 
 class Video extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      blob: [],
+      startingAnnontations: false,
+      blob: null,
       url: "",
       urls: [],
-      stopRecord: false
+      thumbnail: [],
+      stopRecord: false,
+      isRecording: false,
+      preview: 0,
+      func: 0
     };
     this.videoPlayer = React.createRef();
   }
 
-  handleFileStream = async e => {
-    const superBuffer = new Blob(this.state.blob, { type: "video/webm" });
-    const url = window.URL.createObjectURL(superBuffer);
-    const root = firebase.storage().ref();
-    const newImage = root.child(
-      `vids/${this.state.blob[this.state.blob.length - 1]}`
-    );
+componentDidMount(){
 
-    try {
-      const snapshot = await newImage.put(superBuffer);
-      const urls = await snapshot.ref.getDownloadURL();
-      this.setState({
-        url: this.state.url.concat(urls)
-      });
-      console.log(url);
-    } catch (err) {
-      console.log(err);
-    }
-    console.log("hello");
+  
+}
+
+
+  handleFileStream = async e => {
+
+    if(!this.state.blob) return;
+
+    const storageRef = firebase.storage().ref();
+    
+    const ref = storageRef.child(`userVideos/${uuid()}`);
+    const ref1 = storageRef.child(`userThumbnail/${uuid()}`);
+
+    console.log('testblob', this.state.blob)
+    ref.put(this.state.blob).then(function(snapshot) {
+      console.log("Uploaded a blob or file!", snapshot);
+    })
+
+    ref1.put(this.state.thumbnail).then(function(snapshot) {
+      console.log("Uploaded a thumb!", snapshot);
+    })   
+     // try {
+    //   const snapshot = await newImage.put(superBuffer);
+    //   const urls = await snapshot.ref.getDownloadURL();
+    //   this.setState({
+    //     url: this.state.url.concat(urls)
+    //   });
+    //   console.log(url);
+    // } catch (err) {
+    //   console.log(err);
+    // }
+    // console.log("hello");
   };
 
   handleFileInput = async e => {
@@ -56,12 +77,70 @@ class Video extends React.Component {
       console.log(err);
     }
   };
+
   stopRecording = () => {
     this.setState({
       stopRecord: true
     });
   };
 
+  preview = () => {
+    if(this.state.preview===0){
+    this.setState({
+      preview: 1
+    })
+  }
+  else{
+    this.setState({
+      preview: 0
+    })
+  };
+  };
+
+  startAnnotation=()=>{
+    this.setState({
+      startingAnnontations : true
+    })
+  }
+
+  setBlob=(videoblob, thumb)=>{
+    this.setState({
+      blob: videoblob,
+      thumbnail: [thumb]
+
+    })
+    console.log('thumbnail',thumb, videoblob)
+
+  }
+
+  resetBlob=()=>{
+    this.setState({
+      blob : null
+    })
+  }
+
+  isRecord=()=>{
+    this.setState({
+      isRecording : !this.state.isRecording,
+    })
+  }
+
+  
+  reset=()=>{
+    console.log('hira', this.state.func)
+    if(this.state.func === 0){
+this.setState({
+  func : 1
+})
+    }
+    else if(this.state.func===1){
+  this.setState({
+        func : 0
+      }) 
+    }
+  }
+
+  
   render() {
     return (
       <>
@@ -76,37 +155,64 @@ class Video extends React.Component {
               console.log(videoblob);
               console.log("thumb", thumbnailBlob);
               console.log(URL.createObjectURL(videoblob));
-              const storageRef = firebase.storage().ref();
-              const ref = storageRef.child("test/test.mp4");
+              this.setBlob(videoblob, thumbnailBlob)
 
-              ref.put(videoblob).then(function(snapshot) {
-                console.log("Uploaded a blob or file!", snapshot);
-              });
+              // const storageRef = firebase.storage().ref();
+              // const ref = storageRef.child("test/test.mp4");
+
+              // ref.put(videoblob).then(function(snapshot) {
+              //   console.log("Uploaded a blob or file!", snapshot);
+              // });
             }}
             isOnInitially={false}
-            OnStopRecording={isReplayingVideo => {
-              console.log("replay", isReplayingVideo);
-            }}
+          
+            OnTurnOnCamera={
+console.log('hiya')             
+}
+onTurnOnCamera={console.log('hiya1')             
+}
+onTurnOffCamera={console.log('hiya2')             
+}
+onStartRecording={()=> this.reset()         
+}
+onStopRecording={()=> this.reset()        
+}
+// onRecordingComplete={console.log('hiya4.5')             
+// }
+onOpenVideoInput={console.log('hiya5')             
+}
+onStopReplaying={console.log('hiya6')             
+}
           />
-          <div className="annotation">
-            {" "}
-            <SpeechRecognition reset={this.state.stopRecord} />
-          </div>
-        </div>
+          <div className="annotation" style={{opacity: `${this.state.preview}`}}>
+             <SpeechRecognition name={'Daniel'} annotations={this.startAnnontations} />
+             <StartAnontation   startAnnontations={this.state.func} name={'Daniel'} /> 
+             {/* <StopAnontation annotationState={this.state.startingAnnontations}  func={this.handleReset} reset={this.state.func} name={'Daniel'} />  */}
 
-        <div className="upload-btn-wrapper">
-          <button onClick={e => this.handleFileStream(e)} className="btn">
-            Submit
-          </button>
+          </div>
+
+        </div>
+        <div className='btnContainer'>
+        <button className="btn1" onClick={this.stopRecording}>
+      Submit         
+ </button>
+ <button onClick={this.preview} className="btn1">Preview Annotations</button>
+
+       
+          <div className="subcontainer">
+          <div className="upload-btn-wrapper ">
+
           <button className="btn" onClick={this.stopRecording}>
             Upload a file
           </button>
-          <input
+          <input className="btn" style={{width: '100%', height: '100%'}}
             type="file"
             name="myfile"
             onChange={e => this.handleFileInput(e)}
             onClick={this.getFirebasetoken}
           />
+        </div>
+        </div>
         </div>
 
         {this.state.urls.map((e, i) => {
@@ -117,7 +223,17 @@ class Video extends React.Component {
               src={`${e}`}
             />
           );
+
+         
         })}
+        { 
+          this.state.thumbnail.map((e,i)=>{
+            console.log('test',e)
+            const objectURL = URL.createObjectURL(e);
+              console.log('url',objectURL)
+            return <img src={objectURL} key={i}></img>
+
+          })}
       </>
     );
   }

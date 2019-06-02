@@ -105,8 +105,8 @@ class Category extends React.Component {
           duration={800}
           // infinite={true}
           disableAutoPlayOnAction={true}
-          stopAutoPlayOnHover={true}
-          playButtonEnabled={false}
+          stopAutoPlayOnHover={false}
+          playButtonEnabled={true}
         />
         {/* <button onClick={this.slidePrevPage}>Prev</button>
         <button onClick={this.slideNextPage}>Next</button> */}
