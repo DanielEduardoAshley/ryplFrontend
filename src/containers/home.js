@@ -3,6 +3,8 @@ import "./style/home.css";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import serviceWorker from "../services/services";
+import { Link } from "react-router-dom";
+import SideNavBar from "../components/sideNavBar";
 
 //components
 // import Carousel from "../components/carousel";
@@ -85,56 +87,58 @@ class Home extends React.Component {
 
   render() {
     const { currentIndex, galleryItems, responsive, stagePadding } = this.state;
-
-    return (
-      <>
-        <div className="entire-page">
-          <div className="sideNav-wrapper">
-            <header className="header" role="banner">
-              <div className="nav-wrap">
-                <nav className="main-nav" role="navigation">
-                  <ul className="unstyled list-hover-slide">
-                    {this.state.categoryList.map((cat, idx) => {
-                      return (
-                        <li style={{ fontSize: "14px" }} key={idx}>
-                          <a type={idx} onClick={this.changeCategory}>
-                            {" "}
-                            {cat.name}
-                          </a>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </nav>
-              </div>
-            </header>
-          </div>
-          {/* ---- SIDE NAV BAR ---- */}
-          <div className="content-wrapper">
-            <div className="trending">Most Viewed</div>
-
-            <AliceCarousel
-              items={galleryItems}
-              slideToIndex={currentIndex}
-              responsive={responsive}
-              onInitialized={this.handleOnSlideChange}
-              onSlideChanged={this.handleOnSlideChange}
-              onResized={this.handleOnSlideChange}
-              stagePadding={stagePadding}
-              buttonsDisabled={true}
-              dotsDisabled={false}
-              swipeDisabled={false} //for mobile swipe?
-              autoPlay={false}
-              duration={3000}
-              // infinite={true}
-              disableAutoPlayOnAction={true}
-              stopAutoPlayOnHover={true}
-              playButtonEnabled={false}
-            />
-          </div>
+    const page = (
+      <div className="entire-page">
+        {/* <div className="sideNav-wrapper">
+      <header className="header" role="banner">
+        <div className="nav-wrap">
+          <nav className="main-nav" role="navigation">
+            <ul className="unstyled list-hover-slide">
+              {this.state.categoryList.map((cat, i) => {
+                return (
+                  <li
+                    className="cat_item"
+                    style={{ fontSize: "14px" }}
+                    key={i}
+                    id={i}
+                  >
+                    <Link to={`/category/${cat.id}`}>{cat.name}</Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
         </div>
-      </>
+      </header>
+    </div> */}
+        <SideNavBar categoryList={this.state.categoryList} />
+        {/* ---- SIDE NAV BAR ---- */}
+        <div className="content-wrapper">
+          <div className="trending">Most Viewed</div>
+
+          <AliceCarousel
+            items={galleryItems}
+            slideToIndex={currentIndex}
+            responsive={responsive}
+            onInitialized={this.handleOnSlideChange}
+            onSlideChanged={this.handleOnSlideChange}
+            onResized={this.handleOnSlideChange}
+            stagePadding={stagePadding}
+            buttonsDisabled={true}
+            dotsDisabled={false}
+            swipeDisabled={false} //for mobile swipe?
+            autoPlay={false}
+            duration={3000}
+            // infinite={true}
+            disableAutoPlayOnAction={true}
+            stopAutoPlayOnHover={true}
+            playButtonEnabled={false}
+          />
+        </div>
+      </div>
     );
+
+    return this.state.categoryList.length === 0 ? <div /> : page;
   }
 }
 

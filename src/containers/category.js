@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./style/category.css";
 import "./style/home.css";
+import SideNavBar from "./../components/sideNavBar";
+import serviceWorker from "./../services/services";
 
 class Category extends Component {
   constructor(props) {
@@ -8,17 +10,7 @@ class Category extends Component {
 
     this.state = {
       category: "Category Name",
-      categoryList: [
-        "Sport",
-        "News",
-        "Politics",
-        "Tech",
-        "Culture",
-        "Music",
-        "Comedy",
-        "Family",
-        "Science"
-      ],
+      categoryList: [],
       videosList: [
         {
           vidUrl:
@@ -132,36 +124,29 @@ class Category extends Component {
     });
   };
 
+  componentDidMount() {
+    const { id } = this.props.match.params;
+    serviceWorker
+      .getVidsOfCategory(id)
+      .then(data => {
+        const { categories, vidsOfCategory } = data.data.info;
+        console.log(categories, vidsOfCategory);
+        this.setState({ categoryList: categories });
+      })
+      .catch(err => console.log(err));
+  }
+
   render() {
-    return (
+    const page = (
       <>
         <div className="entire-page">
-          <div className="sideNav-wrapper">
-            <header class="header" role="banner">
-              <div class="nav-wrap">
-                <nav class="main-nav" role="navigation">
-                  <ul class="unstyled list-hover-slide">
-                    {this.state.categoryList.map((cat, idx) => {
-                      return (
-                        <li style={{ fontSize: "14px" }}>
-                          <a type={idx} onClick={this.changeCategory}>
-                            {" "}
-                            {cat}
-                          </a>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </nav>
-              </div>
-            </header>
-          </div>
+          <SideNavBar categoryList={this.state.categoryList} />
           <div className="content-wrapper">
             <div className="row category-name">
-              <div>{this.state.category}</div>
-              <hr />
-            </div>
+              <div> {this.state.category} </div> <hr />
+            </div>{" "}
             <div className="row cards-display content">
+              {" "}
               {this.state.videosList.map(e => {
                 return (
                   <div className="card">
@@ -169,46 +154,48 @@ class Category extends Component {
                       <div className="main-video ">
                         <video
                           className="video_container"
-                          autoplay={true}
+                          autoPlay={true}
                           loop={false}
                           muted=""
                         >
-                          <source src={e.vidUrl} />;
-                        </video>
-                      </div>
-                    </div>
+                          <source src={e.vidUrl} />;{" "}
+                        </video>{" "}
+                      </div>{" "}
+                    </div>{" "}
                     <div className="row flex_row">
                       <div className="card_content">
-                        <h3>Title</h3>
+                        <h3> Title </h3>{" "}
                         <h4 className="reactions">
-                          Reactions: {e.responses.length}
-                        </h4>
-                      </div>
-                    </div>
+                          Reactions: {e.responses.length}{" "}
+                        </h4>{" "}
+                      </div>{" "}
+                    </div>{" "}
                     <div className="row responses-row">
                       <div className="video_responses  col-9">
+                        {" "}
                         {e.responses.map((res, idx) => {
                           return (
                             <video
                               className="response_container"
-                              autoplay={true}
+                              autoPlay={true}
                               loop={false}
                               muted=""
                             >
-                              <source src={res.responseUrl} />
+                              <source src={res.responseUrl} />{" "}
                             </video>
                           );
-                        })}
-                      </div>
-                    </div>
+                        })}{" "}
+                      </div>{" "}
+                    </div>{" "}
                   </div>
                 );
-              })}
-            </div>
-          </div>
-        </div>
+              })}{" "}
+            </div>{" "}
+          </div>{" "}
+        </div>{" "}
       </>
     );
+    return this.state.categoryList.length === 0 ? <div /> : page;
   }
 }
 

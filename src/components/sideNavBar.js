@@ -1,46 +1,43 @@
 import React, { Component } from "react";
 import "../containers/style/category.css";
+import { Link } from "react-router-dom";
 
 class SideNavBar extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      categoryList: [
-        "Sport",
-        "News",
-        "Politics",
-        "Tech",
-        "Culture",
-        "Music",
-        "Comedy",
-        "Family",
-        "Science"
-      ]
+      categoryList: []
     };
+  }
+
+  componentDidMount() {
+    this.setState({ categoryList: this.props.categoryList });
   }
 
   render() {
     return (
-      <div className="col-2 menu">
-        {/* <header class="header" role="banner"> */}
-        <div class="nav-wrap">
-          <nav class="main-nav" role="navigation">
-            <ul class="unstyled list-hover-slide">
-              {this.state.categoryList.map((cat, idx) => {
-                return (
-                  <li>
-                    <a type={idx} onClick={this.changeCategory}>
-                      {" "}
-                      {cat}
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
-        </div>
-        {/* </header> */}
+      <div className="sideNav-wrapper">
+        <header className="header" role="banner">
+          <div className="nav-wrap">
+            <nav className="main-nav" role="navigation">
+              <ul className="unstyled list-hover-slide">
+                {this.state.categoryList.map((cat, i) => {
+                  return (
+                    <li
+                      className="cat_item"
+                      style={{ fontSize: "14px" }}
+                      key={i}
+                      id={i}
+                    >
+                      <Link to={`/category/${cat.id}`}>{cat.name}</Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
+          </div>
+        </header>
       </div>
     );
   }
