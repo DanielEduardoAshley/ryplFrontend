@@ -1,34 +1,44 @@
+*{
+  box-sizing: border-box
+}
+
 .player {
-  margin-left: 25%;
-  margin-top: 25%;
+  display: flex;
+  width: calc(6 * 8.333%);
+  margin-top: 5%;
+  margin-left: 30%;
+  height: 500px;
+  width: 800px;
+  border: skyblue;
 }
 
 .upload-btn-wrapper {
   position: relative;
   overflow: hidden;
   display: inline-block;
-}
+} 
 
 .btn {
   border: 2px solid gray;
   color: gray;
   background-color: white;
-  padding: 8px 20px;
+  /* padding: 8px 20px; */
   border-radius: 8px;
   font-size: 20px;
   font-weight: bold;
-  margin-left: 20px;
+  /* margin-left: 20px; */
+  /* width: 100% */
 }
+
 .btn1 {
-  margin-top: 50px;
-  border: 2px solid blue;
+  border: 2px solid gray;
   color: gray;
   background-color: white;
-  padding: 8px 20px;
+  /* padding: 5px 20px; */
+  height: 50px;
   border-radius: 8px;
   font-size: 20px;
   font-weight: bold;
-  margin-left: 20px;
 }
 
 .col {
@@ -36,31 +46,17 @@
 }
 
 .btnContainer {
-  display: flex;
-  height: 100%;
-  flex: wrap;
-  width: 10%;
+  display:flex;
+  margin-left: 35%;
+  margin-top: 40px;
 }
+
+
 
 .upload-btn-wrapper input[type="file"] {
   font-size: 100px;
   position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0;
-}
-
-.btnContainer {
-  display: flex;
-  height: 100%;
-  flex: wrap;
-  width: 10%;
-}
-
-.upload-btn-wrapper input[type="file"] {
-  font-size: 100px;
-  position: absolute;
-  left: 0;
+  left: 0px;
   top: 0;
   opacity: 0;
 }
@@ -74,6 +70,10 @@
 .annotation {
   height: 500px;
   width: 500px;
-  background-color: skyblue;
   overflow-y: scroll;
+}
+
+.subcontainer{
+  height:100px;
+  width:100px;
 }
