@@ -127,8 +127,8 @@ class Home extends React.Component {
         </div>
       </div>
     );
-    return page;
-    // return this.state.categoryList.length === 0 ? <div /> : page;
+    // return page;
+    return this.state.categoryList.length === 0 ? <div /> : page;
   }
 }
 export default Home;
