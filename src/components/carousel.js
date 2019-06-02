@@ -73,7 +73,7 @@ class Carousel extends React.Component {
     const { currentIndex, galleryItems, responsive, stagePadding } = this.state;
 
     return (
-      <div>
+      <div className="col-9 content">
         <AliceCarousel
           items={galleryItems}
           slideToIndex={currentIndex}
@@ -85,15 +85,13 @@ class Carousel extends React.Component {
           buttonsDisabled={true}
           dotsDisabled={false}
           swipeDisabled={true} //for mobile swipe?
-          autoPlay={true}
+          autoPlay={false}
           duration={3000}
           // infinite={true}
           disableAutoPlayOnAction={true}
           stopAutoPlayOnHover={true}
-          playButtonEnabled={true}
+          playButtonEnabled={false}
         />
-        {/* <button onClick={this.slidePrevPage}>Prev</button>
-        <button onClick={this.slideNextPage}>Next</button> */}
       </div>
     );
   }

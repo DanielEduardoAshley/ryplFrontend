@@ -4,7 +4,7 @@ import React from "react";
 import "./video.css";
 import VideoRecorder from "react-video-recorder";
 import PropTypes from "prop-types";
-  import SpeechRecognition, { StartAnontation} from "./annotation";
+  import SpeechRecognition, { StartAnontation, StopAnontation} from "./annotation";
 const uuid = require('uuid/v1')
 
 class Video extends React.Component {
@@ -19,9 +19,16 @@ class Video extends React.Component {
       stopRecord: false,
       isRecording: false,
       preview: 0,
+      func: 0
     };
     this.videoPlayer = React.createRef();
   }
+
+componentDidMount(){
+
+  
+}
+
 
   handleFileStream = async e => {
 
@@ -119,8 +126,21 @@ class Video extends React.Component {
   }
 
   
-  
+  reset=()=>{
+    console.log('hira', this.state.func)
+    if(this.state.func === 0){
+this.setState({
+  func : 1
+})
+    }
+    else if(this.state.func===1){
+  this.setState({
+        func : 0
+      }) 
+    }
+  }
 
+  
   render() {
     return (
       <>
@@ -153,9 +173,9 @@ onTurnOnCamera={console.log('hiya1')
 }
 onTurnOffCamera={console.log('hiya2')             
 }
-onStartRecording={()=> this.startAnnotation          
+onStartRecording={()=> this.reset()         
 }
-onStopRecording={console.log('hiya4')            
+onStopRecording={()=> this.reset()        
 }
 // onRecordingComplete={console.log('hiya4.5')             
 // }
@@ -166,7 +186,9 @@ onStopReplaying={console.log('hiya6')
           />
           <div className="annotation" style={{opacity: `${this.state.preview}`}}>
              <SpeechRecognition name={'Daniel'} annotations={this.startAnnontations} />
-             <StartAnontation annotationState={this.state.startingAnnontations} name={'Daniel'} /> 
+             <StartAnontation   startAnnontations={this.state.func} name={'Daniel'} /> 
+             {/* <StopAnontation annotationState={this.state.startingAnnontations}  func={this.handleReset} reset={this.state.func} name={'Daniel'} />  */}
+
           </div>
 
         </div>

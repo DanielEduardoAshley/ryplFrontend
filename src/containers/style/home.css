@@ -1,17 +1,23 @@
 .entire-page {
   height: 100vh;
+  display: flex;
+  overflow: hidden;
 }
 
-.carousel-wrapper {
+.sideNav-wrapper {
+  width: 10%;
+}
+
+.content-wrapper {
+  width: 80%;
   margin: 30px;
   padding: 30px;
   text-align: center;
-  height: 50%;
-  background-color: #efefef;
+  height: 30%;
 }
 
 .trending {
-  font-size: 24px;
+  font-size: 32px;
   font-weight: 700;
   text-align: left;
   padding-bottom: 20px;
@@ -30,16 +36,3 @@
   text-align: left;
   padding-bottom: 20px;
 }
-
-/* .category-btn {
-  text-align: center;
-  font-size: 20px;
-  font-weight: 700;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  background-color: #009ddc;
-} */
-/* 
-.background {
-  background-color: #efefef;
-} */

@@ -11,6 +11,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-alice-carousel": "^1.13.11",
+    "react-animated-css": "^1.2.1",
     "react-dom": "^16.8.6",
     "react-multimedia-capture": "^1.2.3",
     "react-router-dom": "^5.0.0",
