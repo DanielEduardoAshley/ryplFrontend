@@ -179,7 +179,7 @@ class Category extends Component {
                     </div>{" "}
                     <div className="row flex_row">
                       <div className="card_content">
-                        <h3> Title </h3>{" "}
+                        <h3>{e.video_title}</h3>{" "}
                         <h4 className="reactions">
                           Reactions: {e.responses.length}{" "}
                         </h4>{" "}
