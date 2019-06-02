@@ -1,12 +1,10 @@
-import firebase from "../firebase"
+import firebase from "../firebase";
 import { Player } from "video-react";
 import React from "react";
 import "./video.css";
 import VideoRecorder from "react-video-recorder";
 import PropTypes from "prop-types";
 import SpeechRecognition from "./annotation";
-
-
 
 class Video extends React.Component {
   constructor(props) {
@@ -15,12 +13,11 @@ class Video extends React.Component {
       blob: [],
       url: "",
       urls: [],
-      stopRecord: false,
+      stopRecord: false
     };
     this.videoPlayer = React.createRef();
   }
 
- 
   handleFileStream = async e => {
     const superBuffer = new Blob(this.state.blob, { type: "video/webm" });
     const url = window.URL.createObjectURL(superBuffer);
@@ -59,49 +56,51 @@ class Video extends React.Component {
       console.log(err);
     }
   };
-stopRecording=()=>{
-  this.setState({
-    stopRecord : true,
-  })
-}
+  stopRecording = () => {
+    this.setState({
+      stopRecord: true
+    });
+  };
 
   render() {
-
-
     return (
       <>
-     
-        <div className='player  '>
-       <VideoRecorder
-          onRecordingComplete={(
-            videoblob,
-            startedAt,
-            thumbnailBlob,
-            duration
-          ) => {
-            console.log(videoblob);
-            console.log('thumb',thumbnailBlob);
-            console.log(URL.createObjectURL(videoblob));
-            const storageRef = firebase.storage().ref();
-            const ref = storageRef.child("test/test.mp4");
+        <div className="player  ">
+          <VideoRecorder
+            onRecordingComplete={(
+              videoblob,
+              startedAt,
+              thumbnailBlob,
+              duration
+            ) => {
+              console.log(videoblob);
+              console.log("thumb", thumbnailBlob);
+              console.log(URL.createObjectURL(videoblob));
+              const storageRef = firebase.storage().ref();
+              const ref = storageRef.child("test/test.mp4");
 
-            ref.put(videoblob).then(function(snapshot) {
-              console.log("Uploaded a blob or file!", snapshot);
-            });
-          }}
-          isOnInitially={false}
-          OnStopRecording={(isReplayingVideo)=>{ console.log('replay',isReplayingVideo)         
-        }}
-            
-        />
-        <div className='annotation'> <SpeechRecognition reset={this.state.stopRecord} /></div>
-
+              ref.put(videoblob).then(function(snapshot) {
+                console.log("Uploaded a blob or file!", snapshot);
+              });
+            }}
+            isOnInitially={false}
+            OnStopRecording={isReplayingVideo => {
+              console.log("replay", isReplayingVideo);
+            }}
+          />
+          <div className="annotation">
+            {" "}
+            <SpeechRecognition reset={this.state.stopRecord} />
+          </div>
         </div>
-       
 
         <div className="upload-btn-wrapper">
-          <button onClick={e => this.handleFileStream(e)} className="btn">Submit</button>
-          <button className="btn" onClick={this.stopRecording}>Upload a file</button>
+          <button onClick={e => this.handleFileStream(e)} className="btn">
+            Submit
+          </button>
+          <button className="btn" onClick={this.stopRecording}>
+            Upload a file
+          </button>
           <input
             type="file"
             name="myfile"
@@ -109,8 +108,7 @@ stopRecording=()=>{
             onClick={this.getFirebasetoken}
           />
         </div>
-    
-      
+
         {this.state.urls.map((e, i) => {
           return (
             <Player
