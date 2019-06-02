@@ -90,7 +90,12 @@ class VideoPage extends Component {
               >
                 <div className="mycard-container">
                   <video className="mycard" controls>
-                    <source src={this.state.video.masterVid.video_url} />
+                    {" "}
+                    {this.state.video.masterVid.video_url ? (
+                      <source src={this.state.video.masterVid.video_url} />
+                    ) : (
+                      <></>
+                    )}
                   </video>
                   );
                   <div className="video-info">
