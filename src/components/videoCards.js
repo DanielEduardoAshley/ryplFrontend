@@ -1,6 +1,5 @@
 import React from "react";
 import "./videoCards.css";
-import { Animated } from "react-animated-css";
 
 const VideoCards = props => {
   return (
@@ -17,7 +16,7 @@ const VideoCards = props => {
           />
         </video>
         <div className="video-title">
-          <h2>David and Helen</h2>
+          <h2>Title</h2>
         </div>
         <button className="video-card-btn">See Thread</button>
       </div>
@@ -34,7 +33,7 @@ const VideoCards = props => {
           />
         </video>
         <div className="video-title">
-          <h2>Dan testing</h2>
+          <h2>Title</h2>
         </div>
         <button className="video-card-btn">See Thread</button>
       </div>
@@ -51,7 +50,7 @@ const VideoCards = props => {
           />
         </video>
         <div className="video-title">
-          <h2>Dan still testing..</h2>
+          <h2>Title</h2>
         </div>
         <button className="video-card-btn">See Thread</button>
       </div>
@@ -67,7 +66,7 @@ const VideoCards = props => {
           />
         </video>
         <div className="video-title">
-          <h2>Title 4</h2>
+          <h2>Title</h2>
         </div>
         <button className="video-card-btn">See Thread</button>
       </div>
@@ -83,7 +82,7 @@ const VideoCards = props => {
           />
         </video>
         <div className="video-title">
-          <h2> Demo Practice</h2>
+          <h2>Title</h2>
         </div>
         <button className="video-card-btn">See Thread</button>
       </div>
@@ -99,7 +98,7 @@ const VideoCards = props => {
           />
         </video>
         <div className="video-title">
-          <h2>Title 5</h2>
+          <h2>Title</h2>
         </div>
         <button className="video-card-btn">See Thread</button>
       </div>
