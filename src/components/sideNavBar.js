@@ -37,12 +37,7 @@ class SideNavBar extends Component {
                       id={i}
                     >
                       <Link to={`/category/${cat.id}`}>
-                        <div
-                          id={cat.id}
-                          onClick={e => this.props.clickedCategory(e)}
-                        >
-                          {cat.name}
-                        </div>
+                        <div id={cat.id}>{cat.name}</div>
                       </Link>{" "}
                     </li>
                   );

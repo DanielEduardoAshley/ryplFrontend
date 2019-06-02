@@ -9,7 +9,7 @@ class Category extends Component {
     super(props);
 
     this.state = {
-      category: "Category Name",
+      category: "",
       categoryList: [],
       videosList: [
         {
@@ -113,44 +113,49 @@ class Category extends Component {
     };
   }
 
-  changeCategory = e => {
-    this.setState({
-      category: this.state.categoryList[e.target.type]
-    });
-  };
-
   componentDidMount() {
     const { id } = this.props.match.params;
     serviceWorker
       .getVidsOfCategory(id)
       .then(data => {
         const { categories, vidsOfCategory } = data.data.info;
-        console.log(categories, vidsOfCategory);
-        this.setState({ categoryList: categories, videosList: vidsOfCategory });
+        const { name } = data.data.info.categoryName;
+        console.log(name);
+
+        this.setState({
+          categoryList: categories,
+          videosList: vidsOfCategory,
+          category: name
+        });
       })
       .catch(err => console.log(err));
   }
 
-  clickedCategory = e => {
-    const id = e.target.id;
-    serviceWorker
-      .getVidsOfCategory(id)
-      .then(data => {
-        const { categories, vidsOfCategory } = data.data.info;
-        console.log(categories, vidsOfCategory);
-        this.setState({ categoryList: categories, videosList: vidsOfCategory });
-      })
-      .catch(err => console.log(err));
-  };
+  componentDidUpdate(props) {
+    if (this.props.match.params.id !== props.match.params.id) {
+      const { id } = this.props.match.params;
+      console.log(id);
+      serviceWorker
+        .getVidsOfCategory(id)
+        .then(data => {
+          const { categories, vidsOfCategory } = data.data.info;
+          const { name } = data.data.info.categoryName;
+          console.log(name);
+          this.setState({
+            categoryList: categories,
+            videosList: vidsOfCategory,
+            category: name
+          });
+        })
+        .catch(err => console.log(err));
+    }
+  }
 
   render() {
     const page = (
       <>
         <div className="entire-page">
-          <SideNavBar
-            categoryList={this.state.categoryList}
-            clickedCategory={this.clickedCategory}
-          />
+          <SideNavBar categoryList={this.state.categoryList} />
           <div className="content-wrapper">
             <div className="row category-name">
               <div> {this.state.category} </div> <hr />
