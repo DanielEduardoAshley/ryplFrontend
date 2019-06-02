@@ -10,7 +10,7 @@ serviceWorker.getVidThread = id => {
 };
 
 serviceWorker.getVidsOfCategory = id => {
-  return axios.get(`http://localhost:3002/video/category/${id}`);
+  return axios.get(`http://localhost:3000/video/category/${id}`);
 };
 
 serviceWorker.postVideo = (
