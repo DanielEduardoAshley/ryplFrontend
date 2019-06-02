@@ -1,5 +1,5 @@
 import React from "react";
-import "./videoCards.css";
+import "./style/videoCards.css";
 
 const VideoCards = props => {
   return (
