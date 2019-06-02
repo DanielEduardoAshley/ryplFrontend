@@ -47,5 +47,8 @@ serviceWorker.deleteVideo = (id) => {
     });
 };
 
+serviceWorker.getAllCategories = () => {
+    return axios.get('http://localhost:3000/video/categories');
+};
 
 module.exports = serviceWorker;

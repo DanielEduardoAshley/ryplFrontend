@@ -154,7 +154,7 @@ class Category extends Component {
                       <div className="main-video ">
                         <video
                           className="video_container"
-                          autoplay={true}
+                          autoPlay={true}
                           loop={false}
                           muted=""
                         >
@@ -177,7 +177,7 @@ class Category extends Component {
                           return (
                             <video
                               className="response_container"
-                              autoplay={true}
+                              autoPlay={true}
                               loop={false}
                               muted=""
                             >
