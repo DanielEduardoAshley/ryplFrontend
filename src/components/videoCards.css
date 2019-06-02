@@ -1,12 +1,14 @@
 .videoCard-wrapper {
   display: flex;
+  flex-wrap: nowrap;
   padding: 10px;
   /* border: 1px solid orange; */
   overflow: scroll;
 }
 
 .video-card {
-  /* width: 25%; */
+  width: 45%;
+  height: 50%;
   display: flex;
   flex-direction: column;
   padding: 10px;
@@ -15,7 +17,8 @@
 }
 
 .video {
-  border: 1px solid black;
+  /* border: 1px solid black; */
+  /* width: 100%; */
 }
 
 .video-title {
