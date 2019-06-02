@@ -9,7 +9,7 @@ class Category extends Component {
     super(props);
 
     this.state = {
-      category: "Category Name",
+      category: "",
       categoryList: [],
       videosList: [
         {
@@ -107,22 +107,11 @@ class Category extends Component {
         {
           vidUrl:
             "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0dhttps://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=ef00bea4-b2c2-48d8-9666-1f6e8aba80ad",
-          responses: [
-            // {
-            //   responseUrl:
-            //     "https://firebasestorage.googleapis.com/v0/b/cactus-338da.appspot.com/o/video1.mp4?alt=media&token=efa054c4-6edf-456c-b450-ffef9c3f634e"
-            // }
-          ]
+          responses: []
         }
       ]
     };
   }
-
-  changeCategory = e => {
-    this.setState({
-      category: this.state.categoryList[e.target.type]
-    });
-  };
 
   componentDidMount() {
     const { id } = this.props.match.params;
@@ -130,10 +119,36 @@ class Category extends Component {
       .getVidsOfCategory(id)
       .then(data => {
         const { categories, vidsOfCategory } = data.data.info;
-        console.log(categories, vidsOfCategory);
-        this.setState({ categoryList: categories });
+        const { name } = data.data.info.categoryName;
+        console.log(name);
+
+        this.setState({
+          categoryList: categories,
+          videosList: vidsOfCategory,
+          category: name
+        });
       })
       .catch(err => console.log(err));
+  }
+
+  componentDidUpdate(props) {
+    if (this.props.match.params.id !== props.match.params.id) {
+      const { id } = this.props.match.params;
+      console.log(id);
+      serviceWorker
+        .getVidsOfCategory(id)
+        .then(data => {
+          const { categories, vidsOfCategory } = data.data.info;
+          const { name } = data.data.info.categoryName;
+          console.log(name);
+          this.setState({
+            categoryList: categories,
+            videosList: vidsOfCategory,
+            category: name
+          });
+        })
+        .catch(err => console.log(err));
+    }
   }
 
   render() {
@@ -147,9 +162,9 @@ class Category extends Component {
             </div>{" "}
             <div className="row cards-display content">
               {" "}
-              {this.state.videosList.map(e => {
+              {this.state.videosList.map((e, i) => {
                 return (
-                  <div className="card">
+                  <div className="card" key={i}>
                     <div className="row flex_row">
                       <div className="main-video ">
                         <video
@@ -158,13 +173,13 @@ class Category extends Component {
                           loop={false}
                           muted=""
                         >
-                          <source src={e.vidUrl} />;{" "}
+                          <source src={e.video_url} />;{" "}
                         </video>{" "}
                       </div>{" "}
                     </div>{" "}
                     <div className="row flex_row">
                       <div className="card_content">
-                        <h3> Title </h3>{" "}
+                        <h3>{e.video_title}</h3>{" "}
                         <h4 className="reactions">
                           Reactions: {e.responses.length}{" "}
                         </h4>{" "}
@@ -173,15 +188,16 @@ class Category extends Component {
                     <div className="row responses-row">
                       <div className="video_responses  col-9">
                         {" "}
-                        {e.responses.map((res, idx) => {
+                        {e.responses.map((res, i) => {
                           return (
                             <video
                               className="response_container"
                               autoPlay={true}
                               loop={false}
                               muted=""
+                              key={i}
                             >
-                              <source src={res.responseUrl} />{" "}
+                              <source src={res.video_url} />{" "}
                             </video>
                           );
                         })}{" "}
