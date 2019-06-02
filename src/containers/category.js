@@ -1,24 +1,16 @@
 import React, { Component } from "react";
 import "./style/category.css";
 import "./style/home.css";
+import SideNavBar from "./../components/sideNavBar";
+import serviceWorker from "./../services/services";
 
 class Category extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      category: "Category Name",
-      categoryList: [
-        "Sport",
-        "News",
-        "Politics",
-        "Tech",
-        "Culture",
-        "Music",
-        "Comedy",
-        "Family",
-        "Science"
-      ],
+      category: "",
+      categoryList: [],
       videosList: [
         {
           vidUrl:
@@ -115,100 +107,111 @@ class Category extends Component {
         {
           vidUrl:
             "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0dhttps://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=ef00bea4-b2c2-48d8-9666-1f6e8aba80ad",
-          responses: [
-            // {
-            //   responseUrl:
-            //     "https://firebasestorage.googleapis.com/v0/b/cactus-338da.appspot.com/o/video1.mp4?alt=media&token=efa054c4-6edf-456c-b450-ffef9c3f634e"
-            // }
-          ]
+          responses: []
         }
       ]
     };
   }
 
-  changeCategory = e => {
-    this.setState({
-      category: this.state.categoryList[e.target.type]
-    });
-  };
+  componentDidMount() {
+    const { id } = this.props.match.params;
+    serviceWorker
+      .getVidsOfCategory(id)
+      .then(data => {
+        const { categories, vidsOfCategory } = data.data.info;
+        const { name } = data.data.info.categoryName;
+        console.log(name);
+
+        this.setState({
+          categoryList: categories,
+          videosList: vidsOfCategory,
+          category: name
+        });
+      })
+      .catch(err => console.log(err));
+  }
+
+  componentDidUpdate(props) {
+    if (this.props.match.params.id !== props.match.params.id) {
+      const { id } = this.props.match.params;
+      console.log(id);
+      serviceWorker
+        .getVidsOfCategory(id)
+        .then(data => {
+          const { categories, vidsOfCategory } = data.data.info;
+          const { name } = data.data.info.categoryName;
+          console.log(name);
+          this.setState({
+            categoryList: categories,
+            videosList: vidsOfCategory,
+            category: name
+          });
+        })
+        .catch(err => console.log(err));
+    }
+  }
 
   render() {
-    return (
+    const page = (
       <>
         <div className="entire-page">
-          <div className="sideNav-wrapper">
-            <header class="header" role="banner">
-              <div class="nav-wrap">
-                <nav class="main-nav" role="navigation">
-                  <ul class="unstyled list-hover-slide">
-                    {this.state.categoryList.map((cat, idx) => {
-                      return (
-                        <li style={{ fontSize: "14px" }}>
-                          <a type={idx} onClick={this.changeCategory}>
-                            {" "}
-                            {cat}
-                          </a>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </nav>
-              </div>
-            </header>
-          </div>
+          <SideNavBar categoryList={this.state.categoryList} />
           <div className="content-wrapper">
             <div className="row category-name">
-              <div>{this.state.category}</div>
-              <hr />
-            </div>
+              <div> {this.state.category} </div> <hr />
+            </div>{" "}
             <div className="row cards-display content">
-              {this.state.videosList.map(e => {
+              {" "}
+              {this.state.videosList.map((e, i) => {
                 return (
-                  <div className="card">
+                  <div className="card" key={i}>
                     <div className="row flex_row">
                       <div className="main-video ">
                         <video
                           className="video_container"
-                          autoplay={true}
+                          autoPlay={true}
                           loop={false}
                           muted=""
                         >
-                          <source src={e.vidUrl} />;
-                        </video>
-                      </div>
-                    </div>
+                          <source src={e.video_url} />;{" "}
+                        </video>{" "}
+                      </div>{" "}
+                    </div>{" "}
                     <div className="row flex_row">
                       <div className="card_content">
-                        <h3>Title</h3>
+                        <h3>{e.video_title}</h3>{" "}
                         <h4 className="reactions">
-                          Reactions: {e.responses.length}
-                        </h4>
-                      </div>
-                    </div>
+                          Reactions: {e.responses.length}{" "}
+                        </h4>{" "}
+                      </div>{" "}
+                    </div>{" "}
                     <div className="row responses-row">
                       <div className="video_responses  col-9">
-                        {e.responses.map((res, idx) => {
+                        {" "}
+                        {e.responses.map((res, i) => {
                           return (
                             <video
                               className="response_container"
-                              autoplay={true}
+                              autoPlay={true}
                               loop={false}
                               muted=""
+                              key={i}
                             >
-                              <source src={res.responseUrl} />
+                              <source src={res.video_url} />{" "}
                             </video>
                           );
-                        })}
-                      </div>
-                    </div>
+                        })}{" "}
+                      </div>{" "}
+                    </div>{" "}
                   </div>
                 );
-              })}
-            </div>
-          </div>
-        </div>
+              })}{" "}
+            </div>{" "}
+          </div>{" "}
+        </div>{" "}
       </>
     );
+    return this.state.categoryList.length === 0 ? <div /> : page;
   }
 }
 

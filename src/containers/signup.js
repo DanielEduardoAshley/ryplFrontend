@@ -31,7 +31,7 @@ class SignUp extends React.Component {
       .then(res => {
         let userUID = res.user.uid;
         axios.post(
-          "http://localhost:3200/user ",
+          "http://localhost:3000/user ",
           {
             username: username,
             email: email,
