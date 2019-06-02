@@ -42,11 +42,12 @@ hr {
   overflow-x: scroll;
   max-height: -webkit-fill-available;
 }
-.video_container {
-  width: 100%;
+.video_containerrs {
+  /* width: 100%; */
+  height: -webkit-fill-available;
 }
 
-.card:hover .response_container {
+.this_card:hover .response_container {
   width: 100%;
   border-right: solid 5px #3c3735;
 }
@@ -57,16 +58,16 @@ hr {
   overflow: scroll;
 }
 
-.card:hover .video_container {
+.this_card:hover .video_container {
   opacity: 0.5;
 }
 
-.card_content {
+.this_card_content {
   overflow-wrap: break-word;
   text-align: left;
 }
 
-.card {
+.this_card {
   background-color: #fff;
   bottom: 0;
   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
@@ -79,7 +80,7 @@ hr {
   transition: all 0.4s ease-in-out;
   width: 15rem;
 }
-.card:hover {
+.this_card:hover {
   /* height: min-content; */
   height: 450px;
   transition: all 0.4s ease-in-out;

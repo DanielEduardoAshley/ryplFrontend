@@ -57,7 +57,7 @@ const Dictaphone = ({
         <button onClick={resetTranscript}>Reset</button>
         
 
-        <span style={{ fontSize: "20px" }}>{string}</span>
+        <span style={{ fontSize: "20px" }}>{transcript}</span>
 
   </div>)
   }
