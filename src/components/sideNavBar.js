@@ -12,7 +12,10 @@ class SideNavBar extends Component {
   }
 
   componentDidMount() {
-    this.setState({ categoryList: this.props.categoryList });
+    console.log(this.props);
+    this.setState({
+      categoryList: this.props.categoryList
+    });
   }
 
   render() {
@@ -22,22 +25,27 @@ class SideNavBar extends Component {
           <div className="nav-wrap">
             <nav className="main-nav" role="navigation">
               <ul className="unstyled list-hover-slide">
+                {" "}
                 {this.state.categoryList.map((cat, i) => {
                   return (
                     <li
                       className="cat_item"
-                      style={{ fontSize: "14px" }}
+                      style={{
+                        fontSize: "14px"
+                      }}
                       key={i}
                       id={i}
                     >
-                      <Link to={`/category/${cat.id}`}>{cat.name}</Link>
+                      <Link to={`/category/${cat.id}`}>
+                        <div id={cat.id}>{cat.name}</div>
+                      </Link>{" "}
                     </li>
                   );
-                })}
-              </ul>
-            </nav>
-          </div>
-        </header>
+                })}{" "}
+              </ul>{" "}
+            </nav>{" "}
+          </div>{" "}
+        </header>{" "}
       </div>
     );
   }
