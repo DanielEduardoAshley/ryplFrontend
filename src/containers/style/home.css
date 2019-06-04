@@ -13,7 +13,21 @@
   margin: 30px;
   padding: 30px;
   text-align: center;
-  height: 40%;
+  height: 100vh;
+  justify-items: center;
+}
+
+.video-cards-wrapper {
+  display: flex;
+}
+
+.arrow-space {
+  width: 10%;
+}
+
+.arrow-icon {
+  width: 50px;
+  padding-top: 130px;
 }
 
 .trending {

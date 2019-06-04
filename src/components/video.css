@@ -1,22 +1,78 @@
-*{
-  box-sizing: border-box
+* {
+  box-sizing: border-box;
 }
 
-.player {
+.entire-video-page {
+  height: 60%;
+  margin: 50px;
+  padding: 30px;
   display: flex;
-  width: calc(6 * 8.333%);
-  margin-top: 5%;
-  margin-left: 30%;
-  height: 500px;
-  width: 800px;
-  border: skyblue;
+  justify-content: center;
+  background-color: #179ddc;
+  border-radius: 25px;
+}
+
+.upload-video-wrapper {
+  height: 10%;
+  margin: 50px;
+  padding: 30px;
+  justify-content: center;
+  background-color: #179ddc;
+  border-radius: 25px;
+  display: flex;
+}
+
+.upload-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.video-record-left-panel {
+  width: 40%;
+  height: 100%;
+}
+
+.handle-record-right-panel {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 5px;
+}
+
+.handle-title {
+  display: flex;
+  padding-bottom: 10px;
+}
+
+.handle-description {
+  display: flex;
+  padding-bottom: 10px;
+}
+
+.form-title {
+  width: 25%;
+  font-size: 18px;
+  font-weight: 600;
+  padding-bottom: 10px;
+}
+
+.input-form {
+  width: 75%;
+  font-size: 18px;
+  border: 1px solid black;
+  padding-bottom: 10px;
+}
+
+.annotation-box {
+  border: 1px solid black;
 }
 
 .upload-btn-wrapper {
   position: relative;
   overflow: hidden;
   display: inline-block;
-} 
+}
 
 .btn {
   border: 2px solid gray;
@@ -28,7 +84,7 @@
   font-weight: bold;
   /* margin-left: 20px; */
   height: 50px;
-  width: 100%
+  width: 100%;
 }
 
 .btn1 {
@@ -57,12 +113,12 @@
 }
 
 .btnContainer {
-  display:flex;
+  display: flex;
   margin-left: 33.2%;
   margin-top: 40px;
 }
 
-.inputField{
+.inputField {
   margin-left: 42%;
 }
 
@@ -86,7 +142,7 @@
   overflow-y: scroll;
 }
 
-.subcontainer{
-  height:100px;
-  width:100px;
+.subcontainer {
+  height: 100px;
+  width: 100px;
 }
