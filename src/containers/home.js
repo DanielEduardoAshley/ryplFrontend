@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 //components
 import SideNavBar from "../components/sideNavBar";
 import VideoCards from "../components/videoCards";
+//images
 
 class Home extends React.Component {
   state = {
@@ -33,6 +34,7 @@ class Home extends React.Component {
     const page = (
       <div className="entire-page">
         <SideNavBar categoryList={this.state.categoryList} />
+
         <div className="content-wrapper">
           <div className="trending">Most Viewed</div>
           <VideoCards mostViewedVid={this.state.mostViewedVid} />
