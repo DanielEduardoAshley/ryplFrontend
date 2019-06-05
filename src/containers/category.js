@@ -3,7 +3,7 @@ import "./style/category.css";
 import "./style/home.css";
 import SideNavBar from "./../components/sideNavBar";
 import serviceWorker from "./../services/services";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 class Category extends Component {
   constructor(props) {
