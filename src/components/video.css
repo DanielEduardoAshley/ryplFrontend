@@ -4,12 +4,12 @@
 
 .entire-video-page {
   height: 60%;
-  margin: 50px;
+  margin: 100px;
   padding: 30px;
   display: flex;
   justify-content: center;
-  background-color: #179ddc;
-  border-radius: 25px;
+  /* border: 1px solid #2a2d34; */
+  border-radius: 15px;
 }
 
 .upload-video-wrapper {
@@ -17,8 +17,8 @@
   margin: 50px;
   padding: 30px;
   justify-content: center;
-  background-color: #179ddc;
-  border-radius: 25px;
+  background-color: #2a2d34;
+  /* border-radius: 25px; */
   display: flex;
 }
 
@@ -37,112 +37,59 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding-left: 5px;
+  padding-left: 30px;
 }
 
 .handle-title {
   display: flex;
+  justify-content: space-evenly;
   padding-bottom: 10px;
 }
 
 .handle-description {
   display: flex;
+  justify-content: space-evenly;
   padding-bottom: 10px;
 }
 
 .form-title {
-  width: 25%;
+  width: 50%;
   font-size: 18px;
   font-weight: 600;
   padding-bottom: 10px;
 }
 
 .input-form {
-  width: 75%;
+  width: 100%;
   font-size: 18px;
-  border: 1px solid black;
+  border: 1px solid #2a2d34;
+  border-radius: 5px;
   padding-bottom: 10px;
+  /* padding-bottom: 10px; */
 }
 
 .annotation-box {
-  border: 1px solid black;
+  border: 1px solid #2a2d34;
+  border-radius: 5px;
+  display: flex;
+  padding: 5px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  word-break: break-all;
+  overflow: scroll;
 }
 
 .upload-btn-wrapper {
-  position: relative;
-  overflow: hidden;
-  display: inline-block;
+  background-color: #009ddc;
+  border-radius: 5px;
 }
 
-.btn {
-  border: 2px solid gray;
-  color: gray;
-  background-color: white;
-  /* padding: 8px 20px; */
-  border-radius: 8px;
-  font-size: 20px;
-  font-weight: bold;
-  /* margin-left: 20px; */
-  height: 50px;
-  width: 100%;
+.upload-btn {
+  border: 1px solid #2a2d34;
+  border-radius: 5px;
+  margin: 20px;
 }
 
-.btn1 {
-  border: 2px solid gray;
-  color: gray;
-  background-color: white;
-  /* padding: 5px 20px; */
-  height: 50px;
-  border-radius: 8px;
-  font-size: 20px;
-  font-weight: bold;
-}
-.btn2 {
-  border: 2px solid gray;
-  color: grey;
-  background-color: white;
-  /* padding: 5px 20px; */
-  height: 50px;
-  border-radius: 8px;
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 500px;
-}
-.col {
-  width: calc(2 * 8.333%);
-}
-
-.btnContainer {
-  display: flex;
-  margin-left: 33.2%;
-  margin-top: 40px;
-}
-
-.inputField {
-  margin-left: 42%;
-}
-
-.upload-btn-wrapper input[type="file"] {
-  font-size: 100px;
-  position: absolute;
-  left: 0px;
-  top: 0;
-  opacity: 0;
-}
-
-.videoContainer {
-  height: 500px;
-  width: 500px;
-  background-color: grey;
-}
-
-.annotation {
-  height: 500px;
-  width: 500px;
-  overflow-y: scroll;
-}
-
-.subcontainer {
-  height: 100px;
-  width: 100px;
+.submit-btn-wrapper {
+  padding-top: 10px;
 }
