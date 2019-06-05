@@ -3,6 +3,7 @@ import "./style/VideoPage.css";
 import ShowReplies from "../components/replies";
 import Axios from "axios";
 import serviceWorker from "../services/services";
+import CardColor from "../services/cardColor";
 
 class VideoPage extends Component {
   constructor(props) {
@@ -11,13 +12,13 @@ class VideoPage extends Component {
       repliesStatus: false,
       repliesIdx: null,
       default: {
-        main: "col-6 main-video ",
-        reaction: "col-4 reactions-videos ",
+        main: "col-7 main-video ",
+        reaction: "col-5 reactions-videos ",
         reply: "col-2 replies-videos "
       },
       mode1: {
-        main: "col-6 main-video ",
-        reaction: "col-4 reactions-videos ",
+        main: "col-7 main-video ",
+        reaction: "col-5 reactions-videos ",
         reply: "col-2 replies-videos "
       },
       mode2: {
@@ -55,6 +56,7 @@ class VideoPage extends Component {
   }
 
   toggleMode = e => {
+    console.log("target ", e.target);
     const name = e.target.getAttribute("name");
     if (name === "mode1" || name === "mode2" || name === "mode3") {
       this.setState({
@@ -65,7 +67,6 @@ class VideoPage extends Component {
 
   handleResponseClick = e => {
     const index = e.target.getAttribute("index");
-    const len = this.state.video.responseToMaster.length;
     if (index) {
       this.setState({
         repliesStatus: true,
@@ -88,7 +89,7 @@ class VideoPage extends Component {
                 className={this.state.default["main"]}
                 onClick={this.toggleMode}
               >
-                <div className="mycard-container">
+                <div className="mycard-container" name="mode1">
                   <video className="mycard" controls>
                     {" "}
                     {this.state.video.masterVid.video_url ? (
@@ -98,9 +99,9 @@ class VideoPage extends Component {
                     )}
                   </video>
                   );
-                  <div className="video-info">
-                    <h2>Title</h2>
-                    <p>
+                  <div className="video-info" name="mode1">
+                    <h2 name="mode1">Title</h2>
+                    <p name="mode1">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore magna
                       aliqua. Ut enim ad minim veniam, quis nostrud exercitation
@@ -118,23 +119,26 @@ class VideoPage extends Component {
                 className={this.state.default["reaction"]}
                 onClick={this.toggleMode}
               >
-                <div className="mycard-container responses">
-                  {!this.state.video.responseToMaster.length ? (
-                    <></>
-                  ) : (
-                    this.state.video.responseToMaster.map((vid, idx) => {
-                      return (
-                        <video
-                          className="mycard response"
-                          controls
-                          index={idx}
-                          onClick={this.handleResponseClick}
-                        >
-                          <source src={vid.video_url} />
-                        </video>
-                      );
-                    })
-                  )}
+                <div className="row my-row" name="mode2">
+                  <div className="mycard-container responses" name="mode2">
+                    {!this.state.video.responseToMaster.length ? (
+                      <></>
+                    ) : (
+                      this.state.video.responseToMaster.map((vid, idx) => {
+                        return (
+                          <video
+                            className="mycard response"
+                            controls
+                            index={idx}
+                            style={{ backgroundColor: CardColor[idx % 10] }}
+                            onClick={this.handleResponseClick}
+                          >
+                            <source src={vid.video_url} />
+                          </video>
+                        );
+                      })
+                    )}
+                  </div>
                 </div>
               </div>
               <div
@@ -142,16 +146,24 @@ class VideoPage extends Component {
                 className={this.state.default["reply"]}
                 onClick={this.toggleMode}
               >
-                <div className="mycard-container replies">
-                  {!this.state.repliesStatus || !this.state.repliesIdx ? (
-                    <></>
-                  ) : (
-                    this.state.video.responseToMaster[idx].response.map(
-                      (reply, idx) => {
-                        return <ShowReplies url={reply.video_url} />;
-                      }
-                    )
-                  )}
+                <div
+                  className="row my-row"
+                  // uncomment below in case we wanted to change the color of the whole div to match the reaction color
+                  // style={{ backgroundColor: CardColor[idx] }}
+                >
+                  <div className="mycard-container replies">
+                    {!this.state.repliesStatus || !this.state.repliesIdx ? (
+                      <></>
+                    ) : (
+                      this.state.video.responseToMaster[idx].response.map(
+                        (reply, index) => {
+                          return (
+                            <ShowReplies url={reply.video_url} colorIdx={idx} />
+                          );
+                        }
+                      )
+                    )}
+                  </div>
                 </div>
               </div>
             </>
