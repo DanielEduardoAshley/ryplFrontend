@@ -10,19 +10,16 @@ const propTypes = {
   browserSupportsSpeechRecognition: PropTypes.bool
 };
 
-const handle={
-  func : null,
-}
-
-const options = {
- 
+const handle = {
+  func: null
 };
 
-export const StartAnontation = props => {
-    handle.func = props.startAnnontations
-    return null
-  }
+const options = {};
 
+export const StartAnontation = props => {
+  handle.func = props.startAnnontations;
+  return null;
+};
 
 const Dictaphone = ({
   stopListening,
@@ -33,45 +30,37 @@ const Dictaphone = ({
   startListening,
   abortListening
 }) => {
-  
-
-  
   if (!browserSupportsSpeechRecognition) {
     return null;
   }
-  console.log('gg',handle.func)
-  let string = ''
-  if(handle.func===1){
-    console.log(resetTranscript)
+  console.log("gg", handle.func);
+  let string = "";
+  if (handle.func === 1) {
+    console.log(resetTranscript);
     return (
       <div>
         <button onClick={resetTranscript}>Reset</button>
-  
+
         <span style={{ fontSize: "20px" }}>{transcript}</span>
-        {string = transcript}
-      </div>)
-  }
-  else if(handle.func===0){
-    console.log('string',string)
-   return( <div>
+        {(string = transcript)}
+      </div>
+    );
+  } else if (handle.func === 0) {
+    console.log("string", string);
+    return (
+      <div>
         <button onClick={resetTranscript}>Reset</button>
-        
 
         <span style={{ fontSize: "20px" }}>{transcript}</span>
-
-  </div>)
+      </div>
+    );
   }
-  
-  return null
-    ;  
-}
-;
 
+  return null;
+};
 Dictaphone.propTypes = propTypes;
 
 export default SpeechRecognition(options)(Dictaphone);
-
-
 
 // import React from "react";
 // import PropTypes from "prop-types";
@@ -97,7 +86,6 @@ export default SpeechRecognition(options)(Dictaphone);
 //   return null
 // };
 
-
 // class Dictaphone extends React.Component{
 //   constructor(props){
 //     super(props)
@@ -106,21 +94,13 @@ export default SpeechRecognition(options)(Dictaphone);
 //       browserSupportsSpeechRecognition: PropTypes.bool,
 //       stopListening: PropTypes.func}
 //     }
-    
 
-  
 // render(){
 //   return(
 //     <div>{propTypes.transcript}</div>
 //   )
 // }
 // }
-
-
-
-
-
-
 
 // const Dictaphone = ({
 //   transcript,
@@ -146,6 +126,5 @@ export default SpeechRecognition(options)(Dictaphone);
 //     </div>
 //   );
 // };
-
 
 // export default SpeechRecognition(options)(Dictaphone);

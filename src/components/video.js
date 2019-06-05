@@ -196,7 +196,7 @@ class Video extends React.Component {
                 className="input-form"
                 type="text"
                 onChange={e => this.handleTitle(e)}
-                placeholder="enter a title.."
+                placeholder="Enter a title..."
                 name="title"
               />
             </div>
@@ -205,13 +205,17 @@ class Video extends React.Component {
               <input
                 className="input-form"
                 type="text"
-                placeholder="include a description"
+                placeholder="Include a description..."
                 onChange={e => this.handleDescription(e)}
                 name="description"
               />
             </div>
 
             <div className="annotation-box">
+              <button style={{ padding: "10px" }} onClick={this.preview}>
+                <div>Preview Annotations</div>
+              </button>
+
               {/* <div style={{ opacity: `${this.state.preview}` }}> */}
               <SpeechRecognition
                 name={"Daniel"}
@@ -223,21 +227,68 @@ class Video extends React.Component {
               />
               {/* <StopAnontation annotationState={this.state.startingAnnontations}  func={this.handleReset} reset={this.state.func} name={'Daniel'} />  */}
               {/* </div> */}
+            </div>
 
-              <div className="annotation-btn-wrapper">
-                <button onClick={this.preview}>Preview Annotations</button>
+            <div className="upload-btn-wrapper">
+              <h3 style={{ textAlign: "center" }}>
+                To upload a video from my computer
+              </h3>
+              <div className="upload-btn">
+                <input
+                  type="file"
+                  name="myfile"
+                  onChange={e => this.handleFileInput(e)}
+                  onClick={this.getFirebasetoken}
+                  style={{
+                    fontSize: "16px",
+                    border: "1px solid black",
+                    borderRadius: "5px",
+                    width: "100%",
+                    padding: "10px",
+                    backgroundColor: "#2a2d34",
+                    color: "white",
+                    fontSize: "20px",
+                    fontWeight: "700"
+                  }}
+                />
               </div>
-              <button onClick={this.submit}>Submit</button>
+              <div className="upload-btn">
+                {" "}
+                <button
+                  style={{
+                    fontSize: "16px",
+                    border: "1px solid black",
+                    borderRadius: "5px",
+                    width: "100%",
+                    padding: "10px",
+                    backgroundColor: "#2a2d34",
+                    color: "white",
+                    fontSize: "20px",
+                    fontWeight: "700"
+                  }}
+                  onClick={this.stopRecording}
+                >
+                  Upload File
+                </button>
+              </div>
             </div>
-            <div>
-              <input
-                type="file"
-                name="myfile"
-                onChange={e => this.handleFileInput(e)}
-                onClick={this.getFirebasetoken}
-              />
+            <div className="submit-btn-wrapper">
+              <button
+                style={{
+                  border: "1px solid black",
+                  borderRadius: "5px",
+                  width: "100%",
+                  padding: "10px",
+                  backgroundColor: "#2a2d34",
+                  color: "white",
+                  fontSize: "20px",
+                  fontWeight: "700"
+                }}
+                onClick={this.submit}
+              >
+                Submit
+              </button>
             </div>
-            <button onClick={this.stopRecording}>Upload File</button>
           </div>
         </div>
 
