@@ -1,14 +1,37 @@
 import React from "react";
 import PropTypes from "prop-types";
-import SpeechRecognition from "react-speech-recognition";
+// import SpeechRecognition from "react-speech-recognition";
 import { withRouter } from "react-router-dom";
+// const SpeechRecognitions = webkitSpeechRecognition;
 
-const propTypes = {
-  // Props injected by SpeechRecognition
-  transcript: PropTypes.string,
-  resetTranscript: PropTypes.func,
-  browserSupportsSpeechRecognition: PropTypes.bool
-};
+class Annotation extends React.Component{
+  constructor(props){
+    super(props)
+    this.recognition =  new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
+   
+     this.state={
+      listen : true,
+      results:''
+    }
+
+  }
+  
+  start=()=> {
+    this.recognition.lang = 'en-US';
+    this.recognition.start();
+  }
+
+  stop=()=>{
+    this.recognition.stop()
+    console.log(this.state.results)
+  }
+
+  display=(e)=>{
+return this.recognition.onresult = function(e){
+      if(!e)return null
+      const result = e.results[e.results.length - 1][0].transcript;
+      console.log('result: ', result);
+    
 
 const handle = {
   func: null
@@ -60,7 +83,7 @@ const Dictaphone = ({
 };
 Dictaphone.propTypes = propTypes;
 
-export default SpeechRecognition(options)(Dictaphone);
+// export default SpeechRecognition(options)(Dictaphone);
 
 // import React from "react";
 // import PropTypes from "prop-types";
