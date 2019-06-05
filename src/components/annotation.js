@@ -30,6 +30,7 @@ class Annotation extends React.Component{
 return this.recognition.onresult = function(e){
       if(!e)return null
       const result = e.results[e.results.length - 1][0].transcript;
+<<<<<<< videoCategory
       console.log('result: ', result);
     
 
@@ -56,6 +57,29 @@ for (var i = e.resultIndex; i < e.results.length; i++) {
   render(){
 
     return(
+=======
+      console.log("result: ", result);
+
+      let final_transcript = "";
+      let interim_transcript = "";
+      for (var i = e.resultIndex; i < e.results.length; i++) {
+        if (e.results[i].isFinal) {
+          final_transcript += e.results[i][0].transcript;
+        } else {
+          interim_transcript += e.results[i][0].transcript;
+        }
+
+        console.log("final", final_transcript);
+        this.setState({
+          results: final_transcript
+        });
+      }
+    })());
+  };
+
+  render() {
+    return (
+>>>>>>> local
       <>
       <button onClick={this.start}>Annotation</button>
       <button onClick={this.stop}>StopAnnotation</button>
@@ -149,9 +173,12 @@ export default Annotation
 // ;
 
 // Dictaphone.propTypes = propTypes;
+<<<<<<< videoCategory
 
 // export default SpeechRecognition(options)(Dictaphone);
 
+=======
+>>>>>>> local
 
 
 // import React from "react";
