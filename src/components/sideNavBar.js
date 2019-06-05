@@ -1,51 +1,46 @@
 import React, { Component } from "react";
 import "../containers/style/category.css";
-import { Link } from "react-router-dom";
 
 class SideNavBar extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      categoryList: []
+      categoryList: [
+        "Sport",
+        "News",
+        "Politics",
+        "Tech",
+        "Culture",
+        "Music",
+        "Comedy",
+        "Family",
+        "Science"
+      ]
     };
-  }
-
-  componentDidMount() {
-    console.log(this.props);
-    this.setState({
-      categoryList: this.props.categoryList
-    });
   }
 
   render() {
     return (
-      <div className="sideNav-wrapper">
-        <header className="header" role="banner">
-          <div className="nav-wrap">
-            <nav className="main-nav" role="navigation">
-              <ul className="unstyled list-hover-slide">
-                {" "}
-                {this.state.categoryList.map((cat, i) => {
+      <div className="col-2 menu">
+        <header class="header" role="banner">
+          <div class="nav-wrap">
+            <nav class="main-nav" role="navigation">
+              <ul class="unstyled list-hover-slide">
+                {this.state.categoryList.map((cat, idx) => {
                   return (
-                    <li
-                      className="cat_item"
-                      style={{
-                        fontSize: "14px"
-                      }}
-                      key={i}
-                      id={i}
-                    >
-                      <Link to={`/category/${cat.id}`}>
-                        <div id={cat.id}>{cat.name}</div>
-                      </Link>{" "}
+                    <li>
+                      <a type={idx} onClick={this.changeCategory}>
+                        {" "}
+                        {cat}
+                      </a>
                     </li>
                   );
-                })}{" "}
-              </ul>{" "}
-            </nav>{" "}
-          </div>{" "}
-        </header>{" "}
+                })}
+              </ul>
+            </nav>
+          </div>
+        </header>
       </div>
     );
   }
