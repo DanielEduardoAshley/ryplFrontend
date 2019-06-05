@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../images/rypl.png";
 import searchIcon from "./images/searchIcon.png";
+import userIcon from "../images/user.png";
 import "./style/navbar.css";
 import AuthContext from "../contexts/auth";
 
@@ -30,7 +31,7 @@ const Navbar = props => {
                       type="text"
                       placeholder="search a rypl..."
                       style={{
-                        fontSize: "18px",
+                        fontSize: "16px",
                         padding: "5px",
                         width: "80%",
                         borderRadius: "5px"
@@ -45,6 +46,20 @@ const Navbar = props => {
                     </div>
                   </div>
                   <div className="navbar-right">
+                    <Link
+                      to="/userpage"
+                      className="nav-item"
+                      style={{ textDecoration: "none", color: "white" }}
+                    >
+                      <img
+                        src={userIcon}
+                        style={{
+                          backgroundColor: "white",
+                          width: "30px",
+                          borderRadius: "50%"
+                        }}
+                      />
+                    </Link>
                     <Link
                       to="/video"
                       className="nav-item"
@@ -82,7 +97,7 @@ const Navbar = props => {
                     type="text"
                     placeholder="search a rypl..."
                     style={{
-                      fontSize: "14px",
+                      fontSize: "16px",
                       padding: "5px",
                       width: "80%",
                       borderRadius: "5px"

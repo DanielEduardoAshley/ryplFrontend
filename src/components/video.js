@@ -20,7 +20,7 @@ class Video extends React.Component {
     this.state = {
       blob: null,
       url: "",
-      upload: '',
+      upload: "",
       thumbnails: [],
       thumbnail: "",
       stopRecord: false,
@@ -64,7 +64,6 @@ class Video extends React.Component {
     const videoUrl = root.child(`userVideos/${this.context.uid}/${uuid()}`);
     const thumbUrl = root.child(`userThumbnail/${this.context.uid}/${uuid()}`);
 
-
     try {
       const movie = await videoUrl.put(this.state.blob);
       const movieUrl = await movie.ref.getDownloadURL();
@@ -78,7 +77,6 @@ class Video extends React.Component {
     } catch (err) {
       console.log('error',err);
     }
-
   };
 
   handleFileInput = async e => {
@@ -113,8 +111,6 @@ class Video extends React.Component {
     }
   };
 
- 
-
   setBlob = (videoblob, thumb) => {
     this.setState({
       blob: videoblob,
@@ -128,8 +124,6 @@ class Video extends React.Component {
       blob: null
     });
   };
-
-  
 
   reset = () => {
     console.log("hira", this.state.func);
@@ -160,28 +154,28 @@ class Video extends React.Component {
 
   render() {
     console.log("context", this.context);
-    return (
-    !this.context? <Redirect to='/login'></Redirect>: 
-    
-    this.state.categoryList.length === 0 ? (
+    return !this.context ? (
+      <Redirect to="/login" />
+    ) : this.state.categoryList.length === 0 ? (
       <div>Loading</div>
     ) : (
       <>
-        <div className="player  ">
-          <VideoRecorder
-            onRecordingComplete={(
-              videoblob,
-              startedAt,
-              thumbnailBlob,
-              duration
-            ) => {
-              console.log(videoblob);
-              console.log("thumb", thumbnailBlob);
-              console.log(URL.createObjectURL(videoblob));
-              this.setBlob(videoblob, thumbnailBlob);
+        <div className="entire-video-page">
+          <div className="video-record-left-panel">
+            <VideoRecorder
+              onRecordingComplete={(
+                videoblob,
+                startedAt,
+                thumbnailBlob,
+                duration
+              ) => {
+                console.log(videoblob);
+                console.log("thumb", thumbnailBlob);
+                console.log(URL.createObjectURL(videoblob));
+                this.setBlob(videoblob, thumbnailBlob);
 
-              // const storageRef = firebase.storage().ref();
-              // const ref = storageRef.child("test/test.mp4");
+                // const storageRef = firebase.storage().ref();
+                // const ref = storageRef.child("test/test.mp4");
 
               // ref.put(videoblob).then(function(snapshot) {
               //   console.log("Uploaded a blob or file!", snapshot);
@@ -217,51 +211,69 @@ class Video extends React.Component {
             { <Annotations />}
             {/* <StopAnontation annotationState={this.state.startingAnnontations}  func={this.handleReset} reset={this.state.func} name={'Daniel'} />  */}
           </div>
-        </div>
-        <div className="btnContainer">
-          <button className="btn1" onClick={this.submit}>
-            Submit
-          </button>
-          <button onClick={this.preview} className="btn1">
-            Preview Annotations
-          </button>
-
-          <div className="subcontainer">
-            <div className="upload-btn-wrapper ">
-              <button className="btn" onClick={this.stopRecording}>
-                Upload File
-              </button>
+          {/* ----RIGHT PANEL OF THE PAGE START HERE----- */}
+          <div className="handle-record-right-panel">
+            <div className="handle-title">
+              <div className="form-title">Title</div>
               <input
-                className="btn"
-                style={{ width: "100%", height: "100%" }}
+                className="input-form"
+                type="text"
+                onChange={e => this.handleTitle(e)}
+                placeholder="enter a title.."
+                name="title"
+              />
+            </div>
+            <div className="handle-description">
+              <div className="form-title">Description</div>
+              <input
+                className="input-form"
+                type="text"
+                placeholder="include a description"
+                onChange={e => this.handleDescription(e)}
+                name="description"
+              />
+            </div>
+
+            <div className="annotation-box">
+              {/* <div style={{ opacity: `${this.state.preview}` }}> */}
+              <SpeechRecognition
+                name={"Daniel"}
+                annotations={this.startAnnontations}
+              />
+              <StartAnontation
+                startAnnontations={this.state.func}
+                name={"Daniel"}
+              />
+              {/* <StopAnontation annotationState={this.state.startingAnnontations}  func={this.handleReset} reset={this.state.func} name={'Daniel'} />  */}
+              {/* </div> */}
+
+              <div className="annotation-btn-wrapper">
+                <button onClick={this.preview}>Preview Annotations</button>
+              </div>
+              <button onClick={this.submit}>Submit</button>
+            </div>
+            <div>
+              <input
                 type="file"
                 name="myfile"
                 onChange={e => this.handleFileInput(e)}
                 onClick={this.getFirebasetoken}
               />
             </div>
+            <button onClick={this.stopRecording}>Upload File</button>
           </div>
-        </div>
-        <div className="inputField">{"Tile"}</div>
-        <div className="inputField">
-          <input onChange={e => this.handleTitle(e)} name='title'/>
-        </div>
-
-        <div className="inputField" >{"Description"}</div>
-        <div className="inputField">
-          <input onChange={e => this.handleDescription(e)} name='description'/>
         </div>
 
         
 
-        {this.state.thumbnails.map((e, i) => {
+        {/* {this.state.thumbnails.map((e, i) => {
           console.log("test", e);
           const objectURL = URL.createObjectURL(e);
           console.log("url", objectURL);
           return <img src={objectURL} key={i} />;
-        })}
+        })} */}
       </>
-    ));
+    );
   }
 }
 
