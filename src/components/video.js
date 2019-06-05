@@ -314,13 +314,6 @@ class Video extends React.Component {
             </div>
           </div>
         </div>
-
-        {/* {this.state.thumbnails.map((e, i) => {
-          console.log("test", e);
-          const objectURL = URL.createObjectURL(e);
-          console.log("url", objectURL);
-          return <img src={objectURL} key={i} />;
-        })} */}
       </>
     );
   }
