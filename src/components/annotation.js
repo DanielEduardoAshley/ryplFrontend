@@ -32,6 +32,7 @@ class Annotation extends React.Component {
     return (this.recognition.onresult = (function(e) {
       if (!e) return null;
       const result = e.results[e.results.length - 1][0].transcript;
+<<<<<<< HEAD
       console.log("result: ", result);
 
       let final_transcript = "";
@@ -143,6 +144,60 @@ export default Annotation;
 // ;
 
 // Dictaphone.propTypes = propTypes;
+=======
+      console.log('result: ', result);
+    
+
+const handle = {
+  func: null
+};
+
+const options = {};
+
+export const StartAnontation = props => {
+  handle.func = props.startAnnontations;
+  return null;
+};
+
+const Dictaphone = ({
+  stopListening,
+  finalTranscript,
+  transcript,
+  resetTranscript,
+  browserSupportsSpeechRecognition,
+  startListening,
+  abortListening
+}) => {
+  if (!browserSupportsSpeechRecognition) {
+    return null;
+  }
+  console.log("gg", handle.func);
+  let string = "";
+  if (handle.func === 1) {
+    console.log(resetTranscript);
+    return (
+      <div>
+        <button onClick={resetTranscript}>Reset</button>
+
+        <span style={{ fontSize: "20px" }}>{transcript}</span>
+        {(string = transcript)}
+      </div>
+    );
+  } else if (handle.func === 0) {
+    console.log("string", string);
+    return (
+      <div>
+        <button onClick={resetTranscript}>Reset</button>
+
+        <span style={{ fontSize: "20px" }}>{transcript}</span>
+      </div>
+    );
+  }
+
+  return null;
+};
+Dictaphone.propTypes = propTypes;
+>>>>>>> ce218872de57dbe064a2a80a4ce0ca415450f99e
 
 // export default SpeechRecognition(options)(Dictaphone);
 
