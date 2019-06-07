@@ -5,6 +5,7 @@ import "../components/style/videoCards.css";
 import SideNavBar from "./../components/sideNavBar";
 import serviceWorker from "./../services/services";
 import { Link } from "react-router-dom";
+import Loading from "../components/loading";
 
 class Category extends Component {
   constructor(props) {
@@ -155,6 +156,7 @@ class Category extends Component {
 
   render() {
     console.log("STATE in category: ", this.state);
+
     const page = (
       <>
         <div className="entire-page">
@@ -211,7 +213,7 @@ class Category extends Component {
         </div>
       </>
     );
-    return this.state.categoryList.length === 0 ? <div>Loading</div> : page;
+    return this.state.categoryList.length === 0 ? <Loading /> : page;
   }
 }
 

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 //components
 import SideNavBar from "../components/sideNavBar";
 import VideoCards from "../components/videoCards";
+import Loading from "../components/loading";
 //images
 
 class Home extends React.Component {
@@ -42,7 +43,7 @@ class Home extends React.Component {
       </div>
     );
 
-    return this.state.categoryList.length === 0 ? <div>Loading</div> : page;
+    return this.state.categoryList.length === 0 ? <Loading /> : page;
   }
 }
 export default Home;
