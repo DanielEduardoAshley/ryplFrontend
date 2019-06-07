@@ -3,9 +3,9 @@
 }
 
 .entire-video-page {
-  height: 60%;
-  margin: 100px;
-  padding: 30px;
+  height: 80%;
+  margin: 50px;
+  padding: 50px;
   display: flex;
   justify-content: center;
   /* border: 1px solid #2a2d34; */
@@ -28,13 +28,13 @@
 }
 
 .video-record-left-panel {
-  width: 40%;
-  height: 100%;
+  width: 60%;
+  height: 80%;
 }
 
 .handle-record-right-panel {
   width: 40%;
-  height: 100%;
+  height: 80%;
   display: flex;
   flex-direction: column;
   padding-left: 30px;
@@ -76,7 +76,7 @@
 }
 
 .select-dropdown {
-  width: 100%;
+  width: 103%;
   font-size: 18px;
   border: 1px solid #2a2d34;
   border-radius: 5px;
@@ -100,7 +100,7 @@
 
 .upload-btn {
   border-radius: 5px;
-  margin: 20px;
+  margin: 25px;
 }
 
 .submit-btn-wrapper {

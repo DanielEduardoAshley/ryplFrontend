@@ -10,11 +10,7 @@ const VideoCards = props => {
       {props.mostViewedVid.map((e, i) => {
         return (
           <div className="video-card" key={i}>
-            <video
-              className="video"
-              controls
-              style={{ width: "450px", height: "300px" }}
-            >
+            <video className="video" controls>
               <source type="video/mp4" src={e.video_url} />
             </video>
             <div className="video-title">
