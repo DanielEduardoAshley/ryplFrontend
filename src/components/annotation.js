@@ -34,6 +34,26 @@ class Annotation extends React.Component {
       if (!e) return null;
       const result = e.results[e.results.length - 1][0].transcript;
 
+//       console.log("result: ", result);
+
+//       let final_transcript = "";
+//       let interim_transcript = "";
+//       for (var i = e.resultIndex; i < e.results.length; i++) {
+//         if (e.results[i].isFinal) {
+//           final_transcript += e.results[i][0].transcript;
+//         } else {
+//           interim_transcript += e.results[i][0].transcript;
+//         }
+
+//         console.log("final", final_transcript);
+//         this.setState({
+//           results: final_transcript
+//         });
+//       }
+//     })());
+//   };
+
+
       console.log('result: ', result);
     
 
@@ -159,60 +179,6 @@ export default Annotation;
 // }
 // ;
 
-// Dictaphone.propTypes = propTypes;
-
-//       console.log('result: ', result);
-    
-
-// const handle = {
-//   func: null
-// };
-
-// const options = {};
-
-// export const StartAnontation = props => {
-//   handle.func = props.startAnnontations;
-//   return null;
-// };
-
-// const Dictaphone = ({
-//   stopListening,
-//   finalTranscript,
-//   transcript,
-//   resetTranscript,
-//   browserSupportsSpeechRecognition,
-//   startListening,
-//   abortListening
-// }) => {
-//   if (!browserSupportsSpeechRecognition) {
-//     return null;
-//   }
-//   console.log("gg", handle.func);
-//   let string = "";
-//   if (handle.func === 1) {
-//     console.log(resetTranscript);
-//     return (
-//       <div>
-//         <button onClick={resetTranscript}>Reset</button>
-
-//         <span style={{ fontSize: "20px" }}>{transcript}</span>
-//         {(string = transcript)}
-//       </div>
-//     );
-//   } else if (handle.func === 0) {
-//     console.log("string", string);
-//     return (
-//       <div>
-//         <button onClick={resetTranscript}>Reset</button>
-
-//         <span style={{ fontSize: "20px" }}>{transcript}</span>
-//       </div>
-//     );
-//   }
-
-
-//   return null;
-// };
 // Dictaphone.propTypes = propTypes;
 
 

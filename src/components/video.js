@@ -38,12 +38,11 @@ class Video extends React.Component {
 
   componentDidMount() {
     serviceWorker.getAllCategories().then(response => {
-      console.log("video", response);
       this.setState(
         {
           categoryList: response.data.data
         },
-        () => console.log(this.state)
+        () => console.log(this.state.categoryList, "here")
       );
     });
   }
@@ -233,7 +232,23 @@ class Video extends React.Component {
                 name="description"
               />
             </div>
-
+            <div className="handle-category-dropdown">
+              <div className="form-title">Category</div>
+              <select
+                id="inputState"
+                className="select-dropdown"
+                defaultValue="Choose.."
+              >
+                <option>Select</option>
+                {this.state.categoryList.map((e, i) => {
+                  return (
+                    <option key={i} value={e.id}>
+                      {e.name}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
             {/* <div className="annotation-box"> */}
             {/* <button style={{ padding: "10px" }} onClick={this.preview}>
                   <div>Preview Annotations</div>
@@ -264,11 +279,11 @@ class Video extends React.Component {
                   onClick={this.getFirebasetoken}
                   style={{
                     fontSize: "16px",
-                    border: "1px solid black",
                     borderRadius: "5px",
                     width: "100%",
                     padding: "10px",
-                    backgroundColor: "#2a2d34",
+                    backgroundColor: "#292D33",
+                    border: "1px solid #292D33 ",
                     color: "white",
                     fontSize: "20px",
                     fontWeight: "700"
@@ -280,12 +295,12 @@ class Video extends React.Component {
                 <button
                   style={{
                     fontSize: "16px",
-                    border: "1px solid black",
                     borderRadius: "5px",
                     width: "100%",
                     padding: "10px",
-                    backgroundColor: "#2a2d34",
-                    color: "white",
+                    backgroundColor: "#292D33",
+                    border: "1px solid #292D33 ",
+                    color: " white",
                     fontSize: "20px",
                     fontWeight: "700"
                   }}
