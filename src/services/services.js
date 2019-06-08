@@ -17,9 +17,9 @@ serviceWorker.getVidsOfCategory = id => {
 serviceWorker.postVideo = (
   userId,
   categoryId,
-  title,
+  videoTitle,
   responseTo,
-  vidUrl,
+  videoUrl,
   thumbnailUrl,
   annotation,
   description
@@ -27,9 +27,9 @@ serviceWorker.postVideo = (
   return axios.post(`http://localhost:${port}/video`, {
     userId,
     categoryId,
-    title,
+    videoTitle,
     responseTo,
-    vidUrl,
+    videoUrl,
     thumbnailUrl,
     annotation,
     description

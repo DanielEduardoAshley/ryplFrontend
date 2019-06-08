@@ -16,8 +16,8 @@
   border-radius: 10px;
 }
 .video {
-  /* border: 1px solid black; */
-  /* width: 100%; */
+  border: 1px solid black;
+  width: 100%;
 }
 .video-title {
   word-break: break-all;
@@ -33,3 +33,43 @@
 .video-card-btn:hover {
   background-color: #2a2d34;
 }
+
+/* .reaction{
+  background-color:red;
+  width:50px;
+  height:50px;
+  font-size: 10px;
+  position: relative;
+  top:10%;
+  left:5%; */
+/* } */
+.video-card:hover .react{
+  opacity:1;
+  cursor: pointer;
+}
+
+.react{
+  background:url('../../images/rypl.png') no-repeat;
+  background-size: 80%;
+  background-color: Transparent;
+  opacity: .5;
+  background-repeat:no-repeat;
+  position : absolute;
+  width: 20%;
+  height: 10%;
+  left: 180%;
+  top: 2%;
+  border:none;
+  
+}
+
+
+
+.wrap{
+  display: flex;
+  position: relative;
+  width: 50%;
+  height: 100%;
+
+}
+

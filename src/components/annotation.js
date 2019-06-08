@@ -224,29 +224,5 @@ export default Annotation;
 // }
 // }
 
-// const Dictaphone = ({
-//   transcript,
-//   resetTranscript,
-//   browserSupportsSpeechRecognition,
-//   startListening,
-//   // stopListening,
-//   abortListening
-// }) => {
-//   console.log(startListening)
-//   // abortListening()
-//   // startListening()
-//   // stopListening()
-//   if (!browserSupportsSpeechRecognition) {
-//     return null;
-//   }
-//   return (
-//     <div>
-//       {/* {props.reset? resetTranscript: null} */}
-//       <button onClick={resetTranscript}>Reset</button>
 
-//       <span style={{ fontSize: "20px" }}>{transcript}</span>
-//     </div>
-//   );
-// };
 
-// export default SpeechRecognition(options)(Dictaphone);
