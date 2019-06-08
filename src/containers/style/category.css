@@ -5,16 +5,25 @@
   text-align: left;
 }
 
-.one-wrapper {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-bottom: 3px solid #efefef;
+.video-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
 }
 
+.one-wrapper {
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+}
+/* 
 .top-original-video {
   width: 100%;
-  text-align: left;
+  display: flex;
+  text-align: left; */
+
+.one-video {
+  width: 100%;
 }
 
 .bottom-panel-reactions {

@@ -175,6 +175,7 @@ class Category extends Component {
                     <div className="one-wrapper">
                       <div className="top-original-video" key={i}>
                         <video
+                          className="one-video"
                           id={e.id}
                           autoPlay={false}
                           loop={false}
