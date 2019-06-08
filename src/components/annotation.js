@@ -29,63 +29,51 @@ class Annotation extends React.Component {
   };
 
   display = e => {
-    return (
-      this.recognition.onresult = (function(e) {
+    return (this.recognition.onresult = function(e) {
       if (!e) return null;
       const result = e.results[e.results.length - 1][0].transcript;
+      //       console.log("result: ", result);
 
-//       console.log("result: ", result);
+      //       let final_transcript = "";
+      //       let interim_transcript = "";
+      //       for (var i = e.resultIndex; i < e.results.length; i++) {
+      //         if (e.results[i].isFinal) {
+      //           final_transcript += e.results[i][0].transcript;
+      //         } else {
+      //           interim_transcript += e.results[i][0].transcript;
+      //         }
 
-//       let final_transcript = "";
-//       let interim_transcript = "";
-//       for (var i = e.resultIndex; i < e.results.length; i++) {
-//         if (e.results[i].isFinal) {
-//           final_transcript += e.results[i][0].transcript;
-//         } else {
-//           interim_transcript += e.results[i][0].transcript;
-//         }
+      //         console.log("final", final_transcript);
+      //         this.setState({
+      //           results: final_transcript
+      //         });
+      //       }
+      //     })());
+      //   };
 
-//         console.log("final", final_transcript);
-//         this.setState({
-//           results: final_transcript
-//         });
-//       }
-//     })());
-//   };
+      console.log("result: ", result);
 
+      let final_transcript = "";
+      let interim_transcript = "";
+      for (var i = e.resultIndex; i < e.results.length; i++) {
+        if (e.results[i].isFinal) {
+          final_transcript += e.results[i][0].transcript;
+        } else {
+          interim_transcript += e.results[i][0].transcript;
+        }
 
-      console.log('result: ', result);
-    
+        console.log("final", final_transcript);
+        this.setState({
+          results: final_transcript
+        });
+      }
+    });
+  };
 
-
-let final_transcript = '' 
-let interim_transcript = ''
-for (var i = e.resultIndex; i < e.results.length; i++) {
-  if (e.results[i].isFinal) {
-    final_transcript += e.results[i][0].transcript;
-  } else {
-    interim_transcript += e.results[i][0].transcript;
+  render() {
+    return <></>;
   }
-  
-  console.log('final',final_transcript)
-  this.setState({
-    results : final_transcript
-  })
-  }
-})
-  
-    )}
-  
-  
-  render(){
-
-    return(
-
-<></>
-    
-    )
-  }
-};
+}
 
 //   render() {
 //     return (
@@ -181,7 +169,6 @@ export default Annotation;
 
 // Dictaphone.propTypes = propTypes;
 
-
 // export default SpeechRecognition(options)(Dictaphone);
 
 // import React from "react";
@@ -223,6 +210,3 @@ export default Annotation;
 //   )
 // }
 // }
-
-
-
