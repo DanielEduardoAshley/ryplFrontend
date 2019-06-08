@@ -16,10 +16,10 @@
   border-radius: 10px;
 }
 
-/* .video { 
-  border: 1px solid black; 
-   width: 100%;
-} */
+.video {
+  /* border: 1px solid black; */
+  /* width: 100%; */
+}
 
 .video-title {
   word-break: break-all;
