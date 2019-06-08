@@ -3,85 +3,73 @@ import PropTypes from "prop-types";
 // import SpeechRecognition from "react-speech-recognition";
 import { withRouter } from "react-router-dom";
 // const SpeechRecognitions = webkitSpeechRecognition;
+const recognition = new (window.SpeechRecognition ||
+  window.webkitSpeechRecognition ||
+  window.mozSpeechRecognition ||
+  window.msSpeechRecognition)();
 
-class Annotation extends React.Component {
+recognition.continuous = true
+recognition.interimResults = true
+recognition.lang = 'en-US'
+
+
+class Annotations extends React.Component {
   constructor(props) {
     super(props);
-    this.recognition = new (window.SpeechRecognition ||
-      window.webkitSpeechRecognition ||
-      window.mozSpeechRecognition ||
-      window.msSpeechRecognition)();
-
+    
     this.state = {
-      listen: true,
-      results: ""
+      listen: this.props.func,
+      transcript: ""
     };
   }
+  
+  handleListen=()=>{
 
-  start = () => {
-    this.recognition.lang = "en-US";
-    this.recognition.start();
-  };
+    console.log('listening?', this.state.listening)
 
-  stop = () => {
-    this.recognition.stop();
-    console.log(this.state.results);
-  };
+    if (this.state.listening) {
+      recognition.start()
+      recognition.onend = () => {
+        console.log("...continue listening...")
+        recognition.start()
+      }
 
-  display = e => {
-    return (
-      this.recognition.onresult = (function(e) {
-      if (!e) return null;
-      const result = e.results[e.results.length - 1][0].transcript;
+    } else {
+      recognition.stop()
+      recognition.onend = () => {
+        console.log("Stopped listening per click")
+      }
+    }
 
-//       console.log("result: ", result);
+    recognition.onstart = () => {
+      console.log("Listening!")
+    }
 
-//       let final_transcript = "";
-//       let interim_transcript = "";
-//       for (var i = e.resultIndex; i < e.results.length; i++) {
-//         if (e.results[i].isFinal) {
-//           final_transcript += e.results[i][0].transcript;
-//         } else {
-//           interim_transcript += e.results[i][0].transcript;
-//         }
+    let finalTranscript = ''
+    let interimTranscript = ''
 
-//         console.log("final", final_transcript);
-//         this.setState({
-//           results: final_transcript
-//         });
-//       }
-//     })());
-//   };
+    recognition.onresult = event => {
 
-
-      console.log('result: ', result);
-    
-
-
-let final_transcript = '' 
-let interim_transcript = ''
-for (var i = e.resultIndex; i < e.results.length; i++) {
-  if (e.results[i].isFinal) {
-    final_transcript += e.results[i][0].transcript;
-  } else {
-    interim_transcript += e.results[i][0].transcript;
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const transcript = event.results[i][0].transcript;
+        if (event.results[i].isFinal) finalTranscript += transcript + ' ';
+        else interimTranscript += transcript;
+      }
+  
+    }
+    this.setState({
+      transcript: finalTranscript,
+      interim: interimTranscript
+    })
   }
-  
-  console.log('final',final_transcript)
-  this.setState({
-    results : final_transcript
-  })
-  }
-})
-  
-    )}
-  
   
   render(){
 
     return(
 
-<></>
+<>
+
+{this.state.transcript?this.state.transcript:this.state.interimTranscript}</>
     
     )
   }
@@ -100,7 +88,7 @@ for (var i = e.resultIndex; i < e.results.length; i++) {
 //   }
 // }
 
-export default Annotation;
+export default Annotations;
 // const propTypes = {
 //   // Props injected by SpeechRecognition
 //   transcript: PropTypes.string,
