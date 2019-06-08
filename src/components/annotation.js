@@ -29,9 +29,28 @@ class Annotation extends React.Component {
   };
 
   display = e => {
-    return (this.recognition.onresult = (function(e) {
+    return (this.recognition.onresult = function(e) {
       if (!e) return null;
       const result = e.results[e.results.length - 1][0].transcript;
+      //       console.log("result: ", result);
+
+      //       let final_transcript = "";
+      //       let interim_transcript = "";
+      //       for (var i = e.resultIndex; i < e.results.length; i++) {
+      //         if (e.results[i].isFinal) {
+      //           final_transcript += e.results[i][0].transcript;
+      //         } else {
+      //           interim_transcript += e.results[i][0].transcript;
+      //         }
+
+      //         console.log("final", final_transcript);
+      //         this.setState({
+      //           results: final_transcript
+      //         });
+      //       }
+      //     })());
+      //   };
+
       console.log("result: ", result);
 
       let final_transcript = "";
@@ -48,20 +67,26 @@ class Annotation extends React.Component {
           results: final_transcript
         });
       }
-    })());
+    });
   };
 
   render() {
-    return (
-      <>
-        <button onClick={this.start}>Annotation</button>
-        <button onClick={this.stop}>StopAnnotation</button>
-
-        <div>{this.state.results}</div>
-      </>
-    );
+    return <></>;
   }
 }
+
+//   render() {
+//     return (
+
+//       <>
+//         <button onClick={this.start}>Annotation</button>
+//         <button onClick={this.stop}>StopAnnotation</button>
+
+//         <div>{this.state.results}</div>
+//       </>
+//     );
+//   }
+// }
 
 export default Annotation;
 // const propTypes = {
@@ -185,30 +210,3 @@ export default Annotation;
 //   )
 // }
 // }
-
-// const Dictaphone = ({
-//   transcript,
-//   resetTranscript,
-//   browserSupportsSpeechRecognition,
-//   startListening,
-//   // stopListening,
-//   abortListening
-// }) => {
-//   console.log(startListening)
-//   // abortListening()
-//   // startListening()
-//   // stopListening()
-//   if (!browserSupportsSpeechRecognition) {
-//     return null;
-//   }
-//   return (
-//     <div>
-//       {/* {props.reset? resetTranscript: null} */}
-//       <button onClick={resetTranscript}>Reset</button>
-
-//       <span style={{ fontSize: "20px" }}>{transcript}</span>
-//     </div>
-//   );
-// };
-
-// export default SpeechRecognition(options)(Dictaphone);

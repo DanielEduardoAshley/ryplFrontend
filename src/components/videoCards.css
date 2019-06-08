@@ -7,7 +7,6 @@
 }
 
 .video-card {
-  width: 45%;
   height: 50%;
   display: flex;
   flex-direction: column;
@@ -17,10 +16,10 @@
   border-radius: 10px;
 }
 
-.video {
-  /* border: 1px solid black; */
-  /* width: 100%; */
-}
+/* .video { 
+  border: 1px solid black; 
+   width: 100%;
+} */
 
 .video-title {
   word-break: break-all;

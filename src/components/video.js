@@ -19,7 +19,7 @@ class Video extends React.Component {
     super(props);
     this.state = {
       blob: null,
-      url: "",
+      videoUrl: "",
       upload: "",
       thumbnails: [],
       thumbnail: "",
@@ -29,7 +29,10 @@ class Video extends React.Component {
       func: 0,
       categoryList: [],
       description: "",
-      title: ""
+      videoTitle: "",
+      categoryId: null,
+      annotation: null,
+      responseTo: null
     };
     this.videoPlayer = React.createRef();
   }
@@ -47,9 +50,66 @@ class Video extends React.Component {
     });
   }
 
-  submit = () => {
-    console.log("fire");
-    this.handleFileStream();
+  submit = async () => {
+    // console.log("fire");
+    await this.handleFileStream();
+    console.log(this.state);
+    const { categoryId } = this.state;
+    const {
+      videoTitle,
+      videoUrl,
+      thumbnail,
+      description,
+      annotation,
+      responseTo
+    } = this.state;
+    console.log(categoryId, videoTitle, videoUrl, thumbnail, description);
+
+    serviceWorker
+      .postVideo(
+        1,
+        categoryId,
+        videoTitle,
+        responseTo,
+        videoUrl,
+        thumbnail,
+        annotation,
+        description
+      )
+      .then(() => {
+        console.log(
+          "Video Posted",
+          1,
+          categoryId,
+          videoTitle,
+          responseTo,
+          videoUrl,
+          thumbnail,
+          annotation,
+          description
+        );
+      })
+      .catch(err => {
+        console.log(
+          "Video Posted err",
+          1,
+          categoryId,
+          videoTitle,
+          responseTo,
+          videoUrl,
+          thumbnail,
+          annotation,
+          description
+        );
+      });
+    //   userId,
+    // categoryId,
+    // title,
+    // responseTo,
+    // vidUrl,
+    // thumbnailUrl,
+    // annotation,
+    // description
   };
 
   handleFileStream = async e => {
@@ -70,7 +130,7 @@ class Video extends React.Component {
       const thumbnailUrl = await thumb.ref.getDownloadURL();
       console.log("urls", movieUrl, thumbnailUrl);
       this.setState({
-        url: movieUrl,
+        videoUrl: movieUrl,
         thumbnail: thumbnailUrl
       });
     } catch (err) {
@@ -146,8 +206,13 @@ class Video extends React.Component {
   handleTitle = e => {
     console.log(e.currentTarget.value);
     this.setState({
-      title: e.currentTarget.value
+      videoTitle: e.currentTarget.value
     });
+  };
+
+  handleCategory = e => {
+    console.log("jello", e.currentTarget.value);
+    this.setState({ categoryId: e.currentTarget.value });
   };
 
   render() {
@@ -237,7 +302,9 @@ class Video extends React.Component {
               <select
                 id="inputState"
                 className="select-dropdown"
-                defaultValue="Choose.."
+                // defaultValue="Choose.."
+                defaultValue={this.state.category}
+                onChange={this.handleCategory}
               >
                 <option>Select</option>
                 {this.state.categoryList.map((e, i) => {
