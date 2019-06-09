@@ -30,9 +30,9 @@ class Video extends React.Component {
       categoryList: [],
       description: "",
       videoTitle: "",
-      categoryId:null,
-      annotation:null,
-      responseTo:null,
+      categoryId: null,
+      annotation: null,
+      responseTo: null
     };
     this.videoPlayer = React.createRef();
   }
@@ -50,29 +50,66 @@ class Video extends React.Component {
     });
   }
 
-  submit = async() => {
+  submit = async () => {
     // console.log("fire");
     await this.handleFileStream();
-    console.log(this.state)
-    const { categoryId } = this.state
-    const { videoTitle, videoUrl, thumbnail, description,annotation,responseTo } = this.state
-    console.log(categoryId,videoTitle,videoUrl,thumbnail,description)
+    console.log(this.state);
+    const { categoryId } = this.state;
+    const {
+      videoTitle,
+      videoUrl,
+      thumbnail,
+      description,
+      annotation,
+      responseTo
+    } = this.state;
+    console.log(categoryId, videoTitle, videoUrl, thumbnail, description);
 
-    serviceWorker.postVideo(1,categoryId,videoTitle,responseTo,videoUrl,thumbnail,annotation,description)
-    .then(()=>{
-      console.log('Video Posted',1,categoryId,videoTitle,responseTo,videoUrl,thumbnail,annotation,description)
-    })
-    .catch((err)=>{
-      console.log('Video Posted err',1,categoryId,videoTitle,responseTo,videoUrl,thumbnail,annotation,description)
-    })
-  //   userId,
-  // categoryId,
-  // title,
-  // responseTo,
-  // vidUrl,
-  // thumbnailUrl,
-  // annotation,
-  // description
+    serviceWorker
+      .postVideo(
+        1,
+        categoryId,
+        videoTitle,
+        responseTo,
+        videoUrl,
+        thumbnail,
+        annotation,
+        description
+      )
+      .then(() => {
+        console.log(
+          "Video Posted",
+          1,
+          categoryId,
+          videoTitle,
+          responseTo,
+          videoUrl,
+          thumbnail,
+          annotation,
+          description
+        );
+      })
+      .catch(err => {
+        console.log(
+          "Video Posted err",
+          1,
+          categoryId,
+          videoTitle,
+          responseTo,
+          videoUrl,
+          thumbnail,
+          annotation,
+          description
+        );
+      });
+    //   userId,
+    // categoryId,
+    // title,
+    // responseTo,
+    // vidUrl,
+    // thumbnailUrl,
+    // annotation,
+    // description
   };
 
   handleFileStream = async e => {
@@ -173,9 +210,9 @@ class Video extends React.Component {
     });
   };
 
-  handleCategory= (e) => {
-    console.log('jello', e.currentTarget.value)
-    this.setState({ categoryId : e.currentTarget.value })
+  handleCategory = e => {
+    console.log("jello", e.currentTarget.value);
+    this.setState({ categoryId: e.currentTarget.value });
   };
 
   render() {
@@ -266,15 +303,13 @@ class Video extends React.Component {
                 id="inputState"
                 className="select-dropdown"
                 // defaultValue="Choose.."
-                defaultValue={this.state.category} 
-                onChange={this.handleCategory}  
-
-
+                defaultValue={this.state.category}
+                onChange={this.handleCategory}
               >
-                <option >Select</option>
+                <option>Select</option>
                 {this.state.categoryList.map((e, i) => {
                   return (
-                    <option key={i} value={e.id} >
+                    <option key={i} value={e.id}>
                       {e.name}
                     </option>
                   );

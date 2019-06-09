@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import "./style/category.css";
 import "./style/home.css";
+import "../components/style/videoCards.css";
 import SideNavBar from "./../components/sideNavBar";
 import serviceWorker from "./../services/services";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import Loading from "../components/loading";
 
 class Category extends Component {
   constructor(props) {
@@ -154,6 +156,7 @@ class Category extends Component {
 
   render() {
     console.log("STATE in category: ", this.state);
+
     const page = (
       <>
         <div className="entire-page">
@@ -162,102 +165,57 @@ class Category extends Component {
             <div className="row category-name">
               <div> {this.state.category} </div> <hr />
             </div>{" "}
-            <div className="row this_cards-display content">
-              {" "}
+            <div className="video-wrapper">
               {this.state.videosList.map((e, i) => {
                 return (
-                  <Link to={`/VideoPage/ ${e.id}`}>
-                    <div className="this_card" key={i}>
-                      <div className="row flex_row">
-                        <div className="main-videos ">
-                          <video
-                            id={e.id}
-                            className="video_containerrs"
-                            autoPlay={false}
-                            loop={false}
-                            muted=""
-                          >
-                            <source src={e.video_url} />;{" "}
-                          </video>{" "}
-                        </div>{" "}
-                      </div>{" "}
-                      <div className="row flex_row">
-                        <div className="this_card_content">
-                          <h3>{e.video_title}</h3>{" "}
-                          <h4 className="reactions">
-                            Reactions: {e.responses.length}{" "}
-                          </h4>{" "}
-                        </div>{" "}
-                      </div>{" "}
-                      <div className="row responses-row">
-                        <div className="video_responses  col-9">
-                          {" "}
-                          {e.responses.map((res, i) => {
-                            return (
-                              <video
-                                className="response_container"
-                                autoPlay={false}
-                                loop={false}
-                                muted=""
-                                key={i}
-                              >
-                                <source src={res.video_url} />{" "}
-                              </video>
-                            );
-                          })}{" "}
-                        </div>{" "}
-                      </div>{" "}
+                  <Link
+                    to={`/VideoPage/ ${e.id}`}
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
+                    <div className="one-wrapper">
+                      <div className="top-original-video" key={i}>
+                        <video
+                          className="one-video"
+                          id={e.id}
+                          autoPlay={false}
+                          loop={false}
+                          muted={true}
+                          controls
+                        >
+                          <source src={e.video_url} />;
+                        </video>
+                        <div className="title">
+                          <h2>{e.video_title}</h2>
+                          <h3>Reaction Video Count: {e.responses.length}</h3>
+                        </div>
+                      </div>
+                      {/* TOP-PANEL-END-HERE */}
+                      {/* <div className="bottom-panel-reactions">
+                        {e.responses.map((res, i) => {
+                          return (
+                            <video
+                              className="reaction-video-single"
+                              autoPlay={false}
+                              loop={false}
+                              muted=""
+                              key={i}
+                            >
+                              <source src={res.video_url} />
+                            </video>
+                          );
+                        })}
+                      </div> */}
                     </div>
                   </Link>
                 );
-              })}{" "}
-            </div>{" "}
-          </div>{" "}
-        </div>{" "}
+              })}
+            </div>
+          </div>
+        </div>
       </>
     );
-    return this.state.categoryList.length === 0 ? <div /> : page;
+    return this.state.categoryList.length === 0 ? <Loading /> : page;
   }
 }
 
 export default Category;
-
-{
-  /* OLD CARDS DISPLAY
-   return (
-                <div className="this_card">
-                  <div className="row flex_row">
-                    <div className="main-video ">
-                      <video
-                        className="video_container"
-                        autoplay={true}
-                        loop={false}
-                        muted=""
-                      >
-                        <source src={e.vidUrl} />;
-                      </video>
-
-                      <div className="this_card_content">
-                        <h3>Title</h3>
-                        <p> Description</p>
-                      </div>
-                    </div>
-                    <div className="video_responses  ">
-                      {e.responses.map((res, idx) => {
-                        return (
-                          <video
-                            className="video_container"
-                            autoplay={true}
-                            loop={false}
-                            muted=""
-                          >
-                            <source src={res.responseUrl} />;
-                          </video>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </div>
-              );
-            })} */
-}

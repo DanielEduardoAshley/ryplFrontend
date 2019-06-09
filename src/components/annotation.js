@@ -169,7 +169,6 @@ export default Annotations;
 
 // Dictaphone.propTypes = propTypes;
 
-
 // export default SpeechRecognition(options)(Dictaphone);
 
 // import React from "react";
@@ -211,6 +210,3 @@ export default Annotations;
 //   )
 // }
 // }
-
-
-

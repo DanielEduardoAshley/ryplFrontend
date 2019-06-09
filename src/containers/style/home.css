@@ -1,7 +1,7 @@
 .entire-page {
   height: 100vh;
   display: flex;
-  overflow: hidden;
+  overflow: scroll;
 }
 
 .sideNav-wrapper {
@@ -27,7 +27,6 @@
 
 .arrow-icon {
   width: 50px;
-  padding-top: 130px;
 }
 
 .trending {
