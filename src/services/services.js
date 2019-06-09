@@ -1,35 +1,41 @@
 const axios = require("axios");
-const port = require('./port');
+const port = require("./port");
 const serviceWorker = {};
 
 serviceWorker.getMostViewedVids = () => {
-  return axios.get(`http://localhost:${port}/video/home`);
+  return axios.get(
+    "https://rypl.herokuapp.com/video/home" ||
+    `http://localhost:${port}/video/home`
+  );
 };
 
 serviceWorker.getVidThread = id => {
-  return axios.get(`http://localhost:${port}/video/singlevid/${id}`);
+  return axios.get(
+    `https://rypl.herokuapp.com/video/singlevid/${id}` ||
+    `http://localhost:${port}/video/singlevid/${id}`
+  );
 };
 
 serviceWorker.getVidsOfCategory = id => {
-  return axios.get(`http://localhost:${port}/video/category/${id}`);
+  return axios.get(`https://rypl.herokuapp.com/video/category/${id}` || `http://localhost:${port}/video/category/${id}`);
 };
 
 serviceWorker.postVideo = (
   userId,
   categoryId,
-  title,
+  videoTitle,
   responseTo,
-  vidUrl,
+  videoUrl,
   thumbnailUrl,
   annotation,
   description
 ) => {
-  return axios.post(`http://localhost:${port}/video`, {
+  return axios.post(`https://rypl.herokuapp.com/video` || `http://localhost:${port}/video`, {
     userId,
     categoryId,
-    title,
+    videoTitle,
     responseTo,
-    vidUrl,
+    videoUrl,
     thumbnailUrl,
     annotation,
     description
@@ -44,7 +50,7 @@ serviceWorker.postUser = (
   lastName,
   imgUrl
 ) => {
-  return axios.post(`http://localhost:${port}/user`, {
+  return axios.post(`https://rypl.herokuapp.com/user` || `http://localhost:${port}/user`, {
     username,
     email,
     firebaseUid,
@@ -55,17 +61,17 @@ serviceWorker.postUser = (
 };
 
 serviceWorker.getUser = id => {
-  return axios.get(`http://localhost:${port}/user/${id}`);
+  return axios.get(`https://rypl.herokuapp.com/user/${id}` || `http://localhost:${port}/user/${id}`);
 };
 
 serviceWorker.deleteVideo = id => {
-  return axios.delete(`http://localhost:${port}/video`, {
+  return axios.delete(`https://rypl.herokuapp.com/video` || `http://localhost:${port}/video`, {
     id
   });
 };
 
 serviceWorker.getAllCategories = () => {
-  return axios.get(`http://localhost:${port}/video/categories`);
+  return axios.get(`https://rypl.herokuapp.com/video/categories` || `http://localhost:${port}/video/categories`);
 };
 
 module.exports = serviceWorker;

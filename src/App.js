@@ -2,6 +2,7 @@ import React from "react";
 import firebase from "./firebase";
 import "./App.css";
 import { Route, HashRouter, Switch } from "react-router-dom";
+import serviceWorker from "./services/services";
 
 //Context
 import AuthContext from "./contexts/auth";
@@ -28,11 +29,15 @@ class App extends React.Component {
     console.log(this.state, "state");
     this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.setState({
-          user: {
-            uid: user.uid
-          }
-        });
+        console.log("YOOOOOOO");
+        const { uid } = user;
+        serviceWorker
+          .getUser(uid)
+          .then(data => {
+            console.log(data);
+            this.setState({ user: data.data });
+          })
+          .catch(err => console.log(err));
       } else {
         this.setState({ user: null });
       }
@@ -54,7 +59,6 @@ class App extends React.Component {
             <Route path="/category/:id" exact component={Category} />
             <Route path="/VideoPage/:id" exact component={VideoPage} />
             <Route path="/profile" exact component={Profile} />
-
           </Switch>
         </AuthContext.Provider>
       </HashRouter>
