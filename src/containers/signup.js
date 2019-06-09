@@ -3,6 +3,7 @@ import firebase from "../firebase";
 import axios from "axios";
 import AuthContext from "../contexts/auth";
 import { Redirect } from "react-router-dom";
+import serviceWorker from "../services/services";
 
 import "./style/signup.css";
 
@@ -30,20 +31,9 @@ class SignUp extends React.Component {
       .createUserWithEmailAndPassword(email, password)
       .then(res => {
         let userUID = res.user.uid;
-        axios.post(
-          "http://localhost:3000/user ",
-          {
-            username: username,
-            email: email,
-            firebaseUid: userUID,
-            firstName: firstname,
-            lastName: lastname,
-            imgUrl: null
-          },
-          () => {
-            this.setState({ userUID });
-          }
-        );
+        return serviceWorker
+          .postUser(username, email, userUID, firstname, lastname, "null")
+          .then(data => console.log(data));
       })
       .catch(err => {
         alert(err);
