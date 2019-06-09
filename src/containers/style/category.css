@@ -7,11 +7,10 @@
 
 .video-wrapper {
   display: flex;
-
   flex-wrap: nowrap;
   justify-content: space-around;
   width: 100%;
-  /* overflow: scroll; */
+  flex-flow: wrap;
 }
 
 @media only screen and (max-width: 700px) {
