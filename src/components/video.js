@@ -52,7 +52,17 @@ class Video extends React.Component {
 
   submit = async () => {
     // console.log("fire");
-    await this.handleFileStream();
+
+    if(!this.state.blob && !this.state.upload.length){
+      alert('Please either Upload or Record a Video')
+
+    }
+    else if(this.state.blob && this.state.upload){
+      alert('Please choose to either  Upload or Record')
+    }
+    else if(this.state.blob){
+      await this.handleFileStream();
+
     console.log(this.state);
     const { categoryId } = this.state;
     const {
@@ -102,6 +112,61 @@ class Video extends React.Component {
           description
         );
       });
+
+    }
+    else if(this.state.upload){
+
+      console.log(this.state);
+      const { categoryId } = this.state;
+      const {
+        videoTitle,
+        upload,
+        thumbnail,
+        description,
+        annotation,
+        responseTo
+      } = this.state;
+      console.log(categoryId, videoTitle, upload, thumbnail, description);
+  
+      serviceWorker
+        .postVideo(
+          1,
+          categoryId,
+          videoTitle,
+          responseTo,
+          upload,
+          thumbnail,
+          annotation,
+          description
+        )
+        .then(() => {
+          console.log(
+            "Video Posted",
+            1,
+            categoryId,
+            videoTitle,
+            responseTo,
+            upload,
+            thumbnail,
+            annotation,
+            description
+          );
+        })
+        .catch(err => {
+          console.log(
+            "Video Posted err",
+            1,
+            categoryId,
+            videoTitle,
+            responseTo,
+            upload,
+            thumbnail,
+            annotation,
+            description
+          );
+        });
+    }
+
     //   userId,
     // categoryId,
     // title,
