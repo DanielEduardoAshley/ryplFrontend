@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import "./style/category.css";
 import "./style/home.css";
+import "./style/category.css";
 import "../components/style/videoCards.css";
 import SideNavBar from "./../components/sideNavBar";
 import serviceWorker from "./../services/services";
