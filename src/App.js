@@ -54,7 +54,6 @@ class App extends React.Component {
             <Route path="/category/:id" exact component={Category} />
             <Route path="/VideoPage/:id" exact component={VideoPage} />
             <Route path="/profile" exact component={Profile} />
-
           </Switch>
         </AuthContext.Provider>
       </HashRouter>
