@@ -7,14 +7,26 @@
 
 .video-wrapper {
   display: flex;
+
   flex-wrap: nowrap;
   justify-content: space-around;
+  width: 100%;
+  /* overflow: scroll; */
 }
 
+@media only screen and (max-width: 700px) {
+  .video-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+}
 .one-wrapper {
-  padding: 10px;
+  padding: 20px;
   margin-bottom: 10px;
-  display: flex;
+  width: 450px;
+  border: 1px solid black;
+  border-radius: 15px;
+  margin: 10px;
 }
 /* 
 .top-original-video {
