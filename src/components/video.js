@@ -62,6 +62,14 @@ class Video extends React.Component {
     }
     else if(this.state.blob){
       await this.handleFileStream();
+var reference = firebase.storage.service.getReference().child( "userVideos/" );
+
+      var file = File.applicationStorageDirectory.resolvePath( "userVideos/" );
+
+      var task = reference.getFile( file );
+
+      console.log('task',task)
+
 
     console.log(this.state);
     const { categoryId } = this.state;
@@ -127,7 +135,8 @@ class Video extends React.Component {
         responseTo
       } = this.state;
       console.log(categoryId, videoTitle, upload, thumbnail, description);
-  
+      
+
       serviceWorker
         .postVideo(
           1,
