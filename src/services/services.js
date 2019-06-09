@@ -5,14 +5,14 @@ const serviceWorker = {};
 serviceWorker.getMostViewedVids = () => {
   return axios.get(
     "https://rypl.herokuapp.com/video/home" ||
-      `http://localhost:${port}/video/home`
+    `http://localhost:${port}/video/home`
   );
 };
 
 serviceWorker.getVidThread = id => {
   return axios.get(
     `https://rypl.herokuapp.com/video/singlevid/${id}` ||
-      `http://localhost:${port}/video/singlevid/${id}`
+    `http://localhost:${port}/video/singlevid/${id}`
   );
 };
 
@@ -30,7 +30,7 @@ serviceWorker.postVideo = (
   annotation,
   description
 ) => {
-  return axios.post(`https://rypl.herokuapp.com/video` ||`http://localhost:${port}/video`, {
+  return axios.post(`https://rypl.herokuapp.com/video` || `http://localhost:${port}/video`, {
     userId,
     categoryId,
     videoTitle,
@@ -61,7 +61,7 @@ serviceWorker.postUser = (
 };
 
 serviceWorker.getUser = id => {
-  return axios.get(`https://rypl.herokuapp.com/user/${id}`|| `http://localhost:${port}/user/${id}`);
+  return axios.get(`https://rypl.herokuapp.com/user/${id}` || `http://localhost:${port}/user/${id}`);
 };
 
 serviceWorker.deleteVideo = id => {
@@ -71,7 +71,7 @@ serviceWorker.deleteVideo = id => {
 };
 
 serviceWorker.getAllCategories = () => {
-  return axios.get(`https://rypl.herokuapp.com/video/categories`|| `http://localhost:${port}/video/categories`);
+  return axios.get(`https://rypl.herokuapp.com/video/categories` || `http://localhost:${port}/video/categories`);
 };
 
 module.exports = serviceWorker;

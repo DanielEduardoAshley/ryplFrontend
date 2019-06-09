@@ -8,72 +8,66 @@ const recognition = new (window.SpeechRecognition ||
   window.mozSpeechRecognition ||
   window.msSpeechRecognition)();
 
-recognition.continuous = true
-recognition.interimResults = true
-recognition.lang = 'en-US'
-
+recognition.continuous = true;
+recognition.interimResults = true;
+recognition.lang = "en-US";
 
 class Annotations extends React.Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
       listen: this.props.func,
       transcript: ""
     };
   }
-  
-  handleListen=()=>{
 
-    console.log('listening?', this.state.listening)
+  handleListen = () => {
+    console.log("listening?", this.state.listening);
 
     if (this.state.listening) {
-      recognition.start()
+      recognition.start();
       recognition.onend = () => {
-        console.log("...continue listening...")
-        recognition.start()
-      }
-
+        console.log("...continue listening...");
+        recognition.start();
+      };
     } else {
-      recognition.stop()
+      recognition.stop();
       recognition.onend = () => {
-        console.log("Stopped listening per click")
-      }
+        console.log("Stopped listening per click");
+      };
     }
 
     recognition.onstart = () => {
-      console.log("Listening!")
-    }
+      console.log("Listening!");
+    };
 
-    let finalTranscript = ''
-    let interimTranscript = ''
+    let finalTranscript = "";
+    let interimTranscript = "";
 
     recognition.onresult = event => {
-
       for (let i = event.resultIndex; i < event.results.length; i++) {
         const transcript = event.results[i][0].transcript;
-        if (event.results[i].isFinal) finalTranscript += transcript + ' ';
+        if (event.results[i].isFinal) finalTranscript += transcript + " ";
         else interimTranscript += transcript;
       }
-  
-    }
+    };
     this.setState({
       transcript: finalTranscript,
       interim: interimTranscript
-    })
+    });
+  };
+
+  render() {
+    return (
+      <>
+        {this.state.transcript
+          ? this.state.transcript
+          : this.state.interimTranscript}
+      </>
+    );
   }
-  
-  render(){
-
-    return(
-
-<>
-
-{this.state.transcript?this.state.transcript:this.state.interimTranscript}</>
-    
-    )
-  }
-};
+}
 
 //   render() {
 //     return (
