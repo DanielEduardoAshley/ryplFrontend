@@ -396,6 +396,7 @@ class Video extends React.Component {
             </div>
           </div>
         </div>
+        <Annotations listening={this.state.func} />
       </>
     );
   }

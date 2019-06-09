@@ -3,77 +3,77 @@ import PropTypes from "prop-types";
 // import SpeechRecognition from "react-speech-recognition";
 import { withRouter } from "react-router-dom";
 // const SpeechRecognitions = webkitSpeechRecognition;
+const recognition = new (window.SpeechRecognition ||
+  window.webkitSpeechRecognition ||
+  window.mozSpeechRecognition ||
+  window.msSpeechRecognition)();
 
-class Annotation extends React.Component {
+recognition.continuous = true
+recognition.interimResults = true
+recognition.lang = 'en-US'
+
+
+class Annotations extends React.Component {
   constructor(props) {
     super(props);
-    this.recognition = new (window.SpeechRecognition ||
-      window.webkitSpeechRecognition ||
-      window.mozSpeechRecognition ||
-      window.msSpeechRecognition)();
-
+    
     this.state = {
-      listen: true,
-      results: ""
+      listen: this.props.func,
+      transcript: ""
     };
   }
+  
+  handleListen=()=>{
 
-  start = () => {
-    this.recognition.lang = "en-US";
-    this.recognition.start();
-  };
+    console.log('listening?', this.state.listening)
 
-  stop = () => {
-    this.recognition.stop();
-    console.log(this.state.results);
-  };
-
-  display = e => {
-    return (this.recognition.onresult = function(e) {
-      if (!e) return null;
-      const result = e.results[e.results.length - 1][0].transcript;
-      //       console.log("result: ", result);
-
-      //       let final_transcript = "";
-      //       let interim_transcript = "";
-      //       for (var i = e.resultIndex; i < e.results.length; i++) {
-      //         if (e.results[i].isFinal) {
-      //           final_transcript += e.results[i][0].transcript;
-      //         } else {
-      //           interim_transcript += e.results[i][0].transcript;
-      //         }
-
-      //         console.log("final", final_transcript);
-      //         this.setState({
-      //           results: final_transcript
-      //         });
-      //       }
-      //     })());
-      //   };
-
-      console.log("result: ", result);
-
-      let final_transcript = "";
-      let interim_transcript = "";
-      for (var i = e.resultIndex; i < e.results.length; i++) {
-        if (e.results[i].isFinal) {
-          final_transcript += e.results[i][0].transcript;
-        } else {
-          interim_transcript += e.results[i][0].transcript;
-        }
-
-        console.log("final", final_transcript);
-        this.setState({
-          results: final_transcript
-        });
+    if (this.state.listening) {
+      recognition.start()
+      recognition.onend = () => {
+        console.log("...continue listening...")
+        recognition.start()
       }
-    });
-  };
 
-  render() {
-    return <></>;
+    } else {
+      recognition.stop()
+      recognition.onend = () => {
+        console.log("Stopped listening per click")
+      }
+    }
+
+    recognition.onstart = () => {
+      console.log("Listening!")
+    }
+
+    let finalTranscript = ''
+    let interimTranscript = ''
+
+    recognition.onresult = event => {
+
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const transcript = event.results[i][0].transcript;
+        if (event.results[i].isFinal) finalTranscript += transcript + ' ';
+        else interimTranscript += transcript;
+      }
+  
+    }
+    this.setState({
+      transcript: finalTranscript,
+      interim: interimTranscript
+    })
   }
-}
+  
+  render(){
+
+    return(
+
+<>
+
+{this.state.transcript?this.state.transcript:this.state.interimTranscript}</>
+    
+    )
+  }
+};
 
 //   render() {
 //     return (
@@ -88,7 +88,7 @@ class Annotation extends React.Component {
 //   }
 // }
 
-export default Annotation;
+export default Annotations;
 // const propTypes = {
 //   // Props injected by SpeechRecognition
 //   transcript: PropTypes.string,
