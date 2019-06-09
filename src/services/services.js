@@ -74,4 +74,11 @@ serviceWorker.getAllCategories = () => {
   return axios.get(`https://rypl.herokuapp.com/video/categories` || `http://localhost:${port}/video/categories`);
 };
 
+serviceWorker.addView = (id) => {
+  console.log('HEREEEEEEE')
+  return axios.put(`https://rypl.herokuapp.com/video/views` || `http://localhost:${port}/video/views`, {
+    id
+  });
+};
+
 module.exports = serviceWorker;
