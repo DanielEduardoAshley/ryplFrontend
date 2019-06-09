@@ -30,7 +30,9 @@
   justify-content: center;
   padding: 1%;
   overflow: scroll;
-  background-color: rgb(162, 162, 162);
+  /* background-color: rgb(162, 162, 162); */
+  background-color: white;
+
   border: 1px solid gray;
   transition: all 0.4s ease-in-out;
   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
@@ -41,7 +43,8 @@
   justify-content: center;
   padding: 1%;
   overflow: scroll;
-  background-color: #d2d7df;
+  background-color: white;
+  /* background-color: #d2d7df; */
   border: 1px solid gainsboro;
   transition: all 0.4s ease-in-out;
   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
@@ -52,8 +55,10 @@
   justify-content: center;
   padding: 1%;
   overflow: scroll;
-  background-color: whitesmoke;
-  border: 1px solid whitesmoke;
+  background-color: white;
+  /* background-color: #2a2d34; */
+  /* background-color: whitesmoke; */
+  /* border: 1px solid whitesmoke; */
   transition: all 0.4s ease-in-out;
   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
 }
@@ -76,12 +81,86 @@
   padding: 2%;
 }
 
-/* .mycard.response {
-  background-color: #009ddc;
-} */
-
 .mycard.replies {
   background-color: #009ddc;
+}
+
+.icon-btn {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #cdcdcd;
+  background: white;
+  border-radius: 25px;
+  overflow: hidden;
+  position: relative;
+  transition: width 0.2s ease-in-out;
+}
+.add-btn:hover {
+  width: 120px;
+}
+.add-btn::before,
+.add-btn::after {
+  transition: width 0.2s ease-in-out, border-radius 0.2s ease-in-out;
+  content: "";
+  position: absolute;
+  height: 4px;
+  width: 10px;
+  top: calc(50% - 2px);
+  background: #f463bd;
+}
+.add-btn::after {
+  right: 14px;
+  overflow: hidden;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+.add-btn::before {
+  left: 14px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+.icon-btn:focus {
+  outline: none;
+}
+.btn-txt {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.add-btn:hover::before,
+.add-btn:hover::after {
+  width: 4px;
+  border-radius: 2px;
+}
+.add-btn:hover .btn-txt {
+  opacity: 1;
+}
+
+.card-title-btn.container {
+  /* background-color: brown; */
+  display: grid;
+  padding: 4px;
+  margin: 10px;
+}
+.shadow {
+  -moz-box-shadow: inset 0 0 10px #000000;
+  -webkit-box-shadow: inset 0 0 10px #000000;
+  box-shadow: inset 0 0 10px #000000;
+}
+.title-and-btn {
+  display: inline-flex;
+  position: relative;
+}
+
+.reactions.card-mytitle {
+  max-width: 80%;
+  word-break: keep-all;
+  position: relative;
+  left: 2%;
+}
+
+.reactions.icon-btn.add-btn {
+  position: absolute;
+  right: 2%;
 }
 
 @media only screen and (max-width: 700px) {

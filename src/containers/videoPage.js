@@ -4,6 +4,7 @@ import ShowReplies from "../components/replies";
 import Axios from "axios";
 import serviceWorker from "../services/services";
 import CardColor from "../services/cardColor";
+import { Link } from "react-router-dom";
 
 class VideoPage extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class VideoPage extends Component {
       default: {
         main: "col-7 main-video ",
         reaction: "col-5 reactions-videos ",
-        reply: "col-2 replies-videos "
+        reply: "col-1 replies-videos "
       },
       mode1: {
         main: "col-7 main-video ",
@@ -76,6 +77,7 @@ class VideoPage extends Component {
   };
 
   render() {
+    console.log(this.state.video.masterVid.video_title);
     const idx = this.state.repliesIdx;
     const page = (
       <>
@@ -88,36 +90,43 @@ class VideoPage extends Component {
                 name="mode1"
                 className={this.state.default["main"]}
                 onClick={this.toggleMode}
+                onMouseEnter={this.toggleMode}
               >
                 <div className="mycard-container" name="mode1">
-                  <video className="mycard" controls>
-                    {" "}
-                    {this.state.video.masterVid.video_url ? (
-                      <source src={this.state.video.masterVid.video_url} />
-                    ) : (
-                      <></>
-                    )}
-                  </video>
-                  );
-                  <div className="video-info" name="mode1">
-                    <h2 name="mode1">Title</h2>
-                    <p name="mode1">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                      sint occaecat cupidatat non proident, sunt in culpa qui
-                      officia deserunt mollit anim id est laborum.
-                    </p>
-                  </div>
+                  {this.state.video.masterVid.video_url ? (
+                    <>
+                      <div className="row my-row">
+                        <video className="mycard" controls>
+                          <source src={this.state.video.masterVid.video_url} />
+                        </video>
+
+                        <Link to={`/video/${this.state.video.masterVid.id}`}>
+                          <button class="icon-btn add-btn">
+                            <div class="add-rypl" />
+                            <div class="btn-txt">Add a Rypl</div>
+                          </button>
+                        </Link>
+                      </div>
+
+                      <div className="video-info" name="mode1">
+                        <h2 name="mode1">
+                          {this.state.video.masterVid.video_title}
+                        </h2>
+                        <p name="mode1">
+                          {this.state.video.masterVid.description}
+                        </p>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
                 </div>
               </div>
               <div
                 name="mode2"
                 className={this.state.default["reaction"]}
                 onClick={this.toggleMode}
+                onMouseEnter={this.toggleMode}
               >
                 <div className="row my-row" name="mode2">
                   <div className="mycard-container responses" name="mode2">
@@ -126,15 +135,31 @@ class VideoPage extends Component {
                     ) : (
                       this.state.video.responseToMaster.map((vid, idx) => {
                         return (
-                          <video
-                            className="mycard response"
-                            controls
-                            index={idx}
+                          <div
+                            className="card-title-btn container shadow"
                             style={{ backgroundColor: CardColor[idx % 10] }}
-                            onClick={this.handleResponseClick}
                           >
-                            <source src={vid.video_url} />
-                          </video>
+                            <video
+                              className="mycard response"
+                              controls
+                              index={idx}
+                              // style={{ backgroundColor: CardColor[idx % 10] }}
+                              onClick={this.handleResponseClick}
+                            >
+                              <source src={vid.video_url} />
+                            </video>
+                            <div className="title-and-btn">
+                              <span className="reactions card-mytitle">
+                                <h3>{vid.video_title}</h3>
+                              </span>
+                              <Link to={`/video/${vid.id}`}>
+                                <button className="reactions icon-btn add-btn">
+                                  <div className="add-rypl" />
+                                  <div className="btn-txt">Add a Rypl</div>
+                                </button>
+                              </Link>
+                            </div>
+                          </div>
                         );
                       })
                     )}
@@ -145,6 +170,7 @@ class VideoPage extends Component {
                 name="mode3"
                 className={this.state.default["reply"]}
                 onClick={this.toggleMode}
+                onMouseEnter={this.toggleMode}
               >
                 <div
                   className="row my-row"
