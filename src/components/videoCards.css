@@ -4,7 +4,7 @@
   padding: 10px;
   overflow: scroll;
 }
-
+/* 
 /* .video-card {
   width: 60%;
   height: 50%;
@@ -15,8 +15,7 @@
   border: 1px solid black;
   border-radius: 10px;
 } */
-
-.video-title {
+*/ .video-title {
   word-break: break-all;
 }
 
