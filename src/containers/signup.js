@@ -14,7 +14,8 @@ class SignUp extends React.Component {
     lastname: "",
     email: "",
     password: "",
-    userUID: ""
+    userUID: "",
+    signedUp: false
   };
 
   handleChange = e => {
@@ -31,9 +32,18 @@ class SignUp extends React.Component {
       .createUserWithEmailAndPassword(email, password)
       .then(res => {
         let userUID = res.user.uid;
-        return serviceWorker
-          .postUser(username, email, userUID, firstname, lastname, "null")
-          .then(data => console.log(data));
+        return serviceWorker.postUser(
+          username,
+          email,
+          userUID,
+          firstname,
+          lastname,
+          "null"
+        );
+      })
+      .then(data => {
+        console.log(data);
+        this.setState({ signedUp: true });
       })
       .catch(err => {
         alert(err);
@@ -45,7 +55,9 @@ class SignUp extends React.Component {
 
   render() {
     const { username, firstname, lastname, email, password } = this.state;
-    return (
+    return this.state.signedUp ? (
+      <Redirect to="/" />
+    ) : (
       <>
         <AuthContext.Consumer>
           {user => {
