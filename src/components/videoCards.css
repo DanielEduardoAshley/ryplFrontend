@@ -4,7 +4,7 @@
   padding: 10px;
   overflow: scroll;
 }
-
+/* 
 /* .video-card {
   width: 60%;
   height: 50%;
@@ -17,6 +17,24 @@
 } */
 
 .video-title {
+  word-break: break-all;
+}
+
+.user-wrapper {
+  display: flex;
+  padding-top: 20px;
+  border-bottom: 1px solid #efefef;
+}
+
+.user-image {
+  width: 30%;
+  border-radius: 50%;
+  justify-items: center;
+}
+
+.user-name {
+  width: 80%;
+  text-align: left;
   word-break: break-all;
 }
 
