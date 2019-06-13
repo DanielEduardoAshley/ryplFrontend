@@ -6,6 +6,8 @@ import SideNavBar from "./../components/sideNavBar";
 import serviceWorker from "./../services/services";
 import { Link } from "react-router-dom";
 import Loading from "../components/loading";
+//for fake userimage
+import userImg from "../images/fakeuser.jpg";
 
 class Category extends Component {
   constructor(props) {
@@ -184,6 +186,17 @@ class Category extends Component {
                         >
                           <source src={e.video_url} />;
                         </video>
+                        <div className="user-wrapper">
+                          <div className="user-image">
+                            <img
+                              src={userImg}
+                              style={{ width: "40%", borderRadius: "50%" }}
+                            />
+                          </div>
+                          <div className="user-name">
+                            <h3>Yun</h3>
+                          </div>
+                        </div>
                         <div className="title">
                           <h2>{e.video_title}</h2>
                           <h3>Reaction Video Count: {e.responses.length}</h3>
