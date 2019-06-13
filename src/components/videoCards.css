@@ -15,7 +15,26 @@
   border: 1px solid black;
   border-radius: 10px;
 } */
-*/ .video-title {
+
+.video-title {
+  word-break: break-all;
+}
+
+.user-wrapper {
+  display: flex;
+  padding-top: 20px;
+  border-bottom: 1px solid #efefef;
+}
+
+.user-image {
+  width: 30%;
+  border-radius: 50%;
+  justify-items: center;
+}
+
+.user-name {
+  width: 80%;
+  text-align: left;
   word-break: break-all;
 }
 
