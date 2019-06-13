@@ -45,11 +45,11 @@ class VideoPage extends Component {
     serviceWorker
       .getVidThread(id)
       .then(data => {
-        console.log("video: ", data.data.data);
+        // console.log("video: ", data.data.data);
         this.setState({
           video: data.data.data
         });
-        console.log("state is here: ", this.state);
+        // console.log("state is here: ", this.state);
       })
       .catch(err => {
         console.log(err);
@@ -57,7 +57,7 @@ class VideoPage extends Component {
   }
 
   toggleMode = e => {
-    console.log("target ", e.target);
+    // console.log("target ", e.target);
     const name = e.target.getAttribute("name");
     if (name === "mode1" || name === "mode2" || name === "mode3") {
       this.setState({
@@ -76,8 +76,16 @@ class VideoPage extends Component {
     }
   };
 
+  watchedVid = id => {
+    console.log("here");
+    serviceWorker
+      .addView(id)
+      .then(data => console.log(data))
+      .catch(err => console.log(err));
+  };
+
   render() {
-    console.log(this.state.video.masterVid.video_title);
+    // console.log(this.state.video.masterVid.video_title);
     const idx = this.state.repliesIdx;
     const page = (
       <>
@@ -96,7 +104,13 @@ class VideoPage extends Component {
                   {this.state.video.masterVid.video_url ? (
                     <>
                       <div className="row my-row">
-                        <video className="mycard" controls>
+                        <video
+                          className="mycard"
+                          controls
+                          onEnded={() =>
+                            this.watchedVid(this.state.video.masterVid.id)
+                          }
+                        >
                           <source src={this.state.video.masterVid.video_url} />
                         </video>
 
@@ -145,6 +159,7 @@ class VideoPage extends Component {
                               index={idx}
                               // style={{ backgroundColor: CardColor[idx % 10] }}
                               onClick={this.handleResponseClick}
+                              onEnded={() => this.watchedVid(vid.id)}
                             >
                               <source src={vid.video_url} />
                             </video>
@@ -202,74 +217,3 @@ class VideoPage extends Component {
 }
 
 export default VideoPage;
-
-// Old Dummy Data:
-// video: {
-//     vidUrl:
-//       "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/userVideos%2Fe37ec800-83ca-11e9-a38a-e1a5c2c55deb?alt=media&token=516917a5-8a6c-4975-9e4e-a5f95ea1f1a5",
-//     responses: [
-//       {
-//         responseUrl:
-//           "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0dhttps://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=ef00bea4-b2c2-48d8-9666-1f6e8aba80ad",
-//         replies: [
-//           {
-//             replyUrl:
-//               "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/test%2Ftest.mp4?alt=media&token=ef354168-c799-4b95-aa5b-e3c2076a8f67"
-//           },
-//           {
-//             replyUrl:
-//               "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/test%2Ftest.mp4?alt=media&token=ef354168-c799-4b95-aa5b-e3c2076a8f67"
-//           },
-//           {
-//             replyUrl:
-//               "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/test%2Ftest.mp4?alt=media&token=ef354168-c799-4b95-aa5b-e3c2076a8f67"
-//           },
-//           {
-//             replyUrl:
-//               "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/test%2Ftest.mp4?alt=media&token=ef354168-c799-4b95-aa5b-e3c2076a8f67"
-//           }
-//         ]
-//       },
-//       {
-//         responseUrl:
-//           "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0dhttps://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=ef00bea4-b2c2-48d8-9666-1f6e8aba80ad",
-//         replies: [
-//           {
-//             replyUrl:
-//               "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/test%2Ftest.mp4?alt=media&token=ef354168-c799-4b95-aa5b-e3c2076a8f67"
-//           },
-//           {
-//             replyUrl:
-//               "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/test%2Ftest.mp4?alt=media&token=ef354168-c799-4b95-aa5b-e3c2076a8f67"
-//           }
-//         ]
-//       },
-//       {
-//         responseUrl:
-//           "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0dhttps://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=ef00bea4-b2c2-48d8-9666-1f6e8aba80ad"
-//       },
-//       {
-//         responseUrl:
-//           "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0dhttps://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=ef00bea4-b2c2-48d8-9666-1f6e8aba80ad"
-//       },
-//       {
-//         responseUrl:
-//           "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0dhttps://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=ef00bea4-b2c2-48d8-9666-1f6e8aba80ad"
-//       },
-//       {
-//         responseUrl:
-//           "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0dhttps://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=ef00bea4-b2c2-48d8-9666-1f6e8aba80ad"
-//       },
-//       {
-//         responseUrl:
-//           "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0dhttps://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=ef00bea4-b2c2-48d8-9666-1f6e8aba80ad"
-//       },
-//       {
-//         responseUrl:
-//           "https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=57cd456c-b689-4a4f-8426-863eba9baa0dhttps://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/vids%2F%5Bobject%20Blob%5D?alt=media&token=ef00bea4-b2c2-48d8-9666-1f6e8aba80ad"
-//       }
-//     ]
-//   }
-//   }
-//   }
-//   }
