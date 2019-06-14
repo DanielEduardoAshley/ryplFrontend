@@ -2,6 +2,7 @@ import React from "react";
 import "./videoCards.css";
 import { Player, ControlBar, PlayToggle } from "video-react";
 import userImg from "./images/fakeuser.jpg";
+
 const VideoCards = props => {
   const showLoading = <div>Loading</div>;
   const videos = (
@@ -9,11 +10,10 @@ const VideoCards = props => {
       {props.mostViewedVid.map((e, i) => {
         console.log(e);
         return (
-          <div className="video-card">
+          <div className="home-page-videocards">
             <video
-              className="video"
               controls
-              style={{ width: "450px", height: "300px" }}
+              style={{ width: "440px", height: "250px" }}
               // poster={`${e.thumbnail_url}`}
             >
               >
