@@ -114,8 +114,19 @@ const recognition = new (window.SpeechRecognition ||
 //     console.log('set', this.props)
 //     if(this.props.recording===1 && this.listening===false){
     
+<<<<<<< videoCategory
 //         this.startButton()
 //        console.log('state and props', this.state, this.props, this.recording.final) 
+=======
+    return (
+      <>
+      <div>{this.variable}</div>
+      {/* <button onClick={this.startButton}>button</button> */}
+      </>
+    );
+  }
+}
+>>>>>>> local
 
       
 //     }else{
