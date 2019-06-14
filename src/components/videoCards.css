@@ -4,17 +4,14 @@
   padding: 10px;
   overflow: scroll;
 }
-/* 
-/* .video-card {
-  width: 60%;
-  height: 50%;
-  display: flex;
+
+.home-page-videocards {
   flex-direction: column;
-  padding: 20px;
   margin: 10px;
   border: 1px solid black;
-  border-radius: 10px;
-} */
+  padding-bottom: 10px;
+  border-radius: 0 0 10px 10px;
+}
 
 .video-title {
   word-break: break-all;
@@ -45,8 +42,12 @@
   color: #efefef;
   border-radius: 3px;
   padding: 10px;
+  width: 80%;
 }
 
 .video-card-btn:hover {
   background-color: #2a2d34;
+  cursor: pointer;
+  font-weight: 900;
+  font-size: 18px;
 }
