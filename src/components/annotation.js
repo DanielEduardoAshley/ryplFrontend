@@ -15,55 +15,112 @@ recognition.lang = "en-US";
 class Annotations extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      listen: this.props.func,
-      transcript: ""
-    };
+      interimResults: '',
+      final_transcript: '',
+     final: this.variable
   }
+  }
+recording ={
+  recording : this.props.recording,
+  final:''
+}
 
-  handleListen = () => {
-    console.log("listening?", this.state.listening);
+componentDidMount(){
+  console.log(localStorage.getItem('transcript'))
+}
+ 
+variable=''
+testThree=(trans)=>{
+  console.log('trans', trans)
+  this.variable = trans
+  console.log('var',this.variable)
+  return trans
+}
 
-    if (this.state.listening) {
-      recognition.start();
-      recognition.onend = () => {
-        console.log("...continue listening...");
-        recognition.start();
-      };
-    } else {
-      recognition.stop();
-      recognition.onend = () => {
-        console.log("Stopped listening per click");
-      };
+  startButton=(event)=> {
+  console.log('listening')
+  const testTwo=(trans)=>{
+    console.log('here')
+    this.testThree(trans)
+  }
+  
+  recognition.start();
+  const test=(trans)=>{
+    console.log('gettingthere')
+  testTwo(trans)
+  }
+  recognition.onresult = function(event) {
+    let final_transcript = '';
+    let interimResults ='' 
+    
+    this.testOne=(trans)=>{
+      test(trans)
+    }
+    
+    recognition.onend= function(event){
+      recognition.start()
+
     }
 
-    recognition.onstart = () => {
-      console.log("Listening!");
-    };
+    for (let i = event.resultIndex; i < event.results.length; ++i) {
+      if (event.results[i].isFinal) {
+        final_transcript += event.results[i][0].transcript;
+      }else{
+        interimResults = interimResults + event.results[i][0].transcript;
+  
+        }
+        localStorage.setItem('transcript', final_transcript)
+        // this.setState=({ 
+        //   final : final_transcript
+        // })
+        
+    }  
+    this.testOne(final_transcript)
+    this.finally += final_transcript
+    console.log('123',final_transcript)
+  
+  
+  }
+  
 
-    let finalTranscript = "";
-    let interimTranscript = "";
+  }
 
-    recognition.onresult = event => {
-      for (let i = event.resultIndex; i < event.results.length; i++) {
-        const transcript = event.results[i][0].transcript;
-        if (event.results[i].isFinal) finalTranscript += transcript + " ";
-        else interimTranscript += transcript;
-      }
-    };
+  
+
+  stopButton=()=>{
+    recognition.stop()
+    recognition.onend = function(event){
+      console.log('final',localStorage.getItem('transcript'))
+      console.log('finally!!',this.finally)
+      
+
+    }
+  }
+ 
+  test=()=>{
     this.setState({
-      transcript: finalTranscript,
-      interim: interimTranscript
-    });
-  };
+      final: this.state.final + 1
+    })
+  }
+;
 
   render() {
+    console.log('set')
+    // if(this.props.recording===1){
+    //    this.recording.final = this.startButton()
+    //    console.log('state and props', this.state, this.props, this.recording.final) 
+
+      
+    // }else{
+    //   this.stopButton()
+    // }
+    // console.log(this.state)
+    
     return (
       <>
-        {this.state.transcript
-          ? this.state.transcript
-          : this.state.interimTranscript}
+      <div>{this.variable}</div>
+      <button onClick={this.startButton}>button</button>
       </>
     );
   }

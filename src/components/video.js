@@ -13,6 +13,14 @@ import AuthContext from "../contexts/auth";
 import { Redirect } from "react-router-dom";
 
 const uuid = require("uuid/v1");
+const recognition = new (window.SpeechRecognition ||
+  window.webkitSpeechRecognition ||
+  window.mozSpeechRecognition ||
+  window.msSpeechRecognition)();
+
+recognition.continuous = true;
+recognition.interimResults = true;
+recognition.lang = "en-US";
 
 class Video extends React.Component {
   constructor(props) {
@@ -26,13 +34,15 @@ class Video extends React.Component {
       stopRecord: false,
       isRecording: false,
       preview: 0,
-      func: 0,
+      recording: 0,
       categoryList: [],
       description: "",
       videoTitle: "",
       categoryId: null,
       annotation: null,
-      responseTo: null
+      responseTo: null,
+      transcript: ""
+
     };
     this.videoPlayer = React.createRef();
   }
@@ -62,6 +72,8 @@ class Video extends React.Component {
     }
     else if(this.state.blob){
       await this.handleFileStream();
+
+
 
     console.log(this.state);
     const { categoryId } = this.state;
@@ -127,7 +139,8 @@ class Video extends React.Component {
         responseTo
       } = this.state;
       console.log(categoryId, videoTitle, upload, thumbnail, description);
-  
+      
+
       serviceWorker
         .postVideo(
           1,
@@ -222,6 +235,25 @@ class Video extends React.Component {
     }
   };
 
+  handleFileInputThumbnail = async e => {
+    const firstFile = e.target.files[0];
+
+    const root = firebase.storage().ref();
+    const newImage = root.child(`uploads/thumbnail/${uuid()}/${firstFile.name}`);
+
+    try {
+      const snapshot = await newImage.put(firstFile);
+      const url = await snapshot.ref.getDownloadURL();
+      console.log(url);
+      this.setState({
+        thumbnail: url
+      });
+      console.log(url);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   preview = () => {
     if (this.state.preview === 0) {
       this.setState({
@@ -249,14 +281,15 @@ class Video extends React.Component {
   };
 
   reset = () => {
-    console.log("hira", this.state.func);
-    if (this.state.func === 0) {
+    console.log('newTesting')
+    console.log("hira1234", this.state.func);
+    if (this.state.recording === 0) {
       this.setState({
-        func: 1
+        recording: 1
       });
-    } else if (this.state.func === 1) {
+    } else if (this.state.recording === 1) {
       this.setState({
-        func: 0
+        recording: 0
       });
     }
   };
@@ -280,6 +313,8 @@ class Video extends React.Component {
     this.setState({ categoryId: e.currentTarget.value });
   };
 
+
+  
   render() {
     console.log("context", this.context);
     return !this.context ? (
@@ -313,7 +348,7 @@ class Video extends React.Component {
               OnTurnOnCamera={console.log("hiya")}
               onTurnOnCamera={console.log("hiya1")}
               onTurnOffCamera={console.log("hiya2")}
-              onStartRecording={() => this.reset()}
+              onStartRecording={() => {this.reset()}}
               onStopRecording={() => {
                 this.reset();
                 this.setBlob();
@@ -400,8 +435,8 @@ class Video extends React.Component {
             {/* </div> */}
 
             <div className="upload-btn-wrapper">
-              <h3 style={{ textAlign: "center" }}>
-                To upload a video from my computer
+              <h3 style={{ textAlign: "left", marginLeft: "30" }}>
+                Choose a video from my computer
               </h3>
               <div className="upload-btn">
                 <input
@@ -424,7 +459,7 @@ class Video extends React.Component {
               </div>
               <div className="upload-btn">
                 {" "}
-                <button
+                {/* <button
                   style={{
                     fontSize: "16px",
                     borderRadius: "5px",
@@ -439,7 +474,27 @@ class Video extends React.Component {
                   onClick={this.stopRecording}
                 >
                   Upload File
-                </button>
+                </button> */}
+              <h3 style={{ textAlign: "left" }}>
+                Choose a thumbnail from my computer
+              </h3>               
+               <input
+                  type="file"
+                  name="myfile"
+                  onChange={e => this.handleFileInputThumbnail(e)}
+                  onClick={this.getFirebasetoken}
+                  style={{
+                    fontSize: "16px",
+                    borderRadius: "5px",
+                    width: "100%",
+                    padding: "10px",
+                    backgroundColor: "#292D33",
+                    border: "1px solid #292D33 ",
+                    color: "white",
+                    fontSize: "20px",
+                    fontWeight: "700"
+                  }}
+                  />
               </div>
             </div>
             <div className="submit-btn-wrapper">
@@ -461,7 +516,7 @@ class Video extends React.Component {
             </div>
           </div>
         </div>
-        <Annotations listening={this.state.func} />
+        <Annotations recording={this.state.recording} />
       </>
     );
   }
