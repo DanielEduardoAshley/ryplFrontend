@@ -1,6 +1,7 @@
 import React from "react";
 import "./videoCards.css";
 import { Player, ControlBar, PlayToggle } from 'video-react'
+import userImg from './images/fakeuser.jpg'
 
 const VideoCards = props => {
   const showLoading = <div>Loading</div>;
@@ -9,7 +10,7 @@ const VideoCards = props => {
       {props.mostViewedVid.map((e, i) => {
         console.log(e)
         return (
-          <div className="video-card">
+          <div className="video-card" key={i}>
             <video
               className="video"
               controls

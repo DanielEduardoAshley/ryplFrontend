@@ -1,263 +1,263 @@
 import React from "react";
 import PropTypes from "prop-types";
-// import SpeechRecognition from "react-speech-recognition";
-import { withRouter } from "react-router-dom";
+import SpeechRecognition from "react-speech-recognition";
 // const SpeechRecognitions = webkitSpeechRecognition;
 const recognition = new (window.SpeechRecognition ||
   window.webkitSpeechRecognition ||
   window.mozSpeechRecognition ||
   window.msSpeechRecognition)();
 
-recognition.continuous = true;
-recognition.interimResults = true;
-recognition.lang = "en-US";
+// recognition.continuous = true;
+// recognition.interimResults = true;
+// recognition.lang = "en-US";
 
-class Annotations extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      interimResults: '',
-      final_transcript: '',
-     final: this.variable
-  }
-  }
-recording ={
-  recording : this.props.recording,
-  final:''
-}
+// class Annotations extends React.Component {
+//   constructor(props) {
+//     super(props);
+    
+//       recognition.onresult = this.updateTranscript.bind(this)
+//       // recognition.onend = this.onRecognitionDisconnect.bind(this)
+    
 
-componentDidMount(){
-  console.log(localStorage.getItem('transcript'))
-}
+//     this.state = {
+//       interimResults: '',
+//       finalTranscript: '',
+//      final: this.variable,
+//      listening : false,
+
+//   }
+//   }
+// recording ={
+//   final:''
+// }
+// listening = false;
+
+//  final_transcript = '';
+//  interim_transcripts ='' 
+
+// componentDidMount(){
+//   console.log(localStorage.getItem('transcript'))
+// }
  
-variable=''
-testThree=(trans)=>{
-  console.log('trans', trans)
-  this.variable = trans
-  console.log('var',this.variable)
-  return trans
-}
 
-  startButton=(event)=> {
-  console.log('listening')
-  const testTwo=(trans)=>{
-    console.log('here')
-    this.testThree(trans)
-  }
+
+//   startButton=(event)=> {
+//   console.log('listening')
+//     this.listening=false
+//   if(this.listening===false){
+//   recognition.start();
+
+//   }
+//   recognition.onend= function(event){
+
+//     if(this.listening ===true)
+//     recognition.start()
+
+//   }
   
-  recognition.start();
-  const test=(trans)=>{
-    console.log('gettingthere')
-  testTwo(trans)
-  }
-  recognition.onresult = function(event) {
-    let final_transcript = '';
-    let interimResults ='' 
+
+//   }
+  
+  
+//   updateTranscript=(event)=>{
+//     recognition.onresult= function(event){
+//     for (let i = event.resultIndex; i < event.results.length; ++i) {
+//       if (event.results[i].isFinal) {
+//         this.final_transcript += event.results[i][0].transcript;
+//       }else{
+//         this.interimResults = this.interimResults + event.results[i][0].transcript;
+  
+//         }
+//         localStorage.setItem('transcript', this.final_transcript)
+       
+//           this.finally += this.final_transcript
+//     } 
+//     console.log('123',this.final_transcript)
     
-    this.testOne=(trans)=>{
-      test(trans)
-    }
+//   }
+//   this.setState({ 
+//     finalTranscript :this.final_transcript, 
+//     interimTranscripts: this.interim_transcript 
+//   }, ()=>console.log(this.state))
+//   }
     
-    recognition.onend= function(event){
-      recognition.start()
+   
 
-    }
+   
+    
 
-    for (let i = event.resultIndex; i < event.results.length; ++i) {
-      if (event.results[i].isFinal) {
-        final_transcript += event.results[i][0].transcript;
-      }else{
-        interimResults = interimResults + event.results[i][0].transcript;
-  
-        }
-        localStorage.setItem('transcript', final_transcript)
-        // this.setState=({ 
-        //   final : final_transcript
-        // })
-        
-    }  
-    this.testOne(final_transcript)
-    this.finally += final_transcript
-    console.log('123',final_transcript)
   
   
-  }
   
-
-  }
+  
 
   
 
-  stopButton=()=>{
-    recognition.stop()
-    recognition.onend = function(event){
-      console.log('final',localStorage.getItem('transcript'))
-      console.log('finally!!',this.finally)
+  
+
+//   stopButton=()=>{
+//     recognition.stop()
+//     this.listening=true
+
+//     recognition.onend = function(event){
+//       console.log('final',localStorage.getItem('transcript'))
+//       console.log('finally!!',this.finally)
       
 
-    }
-  }
+//     }
+//   }
  
-  test=()=>{
-    this.setState({
-      final: this.state.final + 1
-    })
-  }
-;
+ 
 
-  render() {
-    console.log('set')
-    // if(this.props.recording===1){
-    //    this.recording.final = this.startButton()
-    //    console.log('state and props', this.state, this.props, this.recording.final) 
-
-      
-    // }else{
-    //   this.stopButton()
-    // }
-    // console.log(this.state)
-    
-    return (
-      <>
-      <div>{this.variable}</div>
-      <button onClick={this.startButton}>button</button>
-      </>
-    );
-  }
-}
 
 //   render() {
+//     console.log('set', this.props)
+//     if(this.props.recording===1 && this.listening===false){
+    
+//         this.startButton()
+//        console.log('state and props', this.state, this.props, this.recording.final) 
+
+      
+//     }else{
+//       this.stopButton()
+//     }
+//     console.log('ftrans',this.final_transcript)
+//     const transcript = this.final_transcript
+    
 //     return (
-
 //       <>
-//         <button onClick={this.start}>Annotation</button>
-//         <button onClick={this.stop}>StopAnnotation</button>
-
-//         <div>{this.state.results}</div>
-//       </>
+//         <div>
+//         {transcript}
+//       </div>      </>
 //     );
 //   }
 // }
 
-export default Annotations;
-// const propTypes = {
-//   // Props injected by SpeechRecognition
-//   transcript: PropTypes.string,
-//   resetTranscript: PropTypes.func,
-//   browserSupportsSpeechRecognition: PropTypes.bool
-// };
+// //   render() {
+// //     return (
 
-// console.log('propTypes.trans',propTypes.transcript)
+// //       <>
+// //         <button onClick={this.start}>Annotation</button>
+// //         <button onClick={this.stop}>StopAnnotation</button>
 
-// const handle={
-//   func : null,
-// }
+// //         <div>{this.state.results}</div>
+// //       </>
+// //     );
+// //   }
+// // }
 
-// const options = {
+// export default Annotations;
+const propTypes = {
+  // Props injected by SpeechRecognition
+  transcript: PropTypes.string,
+  resetTranscript: PropTypes.func,
+  browserSupportsSpeechRecognition: PropTypes.bool
+};
 
-// };
+console.log('propTypes.trans',propTypes.transcript)
 
-// export const StartAnontation = props => {
-//     handle.func = props.startAnnontations
-//     return null
-//   }
+const handle={
+  func : null,
+  recording : false
+}
 
-// let svg = ''
 
-// const Dictaphone = ({
-//   stopListening,
-//   finalTranscript,
-//   transcript,
-//   resetTranscript,
-//   browserSupportsSpeechRecognition,
-//   startListening,
-//   abortListening,
 
-// }) => {
+export const StartAnontation = props => {
+    handle.func = props.startAnnotations
+    console.log(props)
+    return null
+  }
 
-// const handleTranscript=(e)=>{
-// console.log(e.currentTarget.value)
-// }
 
-//   if (!browserSupportsSpeechRecognition) {
-//     return null;
-//   }
-//   console.log('gg',handle.func)
-//   let arr = []
-//   let arrTwo = []
-//   let strings = ''
+const Dictaphone = ({
+  stopListening,
+  finalTranscript,
+  transcript,
+  resetTranscript,
+  browserSupportsSpeechRecognition,
+  startListening,
+  abortListening,
 
-//   console.log('test', `${transcript} ${transcript}`)
+}) => {
 
-//   if(handle.func===1){
-//      arr.push(transcript)
+  
 
-//      arrTwo = [...arr]
-// svg = transcript
-// console.log('ejgdkdd,mf',svg)
-//     return (
-//       <div>
-//         <button onClick={resetTranscript}>Reset</button>
+  if (!browserSupportsSpeechRecognition) {
+    return null;
+  }
+  console.log('gg',handle.func, )
+  
+  
 
-//         <span style={{ fontSize: "20px" }}><input type='text' onChange={(e)=>handleTranscript(e)} value={`${transcript}`}></input></span>
+  console.log('test', ` ${transcript}`)
 
-//       </div>)
-//   }
-//   else if(handle.func===0){
-//     console.log('turned off', arrTwo)
+  if(handle.func===1){
+    // startListening()
+    // recognition.start()
+  
+    localStorage.setItem('trans', transcript)
+    return (
+    
+      <>  
+        <button onClick={resetTranscript}>Reset</button>
+        <div style={{width: '100', heigth: '100'}}>{transcript}</div>
 
-//    return( <div>
-//         <button onClick={resetTranscript}>Reset</button>
-//         <span style={{ fontSize: "20px" }}>{arrTwo}</span>
 
-//   </div>)
-//   }
+      </>)
+  }
+  else if(handle.func===0){
+       
+        handle.recording = false
+        return(<><div></div> 
+        </>)
+        }
 
-//   return null
-//     ;
-// }
-// ;
+  return null
+    ;
+}
+;
 
-// Dictaphone.propTypes = propTypes;
+Dictaphone.propTypes = propTypes;
 
-// export default SpeechRecognition(options)(Dictaphone);
+export default SpeechRecognition(propTypes)(Dictaphone);
 
-// import React from "react";
-// import PropTypes from "prop-types";
-// import SpeechRecognition from "react-speech-recognition";
-// import { withRouter } from "react-router-dom";
+// // import React from "react";
+// // import PropTypes from "prop-types";
+// // import SpeechRecognition from "react-speech-recognition";
+// // import { withRouter } from "react-router-dom";
 
-// // const propTypes = {
-// //   // Props injected by SpeechRecognition
-// //   transcript: PropTypes.string,
-// //   resetTranscript: PropTypes.func,
-// //   browserSupportsSpeechRecognition: PropTypes.bool,
-// //   stopListening: PropTypes.func
+// // // const propTypes = {
+// // //   // Props injected by SpeechRecognition
+// // //   transcript: PropTypes.string,
+// // //   resetTranscript: PropTypes.func,
+// // //   browserSupportsSpeechRecognition: PropTypes.bool,
+// // //   stopListening: PropTypes.func
+// // // };
+// // const options = {
+// //   // autoStart: false,
+// //   // listening: false,
 // // };
-// const options = {
-//   // autoStart: false,
-//   // listening: false,
-// };
 
-// export const StartAnontation = props => {
-//   console.log("testingAnnon", props);
-//   options.listening = !options.autoStart
-//   console.log('options',options)
-//   return null
-// };
+// // export const StartAnontation = props => {
+// //   console.log("testingAnnon", props);
+// //   options.listening = !options.autoStart
+// //   console.log('options',options)
+// //   return null
+// // };
 
-// class Dictaphone extends React.Component{
-//   constructor(props){
-//     super(props)
-//     this.propTypes={transcript: PropTypes.string,
-//       resetTranscript: PropTypes.func,
-//       browserSupportsSpeechRecognition: PropTypes.bool,
-//       stopListening: PropTypes.func}
-//     }
+// // class Dictaphone extends React.Component{
+// //   constructor(props){
+// //     super(props)
+// //     this.propTypes={transcript: PropTypes.string,
+// //       resetTranscript: PropTypes.func,
+// //       browserSupportsSpeechRecognition: PropTypes.bool,
+// //       stopListening: PropTypes.func}
+// //     }
 
-// render(){
-//   return(
-//     <div>{propTypes.transcript}</div>
-//   )
-// }
-// }
+// // render(){
+// //   return(
+// //     <div>{propTypes.transcript}</div>
+// //   )
+// // }
+// // }

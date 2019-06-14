@@ -19,6 +19,8 @@ import VerticalMode from "./components/singleVideoLeft";
 import Category from "./containers/category";
 import VideoPage from "./containers/videoPage";
 import Profile from "./components/profile";
+import PhoneView from "./components/phoneView";
+
 
 class App extends React.Component {
   state = {
@@ -59,6 +61,8 @@ class App extends React.Component {
             <Route path="/category/:id" exact component={Category} />
             <Route path="/VideoPage/:id" exact component={VideoPage} />
             <Route path="/profile" exact component={Profile} />
+            <Route path="/livestream" exact component={PhoneView} />
+
           </Switch>
         </AuthContext.Provider>
       </HashRouter>

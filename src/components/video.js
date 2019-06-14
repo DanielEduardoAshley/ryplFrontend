@@ -4,7 +4,7 @@ import "./video.css";
 import VideoRecorder from "react-video-recorder";
 import serviceWorker from "../services/services";
 import PropTypes from "prop-types";
-import Annotations from "./annotation";
+import Annotations, {StartAnontation} from "./annotation";
 // import SpeechRecognition, {
 //   StartAnontation,
 //   StopAnontation
@@ -41,7 +41,8 @@ class Video extends React.Component {
       categoryId: null,
       annotation: null,
       responseTo: null,
-      transcript: ""
+      transcript: "",
+      beginAnnotations : false
 
     };
     this.videoPlayer = React.createRef();
@@ -282,16 +283,22 @@ class Video extends React.Component {
 
   reset = () => {
     console.log('newTesting')
-    console.log("hira1234", this.state.func);
+    console.log("hira1234", this.state.recording);
     if (this.state.recording === 0) {
       this.setState({
-        recording: 1
-      });
-    } else if (this.state.recording === 1) {
-      this.setState({
-        recording: 0
+        recording: 1,
+        beginAnnotations: !this.state.beginAnnotations,
       });
     }
+    if(this.state.recording===1){
+      this.setState({
+        recording:0,
+        beginAnnotations: !this.state.beginAnnotations,
+
+      })
+    } 
+    
+    
   };
 
   handleDescription = e => {
@@ -317,6 +324,9 @@ class Video extends React.Component {
   
   render() {
     console.log("context", this.context);
+    console.log('recording',this.state.recording)
+    console.log('beginAnnotations', this.state.beginAnnotations)
+
     return !this.context ? (
       <Redirect to="/login" />
     ) : this.state.categoryList.length === 0 ? (
@@ -516,7 +526,11 @@ class Video extends React.Component {
             </div>
           </div>
         </div>
+        
+        <StartAnontation startAnnotations={this.state.recording}/>
         <Annotations recording={this.state.recording} />
+        
+        
       </>
     );
   }
