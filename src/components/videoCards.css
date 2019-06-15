@@ -40,7 +40,7 @@
 }
 
 .see-thread-btn {
-  width: 30%;
+  /* width: 30%; */
   border: none;
   font-size: 14px;
   background-color: #009ddc;
@@ -48,6 +48,7 @@
   border-radius: 10px;
   color: #efefef;
   margin-left: 15%;
+  padding: 5px 10px 5px 10px;
 }
 
 .see-thread-btn:hover {

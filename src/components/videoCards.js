@@ -1,9 +1,11 @@
 import React from "react";
 import "./videoCards.css";
 import { Player, ControlBar, PlayToggle } from "video-react";
+import Loading from "../components/loading";
+import { Link } from "react-router-dom";
 
 const VideoCards = props => {
-  const showLoading = <div>Loading</div>;
+  const showLoading = <Loading />;
   const videos = (
     <div className="videoCard-wrapper">
       {props.mostViewedVid.map((e, i) => {
@@ -49,7 +51,16 @@ const VideoCards = props => {
                 <div className="user-name">
                   <h3>{e.username}</h3>
                 </div>
-                <button className="see-thread-btn">See Thread</button>
+                <Link
+                  to={`/VideoPage/ ${e.id}`}
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                    width: "50%"
+                  }}
+                >
+                  <button className="see-thread-btn">See Thread</button>
+                </Link>
               </div>
               <h2>{e.video_title}</h2>
             </div>
