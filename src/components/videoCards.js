@@ -1,7 +1,6 @@
 import React from "react";
 import "./videoCards.css";
 import { Player, ControlBar, PlayToggle } from "video-react";
-import userImg from "./images/fakeuser.jpg";
 
 const VideoCards = props => {
   const showLoading = <div>Loading</div>;
@@ -40,12 +39,15 @@ const VideoCards = props => {
               <div className="user-wrapper">
                 <div className="user-image">
                   <img
-                    src={userImg}
-                    style={{ width: "40%", borderRadius: "50%" }}
+                    src={e.img_url}
+                    style={{
+                      width: "40%",
+                      borderRadius: "50%"
+                    }}
                   />
                 </div>
                 <div className="user-name">
-                  <h3>Yun</h3>
+                  <h3>{e.username}</h3>
                 </div>
                 <button className="see-thread-btn">See Thread</button>
               </div>
