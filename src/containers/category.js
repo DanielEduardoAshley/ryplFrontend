@@ -196,10 +196,13 @@ class Category extends Component {
                           <div className="user-name">
                             <h3>Yun</h3>
                           </div>
+                          <button className="see-thread-btn">
+                            See Thread: {e.responses.length}
+                          </button>
                         </div>
                         <div className="title">
                           <h2>{e.video_title}</h2>
-                          <h3>Reaction Video Count: {e.responses.length}</h3>
+                          {/* <h3>Responses: {e.responses.length}</h3> */}
                         </div>
                       </div>
                       {/* TOP-PANEL-END-HERE */}

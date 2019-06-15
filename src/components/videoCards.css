@@ -1,5 +1,6 @@
 .videoCard-wrapper {
   display: flex;
+  justify-content: space-around;
   flex-wrap: nowrap;
   padding: 10px;
   overflow: scroll;
@@ -11,6 +12,7 @@
   border: 1px solid black;
   padding-bottom: 10px;
   border-radius: 0 0 10px 10px;
+  width: 30%;
 }
 
 .video-title {
@@ -19,35 +21,37 @@
 
 .user-wrapper {
   display: flex;
+  justify-items: baseline;
   padding-top: 20px;
   border-bottom: 1px solid #efefef;
 }
 
 .user-image {
-  width: 30%;
+  width: 20%;
   border-radius: 50%;
   justify-items: center;
+  padding-top: 10px;
 }
 
 .user-name {
-  width: 80%;
+  width: 30%;
   text-align: left;
   word-break: break-all;
 }
 
-.video-card-btn {
+.see-thread-btn {
+  width: 30%;
   border: none;
   font-size: 14px;
   background-color: #009ddc;
+  margin: 15px;
+  border-radius: 10px;
   color: #efefef;
-  border-radius: 3px;
-  padding: 10px;
-  width: 80%;
+  margin-left: 15%;
 }
 
-.video-card-btn:hover {
+.see-thread-btn:hover {
   background-color: #2a2d34;
   cursor: pointer;
-  font-weight: 900;
-  font-size: 18px;
+  font-size: 16px;
 }

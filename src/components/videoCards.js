@@ -13,7 +13,7 @@ const VideoCards = props => {
           <div className="home-page-videocards">
             <video
               controls
-              style={{ width: "440px", height: "250px" }}
+              style={{ width: "100%" }}
               // poster={`${e.thumbnail_url}`}
             >
               >
@@ -47,10 +47,10 @@ const VideoCards = props => {
                 <div className="user-name">
                   <h3>Yun</h3>
                 </div>
+                <button className="see-thread-btn">See Thread</button>
               </div>
               <h2>{e.video_title}</h2>
             </div>
-            <button className="video-card-btn">See Thread</button>
           </div>
         );
       })}
