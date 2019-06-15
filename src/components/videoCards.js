@@ -2,6 +2,7 @@ import React from "react";
 import "./videoCards.css";
 import { Player, ControlBar, PlayToggle } from "video-react";
 import userImg from "./images/fakeuser.jpg";
+import { Link } from "react-router-dom";
 
 const VideoCards = props => {
   const showLoading = <div>Loading</div>;
@@ -50,7 +51,9 @@ const VideoCards = props => {
               </div>
               <h2>{e.video_title}</h2>
             </div>
-            <button className="video-card-btn">See Thread</button>
+            <Link to={`/VideoPage/${e.id}`}>
+              <button className="video-card-btn">See Thread</button>
+            </Link>
           </div>
         );
       })}
