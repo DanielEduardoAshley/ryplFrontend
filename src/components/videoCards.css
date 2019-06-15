@@ -4,6 +4,7 @@
   flex-wrap: nowrap;
   padding: 10px;
   overflow: scroll;
+  width: 90vw;
 }
 
 .home-page-videocards {
