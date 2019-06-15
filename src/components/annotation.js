@@ -1,11 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import SpeechRecognition from "react-speech-recognition";
-// const SpeechRecognitions = webkitSpeechRecognition;
-// const recognition = new (window.SpeechRecognition ||
-//   window.webkitSpeechRecognition ||
-//   window.mozSpeechRecognition ||
-//   window.msSpeechRecognition)();
 
 const propTypes = {
   // Props injected by SpeechRecognition
@@ -18,13 +13,13 @@ console.log('propTypes.trans',propTypes.transcript)
 
 const handle={
   func : null,
-  recording : false
+  annotation: ''
 }
 
 
 
 export const StartAnontation = props => {
-    handle.func = props.startAnnotations
+    handle.func = props.recording
     console.log(props)
     return null
   }
@@ -55,20 +50,19 @@ const Dictaphone = ({
   if(handle.func===1){
     // startListening()
     // recognition.start()
-  
+    console.log('local')
     localStorage.setItem('trans', transcript)
     return (
     
       <>  
         <button onClick={resetTranscript}>Reset</button>
-        <div style={{width: '100', heigth: '100'}}>{transcript}</div>
+        <div style={{width: '300px', height: '300px'}}>{transcript}</div>
 
 
       </>)
   }
   else if(handle.func===0){
        
-        handle.recording = false
         return(<><div></div> 
         </>)
         }

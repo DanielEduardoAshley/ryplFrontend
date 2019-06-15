@@ -10,7 +10,7 @@ const VideoCards = props => {
       {props.mostViewedVid.map((e, i) => {
         console.log(e);
         return (
-          <div className="home-page-videocards">
+          <div className="home-page-videocards" key={i}>
             <video
               controls
               style={{ width: "440px", height: "250px" }}

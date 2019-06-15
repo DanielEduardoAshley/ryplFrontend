@@ -39,10 +39,9 @@ class Video extends React.Component {
       description: "",
       videoTitle: "",
       categoryId: null,
-      annotation: null,
       responseTo: null,
       transcript: "",
-      beginAnnotations : false
+      annotations : null
 
     };
     this.videoPlayer = React.createRef();
@@ -83,7 +82,7 @@ class Video extends React.Component {
       videoUrl,
       thumbnail,
       description,
-      annotation,
+      annotations,
       responseTo
     } = this.state;
     console.log(categoryId, videoTitle, videoUrl, thumbnail, description);
@@ -96,7 +95,7 @@ class Video extends React.Component {
         responseTo,
         videoUrl,
         thumbnail,
-        annotation,
+        annotations,
         description
       )
       .then(() => {
@@ -108,7 +107,7 @@ class Video extends React.Component {
           responseTo,
           videoUrl,
           thumbnail,
-          annotation,
+          annotations,
           description
         );
       })
@@ -121,7 +120,7 @@ class Video extends React.Component {
           responseTo,
           videoUrl,
           thumbnail,
-          annotation,
+          annotations,
           description
         );
       });
@@ -136,7 +135,7 @@ class Video extends React.Component {
         upload,
         thumbnail,
         description,
-        annotation,
+        annotations,
         responseTo
       } = this.state;
       console.log(categoryId, videoTitle, upload, thumbnail, description);
@@ -150,7 +149,7 @@ class Video extends React.Component {
           responseTo,
           upload,
           thumbnail,
-          annotation,
+          annotations,
           description
         )
         .then(() => {
@@ -162,7 +161,7 @@ class Video extends React.Component {
             responseTo,
             upload,
             thumbnail,
-            annotation,
+            annotations,
             description
           );
         })
@@ -175,7 +174,7 @@ class Video extends React.Component {
             responseTo,
             upload,
             thumbnail,
-            annotation,
+            annotations,
             description
           );
         });
@@ -284,6 +283,7 @@ class Video extends React.Component {
   reset = () => {
     console.log('newTesting')
     console.log("hira1234", this.state.recording);
+    
     if (this.state.recording === 0) {
       this.setState({
         recording: 1,
@@ -291,9 +291,11 @@ class Video extends React.Component {
       });
     }
     if(this.state.recording===1){
+      const annotations = localStorage.getItem('trans')
+
       this.setState({
         recording:0,
-        beginAnnotations: !this.state.beginAnnotations,
+        annotations : annotations,
 
       })
     } 
@@ -325,7 +327,7 @@ class Video extends React.Component {
   render() {
     console.log("context", this.context);
     console.log('recording',this.state.recording)
-    console.log('beginAnnotations', this.state.beginAnnotations)
+    console.log('annotations', this.state.annotations)
 
     return !this.context ? (
       <Redirect to="/login" />
@@ -527,7 +529,7 @@ class Video extends React.Component {
           </div>
         </div>
         
-        <StartAnontation startAnnotations={this.state.recording}/>
+        <StartAnontation recording={this.state.recording} annotations={this.state.annotations}/>
         <Annotations recording={this.state.recording} />
         
         
