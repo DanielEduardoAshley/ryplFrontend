@@ -4,7 +4,7 @@ import "./video.css";
 import VideoRecorder from "react-video-recorder";
 import serviceWorker from "../services/services";
 import PropTypes from "prop-types";
-import Annotations, {StartAnontation} from "./annotation";
+// import Annotations, {StartAnontation} from "./annotation";
 // import SpeechRecognition, {
 //   StartAnontation,
 //   StopAnontation
@@ -529,8 +529,8 @@ class Video extends React.Component {
           </div>
         </div>
         
-        <StartAnontation recording={this.state.recording} annotations={this.state.annotations}/>
-        <Annotations recording={this.state.recording} />
+        {/* <StartAnontation recording={this.state.recording} annotations={this.state.annotations}/>
+        <Annotations recording={this.state.recording} /> */}
         
         
       </>
