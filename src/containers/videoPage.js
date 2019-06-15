@@ -57,9 +57,13 @@ class VideoPage extends Component {
   }
 
   toggleMode = e => {
-    // console.log("target ", e.target);
+    console.log("target ", e.target);
     const name = e.target.getAttribute("name");
     if (name === "mode1" || name === "mode2" || name === "mode3") {
+      if (name === "mode3" && !this.state.repliesIdx) {
+        return;
+      }
+
       this.setState({
         default: this.state[name]
       });
@@ -116,7 +120,7 @@ class VideoPage extends Component {
 
                         <Link to={`/video/${this.state.video.masterVid.id}`}>
                           <button class="icon-btn add-btn">
-                            <div class="add-rypl" />
+                            <div class="add-icon" />
                             <div class="btn-txt">Add a Rypl</div>
                           </button>
                         </Link>
@@ -169,7 +173,7 @@ class VideoPage extends Component {
                               </span>
                               <Link to={`/video/${vid.id}`}>
                                 <button className="reactions icon-btn add-btn">
-                                  <div className="add-rypl" />
+                                  <div className="add-icon" />
                                   <div className="btn-txt">Add a Rypl</div>
                                 </button>
                               </Link>
