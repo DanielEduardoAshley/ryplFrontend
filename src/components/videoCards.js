@@ -1,17 +1,17 @@
 import React from "react";
+import "../containers/style/home.css";
 import "./videoCards.css";
-import { Player, ControlBar, PlayToggle } from "video-react";
 import Loading from "../components/loading";
 import { Link } from "react-router-dom";
 
 const VideoCards = props => {
   const showLoading = <Loading />;
   const videos = (
-    <div className="videoCard-wrapper">
+    <div className="scrolling">
       {props.mostViewedVid.map((e, i) => {
         console.log(e);
         return (
-          <div className="home-page-videocards">
+          <div className="single-cards" stlye={{ width: "500px" }}>
             <video
               controls
               style={{ width: "100%" }}

@@ -159,6 +159,7 @@ hr {
   height: 100vh;
   background: #2a2d34;
   width: 10%;
+  z-index: 1;
 }
 
 .main-nav ul {

@@ -1,7 +1,7 @@
 import React from "react";
 import "./style/home.css";
 import serviceWorker from "../services/services";
-import { Link } from "react-router-dom";
+
 //components
 import SideNavBar from "../components/sideNavBar";
 import VideoCards from "../components/videoCards";
