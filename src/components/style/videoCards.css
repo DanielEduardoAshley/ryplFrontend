@@ -1,75 +1,59 @@
 .videoCard-wrapper {
   display: flex;
+  justify-content: space-around;
   flex-wrap: nowrap;
   padding: 10px;
-  /* border: 1px solid orange; */
   overflow: scroll;
+  width: 100vw;
 }
-.video-card {
-  width: 45%;
-  height: 50%;
-  display: flex;
+
+.home-page-videocards {
   flex-direction: column;
-  padding: 20px;
   margin: 10px;
   border: 1px solid black;
-  border-radius: 10px;
+  padding-bottom: 10px;
+  border-radius: 0 0 10px 10px;
+  width: 50%;
 }
-.video {
-  border: 1px solid black;
-  width: 100%;
-}
+
 .video-title {
   word-break: break-all;
 }
-.video-card-btn {
+
+.user-wrapper {
+  display: flex;
+  justify-items: baseline;
+  padding-top: 20px;
+  border-bottom: 1px solid #efefef;
+}
+
+.user-image {
+  width: 20%;
+  border-radius: 50%;
+  justify-items: center;
+  padding-top: 10px;
+}
+
+.user-name {
+  width: 30%;
+  text-align: left;
+  word-break: break-all;
+}
+
+.see-thread-btn {
+  /* width: 30%; */
   border: none;
   font-size: 14px;
   background-color: #009ddc;
+  margin: 15px;
+  border-radius: 10px;
   color: #efefef;
-  border-radius: 3px;
-  padding: 10px;
+  margin-left: 15%;
+  padding: 5px 10px 5px 10px;
 }
-.video-card-btn:hover {
+
+.see-thread-btn:hover {
   background-color: #2a2d34;
-}
-
-/* .reaction{
-  background-color:red;
-  width:50px;
-  height:50px;
-  font-size: 10px;
-  position: relative;
-  top:10%;
-  left:5%; */
-/* } */
-.video-card:hover .react{
-  opacity:1;
   cursor: pointer;
+  font-size: 16px;
 }
-
-.react{
-  background:url('../../images/rypl.png') no-repeat;
-  background-size: 80%;
-  background-color: Transparent;
-  opacity: .5;
-  background-repeat:no-repeat;
-  position : absolute;
-  width: 20%;
-  height: 10%;
-  left: 180%;
-  top: 2%;
-  border:none;
-  
-}
-
-
-
-.wrap{
-  display: flex;
-  position: relative;
-  width: 50%;
-  height: 100%;
-
-}
-
