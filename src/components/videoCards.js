@@ -1,7 +1,6 @@
 import React from "react";
 import "../containers/style/home.css";
 import "./videoCards.css";
-import { Player, ControlBar, PlayToggle } from "video-react";
 import Loading from "../components/loading";
 import { Link } from "react-router-dom";
 
