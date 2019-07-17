@@ -1,13 +1,14 @@
 import React from "react";
 import "./videoCards.css";
-import { Player, ControlBar, PlayToggle } from 'video-react'
+import { Player, ControlBar, PlayToggle } from "video-react";
+import userImg from "../components/images/fakeuser.jpg";
 
 const VideoCards = props => {
   const showLoading = <div>Loading</div>;
   const videos = (
     <div className="videoCard-wrapper">
       {props.mostViewedVid.map((e, i) => {
-        console.log(e)
+        console.log(e);
         return (
           <div className="video-card">
             <video
@@ -15,10 +16,9 @@ const VideoCards = props => {
               controls
               style={{ width: "450px", height: "300px" }}
               // poster={`${e.thumbnail_url}`}
-              
             >
               >
-              <source type="video/mp4" src={e.video_url} preload={"none"}/>
+              <source type="video/mp4" src={e.video_url} preload={"none"} />
             </video>
             {/* <img src={"https://firebasestorage.googleapis.com/v0/b/rypl-acf62.appspot.com/o/uploads%2F21f30a80-8d10-11e9-b087-310e0299ff45%2Fy2mate.com%20-%20charlie_schmidts_keyboard_cat_the_original_J---aiyznGQ_360p.mp4?alt=media&token=d4ee9197-025e-4bf1-a083-04853b53d118"}></img> */}
             {/* <Player
