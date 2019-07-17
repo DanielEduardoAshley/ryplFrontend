@@ -1,20 +1,21 @@
 import React from "react";
+import "../containers/style/home.css";
 import "./videoCards.css";
-import { Player, ControlBar, PlayToggle } from "video-react";
-import userImg from "../components/images/fakeuser.jpg";
+
+import Loading from "../components/loading";
+import { Link } from "react-router-dom";
 
 const VideoCards = props => {
-  const showLoading = <div>Loading</div>;
+  const showLoading = <Loading />;
   const videos = (
-    <div className="videoCard-wrapper">
+    <div className="scrolling">
       {props.mostViewedVid.map((e, i) => {
         console.log(e);
         return (
-          <div className="video-card">
+          <div className="single-cards" stlye={{ width: "500px" }}>
             <video
-              className="video"
               controls
-              style={{ width: "450px", height: "300px" }}
+              style={{ width: "100%" }}
               // poster={`${e.thumbnail_url}`}
             >
               >
@@ -41,17 +42,29 @@ const VideoCards = props => {
               <div className="user-wrapper">
                 <div className="user-image">
                   <img
-                    src={userImg}
-                    style={{ width: "40%", borderRadius: "50%" }}
+                    src={e.img_url}
+                    style={{
+                      width: "40%",
+                      borderRadius: "50%"
+                    }}
                   />
                 </div>
                 <div className="user-name">
-                  <h3>Yun</h3>
+                  <h3>{e.username}</h3>
                 </div>
+                <Link
+                  to={`/VideoPage/ ${e.id}`}
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                    width: "50%"
+                  }}
+                >
+                  <button className="see-thread-btn">See Thread</button>
+                </Link>
               </div>
               <h2>{e.video_title}</h2>
             </div>
-            <button className="video-card-btn">See Thread</button>
           </div>
         );
       })}

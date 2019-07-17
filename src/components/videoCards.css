@@ -1,20 +1,23 @@
-.videoCard-wrapper {
+/* .videoCard-wrapper {
   display: flex;
+  justify-content: space-around;
   flex-wrap: nowrap;
   padding: 10px;
   overflow: scroll;
-}
-/* 
-/* .video-card {
-  width: 60%;
-  height: 50%;
-  display: flex;
+  width: 100vw;
+} */
+
+
+.single-cards {
   flex-direction: column;
-  padding: 20px;
   margin: 10px;
   border: 1px solid black;
-  border-radius: 10px;
-} */
+  padding-bottom: 10px;
+  border-radius: 0 0 10px 10px;
+  width: 35%;
+  display: inline-block;
+  padding-bottom: 10px;
+}
 
 .video-title {
   word-break: break-all;
@@ -22,31 +25,45 @@
 
 .user-wrapper {
   display: flex;
+  justify-items: baseline;
   padding-top: 20px;
   border-bottom: 1px solid #efefef;
 }
 
 .user-image {
-  width: 30%;
+  width: 20%;
   border-radius: 50%;
   justify-items: center;
+  padding-top: 10px;
 }
 
 .user-name {
-  width: 80%;
+  width: 30%;
   text-align: left;
   word-break: break-all;
 }
 
-.video-card-btn {
+.see-thread-btn {
+  /* width: 30%; */
   border: none;
   font-size: 14px;
   background-color: #009ddc;
+  margin: 15px;
+  border-radius: 10px;
   color: #efefef;
-  border-radius: 3px;
-  padding: 10px;
+  margin-left: 15%;
+  padding: 5px 10px 5px 10px;
 }
 
-.video-card-btn:hover {
+.see-thread-btn:hover {
   background-color: #2a2d34;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.scrolling {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  width: 100vw;
 }

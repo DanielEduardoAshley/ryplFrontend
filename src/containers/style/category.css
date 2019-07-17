@@ -20,11 +20,11 @@
   }
 }
 .one-wrapper {
-  padding: 20px;
-  margin-bottom: 10px;
+  /* padding: 20px; */
+  /* margin-bottom: 10px; */
   width: 450px;
   border: 1px solid black;
-  border-radius: 15px;
+  border-radius: 0 0 10px 10px;
   margin: 10px;
 }
 /* 
@@ -159,6 +159,7 @@ hr {
   height: 100vh;
   background: #2a2d34;
   width: 10%;
+  z-index: 1;
 }
 
 .main-nav ul {
