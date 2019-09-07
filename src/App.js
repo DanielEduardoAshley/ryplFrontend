@@ -29,7 +29,7 @@ class App extends React.Component {
     console.log(this.state, "state");
     this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log("YOOOOOOO");
+        console.log("FIRED");
         const { uid } = user;
         serviceWorker
           .getUser(uid)

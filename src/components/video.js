@@ -3,16 +3,12 @@ import React from "react";
 import "./video.css";
 import VideoRecorder from "react-video-recorder";
 import serviceWorker from "../services/services";
-import PropTypes from "prop-types";
 import Annotations from "./annotation";
-// import SpeechRecognition, {
-//   StartAnontation,
-//   StopAnontation
-// } from "./annotation";
 import AuthContext from "../contexts/auth";
 import { Redirect } from "react-router-dom";
 
 const uuid = require("uuid/v1");
+
 const recognition = new (window.SpeechRecognition ||
   window.webkitSpeechRecognition ||
   window.mozSpeechRecognition ||
@@ -44,7 +40,6 @@ class Video extends React.Component {
       transcript: ""
 
     };
-    this.videoPlayer = React.createRef();
   }
 
   static contextType = AuthContext;
@@ -180,14 +175,7 @@ class Video extends React.Component {
         });
     }
 
-    //   userId,
-    // categoryId,
-    // title,
-    // responseTo,
-    // vidUrl,
-    // thumbnailUrl,
-    // annotation,
-    // description
+ 
   };
 
   handleFileStream = async e => {
@@ -254,18 +242,7 @@ class Video extends React.Component {
     }
   };
 
-  preview = () => {
-    if (this.state.preview === 0) {
-      this.setState({
-        preview: 1
-      });
-    } else {
-      this.setState({
-        preview: 0
-      });
-    }
-  };
-
+  
   setBlob = (videoblob, thumb) => {
     this.setState({
       blob: videoblob,
@@ -280,19 +257,7 @@ class Video extends React.Component {
     });
   };
 
-  reset = () => {
-    console.log('newTesting')
-    console.log("hira1234", this.state.func);
-    if (this.state.recording === 0) {
-      this.setState({
-        recording: 1
-      });
-    } else if (this.state.recording === 1) {
-      this.setState({
-        recording: 0
-      });
-    }
-  };
+  
 
   handleDescription = e => {
     console.log(e.currentTarget.value);
@@ -337,43 +302,20 @@ class Video extends React.Component {
                 console.log(URL.createObjectURL(videoblob));
                 this.setBlob(videoblob, thumbnailBlob);
 
-                // const storageRef = firebase.storage().ref();
-                // const ref = storageRef.child("test/test.mp4");
-
-                // ref.put(videoblob).then(function(snapshot) {
-                //   console.log("Uploaded a blob or file!", snapshot);
-                // });
+            
               }}
               isOnInitially={false}
-              OnTurnOnCamera={console.log("hiya")}
-              onTurnOnCamera={console.log("hiya1")}
-              onTurnOffCamera={console.log("hiya2")}
-              onStartRecording={() => {this.reset()}}
+              
+              // onStartRecording={() => {this.reset()}}
               onStopRecording={() => {
-                this.reset();
+                // this.reset();
                 this.setBlob();
                 return null;
               }}
-              // onRecordingComplete={console.log('hiya4.5')
-              // }
-              onOpenVideoInput={console.log("hiya5")}
-              onStopReplaying={console.log("hiya6")}
+            
             />
           </div>
-          {/* <div
-              className="annotation"
-              style={{ opacity: `${this.state.preview}` }}
-            > */}
-          {/* <SpeechRecognition
-              name={"Daniel"}
-              annotations={this.startAnnontations}
-            />
-            <StartAnontation
-              startAnnontations={this.state.func}
-              name={"Daniel"}
-            /> */}
-          {/* {<Annotations />} */}
-          {/* <StopAnontation annotationState={this.state.startingAnnontations}  func={this.handleReset} reset={this.state.func} name={'Daniel'} />  */}
+          
 
           {/* ----RIGHT PANEL OF THE PAGE START HERE----- */}
           <div className="handle-record-right-panel">
@@ -416,23 +358,7 @@ class Video extends React.Component {
                 })}
               </select>
             </div>
-            {/* <div className="annotation-box"> */}
-            {/* <button style={{ padding: "10px" }} onClick={this.preview}>
-                  <div>Preview Annotations</div>
-                </button> */}
 
-            {/* <div style={{ opacity: `${this.state.preview}` }}> */}
-            {/* <SpeechRecognition
-                  name={"Daniel"}
-                  annotations={this.startAnnontations}
-                />
-                <StartAnontation
-                  startAnnontations={this.state.func}
-                  name={"Daniel"}
-                /> */}
-            {/* <StopAnontation annotationState={this.state.startingAnnontations}  func={this.handleReset} reset={this.state.func} name={'Daniel'} />  */}
-            {/* </div> */}
-            {/* </div> */}
 
             <div className="upload-btn-wrapper">
               <h3 style={{ textAlign: "left", marginLeft: "30" }}>
@@ -459,22 +385,7 @@ class Video extends React.Component {
               </div>
               <div className="upload-btn">
                 {" "}
-                {/* <button
-                  style={{
-                    fontSize: "16px",
-                    borderRadius: "5px",
-                    width: "100%",
-                    padding: "10px",
-                    backgroundColor: "#292D33",
-                    border: "1px solid #292D33 ",
-                    color: " white",
-                    fontSize: "20px",
-                    fontWeight: "700"
-                  }}
-                  onClick={this.stopRecording}
-                >
-                  Upload File
-                </button> */}
+            
               <h3 style={{ textAlign: "left" }}>
                 Choose a thumbnail from my computer
               </h3>               
@@ -516,7 +427,7 @@ class Video extends React.Component {
             </div>
           </div>
         </div>
-        <Annotations recording={this.state.recording} />
+        {/* <Annotations recording={this.state.recording} /> */}
       </>
     );
   }

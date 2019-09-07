@@ -12,7 +12,8 @@
   flex-direction: column;
   margin: 10px;
   border: 1px solid black;
-  padding-bottom: 10px;
+  /* padding-bottom: 10px;
+  padding-top: 50px; */
   border-radius: 0 0 10px 10px;
   width: 35%;
   display: inline-block;
