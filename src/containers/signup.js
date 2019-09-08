@@ -14,7 +14,8 @@ class SignUp extends React.Component {
     lastname: "",
     email: "",
     password: "",
-    userUID: ""
+    userUID: "",
+    signUp: false,
   };
 
   handleChange = e => {
@@ -33,7 +34,12 @@ class SignUp extends React.Component {
         let userUID = res.user.uid;
         return serviceWorker
           .postUser(username, email, userUID, firstname, lastname, "null")
-          .then(data => console.log(data));
+          .then(data => 
+            this.setState({
+              signUp : true,
+            })
+          
+          );
       })
       .catch(err => {
         alert(err);
@@ -44,8 +50,9 @@ class SignUp extends React.Component {
   // if doing profile imag, handleFileInput = (e) => {};
 
   render() {
-    const { username, firstname, lastname, email, password } = this.state;
+    const { username, firstname, lastname, email, password, signUp } = this.state;
     return (
+      signUp ? <Redirect to="/" /> : 
       <>
         <AuthContext.Consumer>
           {user => {

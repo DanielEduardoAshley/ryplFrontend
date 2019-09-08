@@ -11,10 +11,10 @@ const VideoCards = props => {
       {props.mostViewedVid.map((e, i) => {
         console.log(e);
         return (
-          <div className="single-cards" stlye={{ width: "500px" }}>
+          <div className="single-cards" style={{ width: "500px", height: "500px" }}>
             <video
               controls
-              style={{ width: "100%" }}
+              style={{ width: "100%", height: '50%' }}
               // poster={`${e.thumbnail_url}`}
             >
               >
