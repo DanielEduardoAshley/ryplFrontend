@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "bootstrap": "^4.3.1",
     "dotenv": "^8.0.0",
     "firebase": "^6.0.2",
@@ -15,7 +15,7 @@
     "react-dom": "^16.8.6",
     "react-multimedia-capture": "^1.2.3",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "3.0.1",
+    "react-scripts": "^3.4.1",
     "react-slick": "^0.24.0",
     "react-speech-recognition": "^2.0.1",
     "react-spring": "^8.0.20",
