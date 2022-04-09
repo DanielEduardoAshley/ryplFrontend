@@ -7,7 +7,7 @@
     "bootstrap": "^4.3.1",
     "dotenv": "^8.0.0",
     "firebase": "^6.0.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-alice-carousel": "^1.13.11",
